@@ -1,0 +1,8 @@
+# Backups taken before an edit
+*.vor-claude-backup
+
+# Logs
+*.log
+
+# Generated at load time (H.makeMinimap)
+textures/sw_minimap_*.tga
