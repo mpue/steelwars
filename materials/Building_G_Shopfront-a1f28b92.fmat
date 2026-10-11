@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.10000000149011612,
+    0.0820000022649765,
+    0.057999998331069946
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.8199999928474426,
+    0.5799999833106995
+  ],
+  "emissionStrength": 1.2599999904632568,
+  "glass": false,
+  "id": "a1f28b921127cb32075e5fb47e340252",
+  "ior": 1.5,
+  "name": "Building G Shopfront",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.550000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

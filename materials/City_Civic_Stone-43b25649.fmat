@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.7400000095367432,
+    0.699999988079071,
+    0.6200000047683716
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "43b256491995ffe326fb81bccf59810e",
+  "ior": 1.5,
+  "name": "City Civic Stone",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8500000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

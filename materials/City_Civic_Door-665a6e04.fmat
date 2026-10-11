@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.30000001192092896,
+    0.18000000715255737,
+    0.10000000149011612
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "665a6e04e7a5cca4293506ab2f2a08af",
+  "ior": 1.5,
+  "name": "City Civic Door",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.6000000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

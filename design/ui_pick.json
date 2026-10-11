@@ -1,0 +1,72 @@
+{
+ "ui_frame": {
+  "raw": "frame_1",
+  "mirror": "tl",
+  "size": [
+   512,
+   360
+  ]
+ },
+ "ui_panel": {
+  "raw": "frame_0",
+  "mirror": "tl",
+  "size": [
+   512,
+   360
+  ],
+  "glass": [
+   40,
+   0.82
+  ]
+ },
+ "ui_button": {
+  "raw": "button_1",
+  "mirror": "h",
+  "size": [
+   512,
+   128
+  ],
+  "variants": {
+   "ui_button_hot": {
+    "gain": 1.45
+   },
+   "ui_button_on": {
+    "gain": 1.3,
+    "to": [
+     110,
+     215,
+     255
+    ]
+   }
+  },
+  "gain": 0.85
+ },
+ "ui_slot": {
+  "raw": "slot_0",
+  "mirror": "tl",
+  "size": [
+   256,
+   256
+  ],
+  "variants": {
+   "ui_slot_hot": {
+    "gain": 1.4
+   }
+  }
+ },
+ "ui_side": {
+  "raw": "side_0",
+  "thresh": 4
+ },
+ "ui_bar": {
+  "raw": "bar_0",
+  "thresh": 4
+ },
+ "sw_logo": {
+  "raw": "logo_1",
+  "size": [
+   1400,
+   400
+  ]
+ }
+}

@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.23999999463558197,
+    0.12999999523162842,
+    0.019999999552965164
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.44999998807907104,
+    0.019999999552965164
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "3807adedb5b4d389599a3c0bdaf2dfc2",
+  "ior": 1.5,
+  "name": "City Civic Signal Z Amber",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.20000000298023224,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

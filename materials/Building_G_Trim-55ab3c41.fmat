@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.020000001415610313,
+    0.08500000089406967,
+    0.10000000149011612
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.20000000298023224,
+    0.8500000238418579,
+    1.0
+  ],
+  "emissionStrength": 0.671999990940094,
+  "glass": false,
+  "id": "55ab3c411ba8137dc2fe370d88a17acd",
+  "ior": 1.5,
+  "name": "Building G Trim",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.5,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

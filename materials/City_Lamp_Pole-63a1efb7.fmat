@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.20000000298023224,
+    0.20999999344348907,
+    0.2199999988079071
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "63a1efb75c5b547ea287db0434b6c67f",
+  "ior": 1.5,
+  "name": "City Lamp Pole",
+  "opacity": 1.0,
+  "reflectivity": 0.25,
+  "roughness": 0.44999998807907104,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

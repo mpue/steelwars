@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.6200000047683716,
+    0.029999999329447746,
+    0.03999999910593033
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "a51ac8ae69e4fba6f8aa2ec46ccae629",
+  "ior": 1.5,
+  "name": "City Prop Sign Red",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.44999998807907104,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

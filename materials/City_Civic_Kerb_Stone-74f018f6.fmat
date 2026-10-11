@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.5199999809265137,
+    0.5099999904632568,
+    0.49000000953674316
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "74f018f68a93c9ff14d0602ea46856a4",
+  "ior": 1.5,
+  "name": "City Civic Kerb Stone",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.75,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

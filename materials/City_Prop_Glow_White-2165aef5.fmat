@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8799999952316284
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.9700000286102295,
+    0.8999999761581421
+  ],
+  "emissionStrength": 2.5,
+  "glass": false,
+  "id": "2165aef524e8d4798ab7207204f0c9d3",
+  "ior": 1.5,
+  "name": "City Prop Glow White",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.4000000059604645,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

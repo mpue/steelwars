@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.05000000074505806,
+    0.05000000074505806,
+    0.05000000074505806
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "abab2307c1959823430b59b41fe008f4",
+  "ior": 1.5,
+  "name": "City Traffic Tyre",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.800000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

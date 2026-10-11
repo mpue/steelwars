@@ -1,0 +1,41 @@
+{
+  "albedo": [
+    0.8600000143051147,
+    0.8100000023841858,
+    0.699999988079071
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "79f9029aab0a90bfe9534a932892c541",
+  "ior": 1.5,
+  "name": "City Civic Hall",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.800000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "windowCell": [
+    2.799999952316284,
+    3.799999952316284
+  ],
+  "windowColor": [
+    1.0,
+    0.8799999952316284,
+    0.699999988079071
+  ],
+  "windowGlow": 2.200000047683716,
+  "windowGrid": true,
+  "windowLit": 0.05999999865889549,
+  "windowSeed": 113.0
+}

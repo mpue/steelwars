@@ -1,0 +1,117 @@
+-- STEELWARS -- sound: cues with variants, the announcer, the music.
+--
+-- A cue names what happened ("cannon", "explode_big"); the table below names
+-- the files that can sound for it (sounds/ in the project, cut from the sample
+-- library by design/import_sounds.py). Variants rotate, so ten tanks firing do
+-- not sound like one tank ten times.
+local A = {}
+
+-- file list, volume, near/far (m) for positioned cues
+A.cues = {
+    rifle        = { files = { "sw_rifle1.wav", "sw_rifle2.wav", "sw_rifle3.wav" }, vol = 0.45, near = 40, far = 380 },
+    mg           = { files = { "sw_mg1.wav", "sw_mg2.wav" }, vol = 0.5, near = 40, far = 420 },
+    rocket       = { files = { "sw_rocket1.wav", "sw_rocket2.wav" }, vol = 0.7, near = 50, far = 500 },
+    cannon       = { files = { "sw_cannon1.wav", "sw_cannon2.wav", "sw_cannon3.wav" }, vol = 0.8, near = 60, far = 650 },
+    heavycannon  = { files = { "sw_heavy1.wav", "sw_heavy2.wav" }, vol = 0.95, near = 70, far = 750 },
+    plasma       = { files = { "sw_plasma1.wav", "sw_plasma2.wav" }, vol = 0.9, near = 60, far = 700 },
+    laser        = { files = { "sw_laser1.wav", "sw_laser2.wav" }, vol = 0.7, near = 50, far = 600 },
+    impact       = { files = { "sw_impact1.wav", "sw_impact2.wav", "sw_impact3.wav" }, vol = 0.6, near = 50, far = 500 },
+    impact_big   = { files = { "sw_impactbig1.wav", "sw_impactbig2.wav" }, vol = 0.85, near = 60, far = 650 },
+    explode_small= { files = { "sw_expl_s1.wav", "sw_expl_s2.wav", "sw_expl_s3.wav" }, vol = 0.85, near = 70, far = 750 },
+    explode_med  = { files = { "sw_expl_m1.wav", "sw_expl_m2.wav" }, vol = 1.0, near = 80, far = 900 },
+    explode_big  = { files = { "sw_expl_b1.wav", "sw_expl_b2.wav" }, vol = 1.0, near = 100, far = 1200 },
+    die_bot      = { files = { "sw_botdie1.wav", "sw_botdie2.wav", "sw_botdie3.wav" }, vol = 0.7, near = 40, far = 400 },
+    build_place  = { files = { "sw_place.wav" }, vol = 0.8 },
+    build_rise   = { files = { "sw_construct.wav" }, vol = 0.6, near = 60, far = 500 },
+    deploy       = { files = { "sw_deploy.wav" }, vol = 0.9, near = 60, far = 600 },
+    unit_out     = { files = { "sw_unitout.wav" }, vol = 0.6, near = 50, far = 500 },
+    harvest      = { files = { "sw_harvest.wav" }, vol = 0.35, near = 30, far = 260 },
+    unload       = { files = { "sw_unload.wav" }, vol = 0.5, near = 40, far = 350 },
+    capture      = { files = { "sw_capture.wav" }, vol = 0.9, near = 60, far = 600 },
+    click        = { files = { "sw_click.wav" }, vol = 0.45 },
+    select       = { files = { "sw_select.wav" }, vol = 0.35 },
+    error        = { files = { "sw_error.wav" }, vol = 0.5 },
+    -- the announcer (2D)
+    v_building   = { files = { "sw_v_building.wav" }, vol = 1.0, voice = true },
+    v_training   = { files = { "sw_v_training.wav" }, vol = 1.0, voice = true },
+    v_ready      = { files = { "sw_v_ready.wav" }, vol = 1.0, voice = true },
+    v_unitready  = { files = { "sw_v_unitready.wav" }, vol = 1.0, voice = true },
+    v_lowpower   = { files = { "sw_v_lowpower.wav" }, vol = 1.0, voice = true },
+    v_attacked   = { files = { "sw_v_baseattack.wav" }, vol = 1.0, voice = true },
+    v_unitattack = { files = { "sw_v_unitattack.wav" }, vol = 1.0, voice = true },
+    v_research   = { files = { "sw_v_research.wav" }, vol = 1.0, voice = true },
+    v_nocash     = { files = { "sw_v_nocash.wav" }, vol = 1.0, voice = true },
+    v_captured   = { files = { "sw_v_captured.wav" }, vol = 1.0, voice = true },
+    v_lost       = { files = { "sw_v_lost.wav" }, vol = 1.0, voice = true },
+    v_storage    = { files = { "sw_v_storage.wav" }, vol = 1.0, voice = true },
+    v_cantdeploy = { files = { "sw_v_cantdeploy.wav" }, vol = 1.0, voice = true },
+    v_victory    = { files = { "sw_v_victory.wav" }, vol = 1.0, voice = true },
+    v_defeat     = { files = { "sw_v_defeat.wav" }, vol = 1.0, voice = true },
+    v_upgraded   = { files = { "sw_v_upgraded.wav" }, vol = 1.0, voice = true },
+    v_ack        = { files = { "sw_v_ack1.wav", "sw_v_ack2.wav", "sw_v_ack3.wav", "sw_v_ack4.wav" }, vol = 0.8, voice = true, short = true },
+    v_sel        = { files = { "sw_v_sel1.wav", "sw_v_sel2.wav", "sw_v_sel3.wav" }, vol = 0.8, voice = true, short = true },
+    v_attack     = { files = { "sw_v_atk1.wav", "sw_v_atk2.wav", "sw_v_atk3.wav" }, vol = 0.8, voice = true, short = true },
+}
+
+A.music = { "sw_music1.mp3", "sw_music2.mp3", "sw_music3.mp3" }
+A.menuMusic = "sw_menu.mp3"
+
+local turn = {}
+local voiceBusyUntil = 0
+local lastVoice = {}
+A.clock = 0
+A.master = 1
+A.musicVol = 0.55
+
+function A.play(cue, x, y, z, vol, pitch)
+    local c = A.cues[cue]
+    if not c then return end
+    local n = (turn[cue] or 0) % #c.files + 1
+    turn[cue] = n
+    local f = c.files[n]
+    local v = (vol or 1) * c.vol * A.master
+    if x and not c.voice then
+        game.sound(f, v, pitch or 1, x, y, z, c.near or 50, c.far or 500)
+    else
+        game.sound(f, v, pitch or 1)
+    end
+end
+
+-- The announcer: one line at a time, the same line not again for a while.
+function A.voice(cue, gap)
+    local c = A.cues[cue]
+    if not c then return end
+    if not c.short and A.clock < voiceBusyUntil then return end
+    if lastVoice[cue] and A.clock - lastVoice[cue] < (gap or 6) then return end
+    lastVoice[cue] = A.clock
+    if not c.short then voiceBusyUntil = A.clock + 1.6 end
+    A.play(cue)
+end
+
+-- --- Music: a playlist, one track after another ------------------------------
+local track = 0
+local playingMenu = false
+function A.startMenuMusic()
+    if playingMenu then return end
+    local ok = music.load(A.menuMusic)
+    if ok then music.setVolume(A.musicVol); music.play(0); playingMenu = true end
+end
+function A.startGameMusic()
+    playingMenu = false
+    track = 0
+    A.nextTrack()
+end
+function A.nextTrack()
+    for _ = 1, #A.music do
+        track = track % #A.music + 1
+        local ok = music.load(A.music[track])
+        if ok then music.setVolume(A.musicVol); music.play(0); return end
+    end
+end
+function A.update(dt, inGame)
+    A.clock = A.clock + dt
+    if inGame and not music.isPlaying() and not music.isPaused() then A.nextTrack() end
+    if not inGame and playingMenu and not music.isPlaying() then music.play(0) end
+end
+
+return A

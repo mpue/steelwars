@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.6200000047683716,
+    0.15000000596046448,
+    0.10999999940395355
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "81d4b5998f19b487a58a1bfec2cd0461",
+  "ior": 1.5,
+  "name": "City Civic Chimney Red",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.800000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.20999999344348907,
+    0.2199999988079071,
+    0.23999999463558197
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "b0d2cb85ced271cfa2a47959ab981a9e",
+  "ior": 1.5,
+  "name": "City House Roof 3",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.699999988079071,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

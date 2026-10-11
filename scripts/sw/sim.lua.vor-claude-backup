@@ -1,0 +1,566 @@
+-- STEELWARS -- the simulation: everything that decides the game.
+--
+-- DETERMINISTIC. In a multiplayer game every machine runs this from the same
+-- seed with the same orders at the same steps and must arrive at the same
+-- world, bit for bit -- the relay only carries orders (see NetRelay.hpp). So:
+--   * objects live in an array in id order, and every loop walks that array;
+--     no pairs() over anything whose order could differ between machines;
+--   * randomness comes from S.rng (our own generator), never math.random;
+--   * nothing here asks the engine anything -- not the camera, not the clock,
+--     not a raycast. The map grid (map.lua) was built once at the start.
+-- The view (view.lua) reads the state and the events; it never writes.
+local D = require("sw.defs")
+local U = require("sw.util")
+local M = require("sw.map")
+
+local S = {}
+local floor, sqrt, abs, min, max = math.floor, math.sqrt, math.abs, math.min, math.max
+local DT = D.TICK
+
+-- --- State --------------------------------------------------------------------
+function S.new(opts)
+    S.tick = 0
+    S.objs = {}            -- every live object, in id order
+    S.byId = {}
+    S.nextId = 1
+    S.events = {}          -- for the view and the sound; cleared by it
+    S.rng = U.rng(opts.seed or 1)
+    S.players = {}
+    S.over = false
+    S.winner = nil
+    S.crystals = {}
+    S.dirtyObjs = false
+    for p = 0, #opts.players - 1 do
+        local o = opts.players[p + 1]
+        S.players[p] = {
+            index = p, name = o.name or ("Spieler " .. (p + 1)), color = o.color or p,
+            team = o.team or p, ai = o.ai, aiLevel = o.aiLevel or 2,
+            cells = o.cells or D.START_CELLS, raw = 0, rawCap = 0,
+            power = 0, use = 0, ratio = 1, fuelDebt = 0,
+            techs = {}, alive = true, radar = false, has = {},
+            vis = {}, explored = {}, stats = { built = 0, lost = 0, killed = 0, harvested = 0 },
+            startX = o.startX, startZ = o.startZ,
+        }
+    end
+    S.nPlayers = #opts.players
+    -- vision grid: 8 m cells
+    S.VC = 8
+    S.VW = floor(M.size / S.VC)
+end
+
+function S.emit(ev) S.events[#S.events + 1] = ev end
+function S.msg(p, text, sound)
+    S.emit({ t = "msg", p = p, text = text, sound = sound })
+end
+
+function S.enemies(a, b)
+    if a == b or a < 0 or b < 0 then return false end
+    return S.players[a].team ~= S.players[b].team
+end
+
+-- --- Objects ---------------------------------------------------------------
+local function insert(o)
+    o.id = S.nextId
+    S.nextId = S.nextId + 1
+    S.objs[#S.objs + 1] = o
+    S.byId[o.id] = o
+    o.alive = true
+    return o
+end
+
+function S.get(id) local o = S.byId[id]; if o and o.alive then return o end end
+
+function S.techMul(p, kind)
+    local pl = S.players[p]
+    if not pl then return 1 end
+    if kind == "dmg" then
+        return 1 + (pl.techs.weapons1 and 0.2 or 0) + (pl.techs.weapons2 and 0.2 or 0)
+    elseif kind == "hp" then
+        return 1 + (pl.techs.plating1 and 0.2 or 0) + (pl.techs.plating2 and 0.2 or 0)
+    end
+    return 1
+end
+
+function S.addUnit(type, owner, x, z, h)
+    local d = D.units[type]
+    local o = {
+        cat = "unit", type = type, def = d, owner = owner,
+        x = x, z = z, px = x, pz = z, y = 0, py = 0, h = h or 0, ph = h or 0,
+        hp = d.hp * S.techMul(owner, "hp"), radius = d.radius,
+        orders = {}, path = nil, pi = 1, target = 0, cd = 0, tAng = 0, ptAng = 0,
+        stuck = 0, moving = false, carry = 0, cargo = {}, flying = false,
+        acquire = 0, air = d.air or false,
+    }
+    o.maxhp = o.hp
+    if d.air then o.y, o.py, o.flying = d.flyHeight, d.flyHeight, true end
+    insert(o)
+    S.emit({ t = "spawn", id = o.id })
+    return o
+end
+
+function S.footCenter(i, j, w, h)
+    return M.x0 + (i + w * 0.5) * D.CELL, M.z0 + (j + h * 0.5) * D.CELL
+end
+
+function S.addBuilding(type, owner, i, j, instant)
+    local d = D.buildings[type]
+    local w, hh = d.size[1], d.size[2]
+    local cx, cz = S.footCenter(i, j, w, hh)
+    local o = {
+        cat = "bld", type = type, def = d, owner = owner, i = i, j = j, w = w, hgt = hh,
+        x = cx, z = cz, px = cx, pz = cz, y = 0, py = 0, h = 0, ph = 0,
+        hp = d.hp, maxhp = d.hp, radius = max(w, hh) * D.CELL * 0.5,
+        built = instant and 1 or 0, queue = {}, queue2 = {}, ready = nil, rally = nil,
+        armor = false, ext = false, research = nil, target = 0, cd = 0, tAng = 0, ptAng = 0,
+        acquire = 0, upgrading = nil,
+    }
+    insert(o)
+    if M.clearTrees(i, j, w, hh) then
+        S.emit({ t = "clear", x = cx, z = cz, r = max(w, hh) * D.CELL * 0.75 + 2 })
+    end
+    M.occupy(i, j, w, hh, o.id)
+    S.emit({ t = "spawn", id = o.id })
+    return o
+end
+
+function S.addCrystal(x, z, amount, variant)
+    local o = { cat = "crystal", type = "crystal", owner = -1, x = x, z = z, px = x, pz = z, y = 0, h = 0,
+                amount = amount, max = amount, variant = variant, radius = 2.2, hp = 1, maxhp = 1 }
+    insert(o)
+    local i, j = M.cellOf(x, z)
+    if M.inside(i, j) then M.crystal[M.index(i, j)] = o.id end
+    S.crystals[#S.crystals + 1] = o
+    return o
+end
+
+-- Remove from the world. `how`: "killed", "sold", "deployed", "boarded", "captured".
+function S.remove(o, how, by)
+    if not o.alive then return end
+    o.alive = false
+    o.how = how
+    S.dirtyObjs = true
+    if o.cat == "bld" then
+        M.occupy(o.i, o.j, o.w, o.hgt, 0)
+    elseif o.cat == "crystal" then
+        local i, j = M.cellOf(o.x, o.z)
+        if M.inside(i, j) then M.crystal[M.index(i, j)] = 0 end
+    end
+    if how == "killed" then
+        local pl = S.players[o.owner]
+        if pl then pl.stats.lost = pl.stats.lost + 1 end
+        local killer = by and S.byId[by]
+        if killer and S.players[killer.owner] then
+            local kp = S.players[killer.owner]
+            kp.stats.killed = kp.stats.killed + 1
+        end
+        -- whatever it carried goes down with it
+        if o.cargo then
+            for _, cid in ipairs(o.cargo) do
+                local c = S.byId[cid]
+                if c and c.alive then c.x, c.z = o.x, o.z; S.remove(c, "killed", by) end
+            end
+        end
+    end
+    S.emit({ t = "remove", id = o.id, how = how, x = o.x, z = o.z, y = o.y, cat = o.cat, type = o.type, owner = o.owner })
+end
+
+-- --- Players' economy -------------------------------------------------------
+local function powerOf(b)
+    local d = b.def
+    if b.built < 1 then return 0, 0 end
+    local p = d.power or 0
+    if p > 0 then
+        local v = p
+        if b.ext and D.extend[b.type].powerMul then v = v * D.extend[b.type].powerMul end
+        if b.ext and D.extend[b.type].power then v = v + D.extend[b.type].power end
+        return v, 0
+    end
+    return 0, -p
+end
+
+local function economy()
+    for p = 0, S.nPlayers - 1 do
+        local pl = S.players[p]
+        pl.power, pl.use, pl.rawCap, pl.radar = 0, 0, 0, false
+        pl.has = {}
+        pl.plants = 0
+        pl.convert = 0
+    end
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.cat == "bld" and o.owner >= 0 then
+            local pl = S.players[o.owner]
+            if o.built >= 1 then pl.has[o.type] = (pl.has[o.type] or 0) + 1 end
+            local prod, use = powerOf(o)
+            if o.type == "powerplant" then
+                if pl.cells > 0 then pl.power = pl.power + prod end
+                if o.built >= 1 then pl.plants = pl.plants + 1 end
+            else
+                pl.power = pl.power + prod
+            end
+            pl.use = pl.use + use
+            if o.def.store and o.built >= 1 then
+                local st = o.def.store
+                if o.ext then
+                    local e = D.extend[o.type]
+                    if e.storeMul then st = st * e.storeMul end
+                    if e.store then st = st + e.store end
+                end
+                pl.rawCap = pl.rawCap + st
+            end
+            if o.def.convert and o.built >= 1 then
+                local c = o.def.convert
+                if o.ext and D.extend[o.type].convertMul then c = c * D.extend[o.type].convertMul end
+                pl.convert = pl.convert + c
+            end
+        end
+    end
+    for p = 0, S.nPlayers - 1 do
+        local pl = S.players[p]
+        pl.ratio = (pl.use <= pl.power) and 1 or (pl.power / max(1, pl.use))
+        pl.lowPower = pl.ratio < 1
+        pl.radar = (pl.has.radar or 0) > 0 and not pl.lowPower
+        -- refineries turn Energicum into cells (slower without enough power)
+        if pl.raw > 0 and pl.convert > 0 then
+            local amt = min(pl.raw, pl.convert * DT * (pl.lowPower and 0.5 or 1))
+            pl.raw = pl.raw - amt
+            pl.cells = pl.cells + amt
+        end
+        if pl.raw > pl.rawCap then pl.raw = pl.rawCap end
+        -- power plants burn cells
+        if pl.plants > 0 and pl.cells > 0 then
+            pl.fuelDebt = pl.fuelDebt + pl.plants * D.buildings.powerplant.fuel * DT
+            if pl.fuelDebt >= 1 then
+                local whole = floor(pl.fuelDebt)
+                pl.cells = max(0, pl.cells - whole)
+                pl.fuelDebt = pl.fuelDebt - whole
+            end
+        end
+        -- warnings, at most every few seconds
+        if pl.lowPower and not pl.warnedPower and pl.alive then
+            S.msg(p, "Zu wenig Strom", "lowpower")
+            pl.warnedPower = true
+        elseif not pl.lowPower then
+            pl.warnedPower = false
+        end
+    end
+end
+
+-- --- Production -----------------------------------------------------------------
+function S.reqsMet(p, list)
+    local pl = S.players[p]
+    for _, r in ipairs(list or {}) do
+        if (pl.has[r] or 0) == 0 then return false end
+    end
+    return true
+end
+
+function S.canProduce(p, type)
+    local pl = S.players[p]
+    local d = D.units[type] or D.buildings[type]
+    if not d then return false, "?" end
+    if not S.reqsMet(p, d.req) then return false, "Voraussetzung fehlt" end
+    if d.tech and not pl.techs[d.tech] then return false, "Forschung fehlt" end
+    return true
+end
+
+local function speedOf(b)
+    local pl = S.players[b.owner]
+    local s = max(0.25, pl.ratio)
+    if b.ext then
+        local e = D.extend[b.type]
+        if e.buildSpeed then s = s * e.buildSpeed end
+        if e.researchSpeed then s = s * e.researchSpeed end
+    end
+    return s
+end
+
+-- Where a building lets its units out: the cell row in front (+Z) of it.
+function S.exitPoint(b)
+    local x = b.x
+    local z = M.z0 + (b.j + b.hgt) * D.CELL + D.CELL * 0.8
+    if b.type == "hangar" then z = b.z end
+    return x, z
+end
+
+function S.freePad(p)
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.cat == "bld" and o.type == "hangar" and o.owner == p and o.built >= 1 then
+            o.padUser = o.padUser or { 0, 0, 0, 0 }
+            for k = 1, 4 do
+                local u = S.get(o.padUser[k])
+                if not u then return o, k end
+            end
+        end
+    end
+end
+
+function S.padPos(hangar, k)
+    local dx = (k == 1 or k == 3) and -7 or 7
+    local dz = (k == 1 or k == 2) and -7 or 7
+    return hangar.x + dx, hangar.z + dz
+end
+
+local function finishUnit(b, type)
+    local d = D.units[type]
+    local x, z = S.exitPoint(b)
+    if d.needsPad then
+        local hg, k = S.freePad(b.owner)
+        if not hg then return false end
+        local u = S.addUnit(type, b.owner, hg.x, hg.z, 0)
+        hg.padUser[k] = u.id
+        u.pad, u.padK = hg.id, k
+        local px, pz = S.padPos(hg, k)
+        u.x, u.z, u.px, u.pz = px, pz, px, pz
+        u.y, u.py = 0.5, 0.5
+        u.landed = true
+        S.emit({ t = "produced", id = u.id, p = b.owner })
+        return true
+    end
+    local u = S.addUnit(type, b.owner, x, z, 0)
+    local rx, rz = x, z + (d.infantry and 6 or 10)
+    if b.rally then rx, rz = b.rally[1], b.rally[2] end
+    if type == "harvester" then
+        u.orders = { { k = "harvest", id = 0 } }
+    else
+        S.orderMove(u, rx, rz, false)
+    end
+    S.emit({ t = "produced", id = u.id, p = b.owner })
+    return true
+end
+
+local function production()
+    for _, b in ipairs(S.objs) do
+        if b.alive and b.cat == "bld" and b.built >= 1 and b.owner >= 0 then
+            local pl = S.players[b.owner]
+            local sp = speedOf(b)
+            -- queue: structures (base) / units (base: infantry, factory: vehicles)
+            for qn = 1, 2 do
+                local q = (qn == 1) and b.queue or b.queue2
+                local item = q[1]
+                if item and not item.done then
+                    item.prog = item.prog + DT * sp / max(0.5, item.time)
+                    if item.prog >= 1 then
+                        item.prog = 1
+                        if item.kind == "unit" then
+                            if finishUnit(b, item.type) then
+                                table.remove(q, 1)
+                            else
+                                item.waiting = true
+                            end
+                        elseif item.kind == "bld" then
+                            item.done = true    -- waits to be placed
+                            S.emit({ t = "ready", p = b.owner, type = item.type, id = b.id })
+                        end
+                    end
+                end
+            end
+            -- research
+            local r = b.research
+            if r then
+                r.prog = r.prog + DT * sp / r.time
+                if r.prog >= 1 then
+                    pl.techs[r.key] = true
+                    b.research = nil
+                    S.emit({ t = "research", p = b.owner, key = r.key })
+                    S.msg(b.owner, "Forschung abgeschlossen: " .. D.researchByKey[r.key].name, "research")
+                end
+            end
+            -- an upgrade being fitted
+            local up = b.upgrading
+            if up then
+                up.prog = up.prog + DT / up.time
+                if up.prog >= 1 then
+                    if up.kind == "armor" then
+                        b.armor = true
+                        local f = D.ARMOR_MUL
+                        b.maxhp = b.maxhp * f
+                        b.hp = b.hp * f
+                    else
+                        b.ext = true
+                        local e = D.extend[b.type]
+                        if e.hpMul then b.maxhp = b.maxhp * e.hpMul; b.hp = b.hp * e.hpMul end
+                    end
+                    b.upgrading = nil
+                    S.emit({ t = "upgraded", id = b.id, kind = up.kind })
+                end
+            end
+        end
+        -- construction (the rising animation; hit points grow with it)
+        if b.alive and b.cat == "bld" and b.built < 1 then
+            local dur = (b.type == "wall") and 1.0 or 3.0
+            b.built = min(1, b.built + DT / dur)
+            if b.built >= 1 then
+                S.emit({ t = "built", id = b.id })
+                if b.def.freeUnit then
+                    local x, z = b.x, M.z0 + (b.j + b.hgt) * D.CELL + 4
+                    local u = S.addUnit(b.def.freeUnit, b.owner, x, z, 0)
+                    u.orders = { { k = "harvest", id = 0 } }
+                end
+            end
+        end
+    end
+end
+
+-- --- Vision --------------------------------------------------------------------
+local circles = {}
+local function circle(r)
+    local c = circles[r]
+    if c then return c end
+    c = {}
+    for dj = -r, r do
+        for di = -r, r do
+            if di * di + dj * dj <= r * r then c[#c + 1] = di; c[#c + 1] = dj end
+        end
+    end
+    circles[r] = c
+    return c
+end
+
+local function vision(p)
+    local pl = S.players[p]
+    local VW, VC = S.VW, S.VC
+    local vis, exp = {}, pl.explored
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.owner == p and (o.cat == "unit" or o.cat == "bld") and not o.inside then
+            local sight = o.def.sight or 30
+            if o.cat == "bld" and o.ext and D.extend[o.type].sightMul then sight = sight * D.extend[o.type].sightMul end
+            if o.cat == "bld" and o.built < 1 then sight = 16 end
+            local r = floor(sight / VC)
+            local ci, cj = floor((o.x - M.x0) / VC), floor((o.z - M.z0) / VC)
+            local c = circle(r)
+            for n = 1, #c, 2 do
+                local ii, jj = ci + c[n], cj + c[n + 1]
+                if ii >= 0 and jj >= 0 and ii < VW and jj < VW then
+                    local k = jj * VW + ii + 1
+                    vis[k] = true
+                    exp[k] = true
+                end
+            end
+        end
+    end
+    pl.vis = vis
+end
+
+-- Can player p see world position (x, z)? (Allies share sight.)
+function S.sees(p, x, z)
+    local VC, VW = S.VC, S.VW
+    local i, j = floor((x - M.x0) / VC), floor((z - M.z0) / VC)
+    if i < 0 or j < 0 or i >= VW or j >= VW then return false end
+    local k = j * VW + i + 1
+    local team = S.players[p].team
+    for q = 0, S.nPlayers - 1 do
+        local pq = S.players[q]
+        if pq.team == team and pq.vis[k] then return true end
+    end
+    return false
+end
+
+-- --- Victory ---------------------------------------------------------------------
+local function victory()
+    local count = {}
+    for p = 0, S.nPlayers - 1 do count[p] = { b = 0, u = 0, base = 0, mcv = 0 } end
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.owner >= 0 then
+            local c = count[o.owner]
+            if o.cat == "bld" and o.type ~= "wall" then
+                c.b = c.b + 1
+                if o.type == "base" then c.base = c.base + 1 end
+            elseif o.cat == "unit" then
+                c.u = c.u + 1
+                if o.type == "mcv" then c.mcv = c.mcv + 1 end
+            end
+        end
+    end
+    for p = 0, S.nPlayers - 1 do
+        local pl = S.players[p]
+        local c = count[p]
+        if pl.alive and S.tick > 40 then
+            local lost = (c.b == 0 and c.u == 0)
+            -- lost the base station to an infiltrator, and nothing to build a new one
+            if pl.hadBase and c.base == 0 and c.mcv == 0 and pl.baseCaptured then lost = true end
+            if c.base > 0 then pl.hadBase = true end
+            if lost then
+                pl.alive = false
+                S.emit({ t = "defeat", p = p })
+                S.msg(-1, pl.name .. " wurde besiegt", "defeat")
+                -- whatever is left of them shuts down and blows up
+                for _, o in ipairs(S.objs) do
+                    if o.alive and o.owner == p then o.selfDestruct = S.tick + 10 + S.rng:int(0, 60) end
+                end
+            end
+        end
+    end
+    -- the game is over when one team is left
+    local team = nil
+    local teams = 0
+    for p = 0, S.nPlayers - 1 do
+        local pl = S.players[p]
+        if pl.alive and pl.team ~= team then
+            if team == nil then team = pl.team; teams = 1
+            elseif pl.team ~= team then teams = 2 end
+        end
+    end
+    if not S.over and teams <= 1 and S.nPlayers > 1 then
+        S.over = true
+        S.winner = team
+        S.emit({ t = "gameover", team = team })
+    end
+end
+
+-- --- The step ------------------------------------------------------------------
+function S.step()
+    S.tick = S.tick + 1
+    -- remember the last state for the view's interpolation
+    for _, o in ipairs(S.objs) do
+        o.px, o.pz, o.py, o.ph, o.ptAng = o.x, o.z, o.y, o.h, o.tAng
+    end
+    economy()
+    production()
+    S.buildBuckets()
+    S.updateUnits()
+    S.updateCombat()
+    S.updateProjectiles()
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.selfDestruct and S.tick >= o.selfDestruct then S.damage(o, 1e9, "heavy", nil) end
+    end
+    local p = S.tick % 10
+    if p < S.nPlayers then vision(p) end
+    if S.tick % 20 == 0 then victory() end
+    -- compact the object list now and then
+    if S.dirtyObjs and S.tick % 20 == 0 then
+        local keep = {}
+        for _, o in ipairs(S.objs) do
+            if o.alive then keep[#keep + 1] = o else S.byId[o.id] = nil end
+        end
+        S.objs = keep
+        S.dirtyObjs = false
+    end
+    -- Energicum grows back, slowly
+    if S.tick % 20 == 0 then
+        local g = D.CRYSTAL_REGROW
+        for _, c in ipairs(S.crystals) do
+            if c.amount < c.max then c.amount = math.min(c.max, c.amount + g) end
+        end
+    end
+    if S.aiThink then S.aiThink() end
+end
+
+-- A checksum of the world, compared between machines to catch a desync.
+function S.hash()
+    local h = S.tick
+    for _, o in ipairs(S.objs) do
+        if o.alive then
+            h = (h * 31 + o.id * 7 + floor(o.x * 8) * 13 + floor(o.z * 8) * 17 + floor(o.hp)) % 2147483647
+        end
+    end
+    for p = 0, S.nPlayers - 1 do
+        h = (h * 31 + floor(S.players[p].cells)) % 2147483647
+    end
+    return h
+end
+
+require("sw.simunit")(S)
+require("sw.simcombat")(S)
+require("sw.simcmd")(S)
+
+return S

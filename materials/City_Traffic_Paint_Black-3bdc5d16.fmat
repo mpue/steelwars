@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.03999999910593033,
+    0.03999999910593033,
+    0.05000000074505806
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "3bdc5d166b4ed37820f14e95f6e2d9ef",
+  "ior": 1.5,
+  "name": "City Traffic Paint Black",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.25,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

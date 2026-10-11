@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.699999988079071,
+    0.029999999329447746,
+    0.029999999329447746
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.07999999821186066,
+    0.05999999865889549
+  ],
+  "emissionStrength": 3.0,
+  "glass": false,
+  "id": "37e522f332870d1fd8258e744ad838f1",
+  "ior": 1.5,
+  "name": "City Civic Red Cross",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.4000000059604645,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

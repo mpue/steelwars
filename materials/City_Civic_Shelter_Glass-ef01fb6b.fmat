@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.800000011920929,
+    0.8600000143051147,
+    0.8799999952316284
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "ef01fb6b56458586eb711256becab158",
+  "ior": 1.5,
+  "name": "City Civic Shelter Glass",
+  "opacity": 0.30000001192092896,
+  "reflectivity": 0.03999999910593033,
+  "roughness": 0.07999999821186066,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

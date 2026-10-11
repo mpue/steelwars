@@ -1,0 +1,508 @@
+-- STEELWARS -- the player's hands: selecting, ordering, placing buildings.
+--
+-- Turns mouse and keys into order lines for the session (session.lua sends
+-- them; nothing here touches the simulation). Built for an unsteady hand too:
+-- a click is a click even when the mouse wandered a little, every drag has a
+-- click-click alternative, and every button has a key.
+local D = require("sw.defs")
+local U = require("sw.util")
+local M = require("sw.map")
+local S = require("sw.sim")
+local V = require("sw.view")
+local C = require("sw.camera")
+local A = require("sw.audio")
+
+local I = {}
+local floor, sqrt, min, max, abs = math.floor, math.sqrt, math.min, math.max, math.abs
+
+I.sel = {}            -- selected sim ids (array)
+I.selSet = {}
+I.groups = {}
+I.mode = nil          -- nil | "place" | "wall" | "amove" | "unload" | "rally"
+I.placeType = nil
+I.wallStart = nil
+I.hover = nil         -- sim object under the mouse
+I.markers = {}        -- move/attack markers on the ground
+I.send = function(line) end
+I.overHud = false     -- the HUD says the mouse is over a panel
+I.lastClick = { t = -10, id = 0 }
+I.time = 0
+
+local function me() return V.me end
+
+function I.clearSel()
+    I.sel, I.selSet = {}, {}
+end
+function I.select(list, add)
+    if not add then I.clearSel() end
+    for _, o in ipairs(list) do
+        if not I.selSet[o.id] then
+            I.sel[#I.sel + 1] = o.id
+            I.selSet[o.id] = true
+        end
+    end
+end
+function I.toggle(o)
+    if I.selSet[o.id] then
+        I.selSet[o.id] = nil
+        for k, id in ipairs(I.sel) do if id == o.id then table.remove(I.sel, k); break end end
+    else
+        I.sel[#I.sel + 1] = o.id
+        I.selSet[o.id] = true
+    end
+end
+
+-- Living selected objects (drops the dead ones).
+function I.selected()
+    local out = {}
+    local keep, set = {}, {}
+    for _, id in ipairs(I.sel) do
+        local o = S.get(id)
+        if o and not o.inside then out[#out + 1] = o; keep[#keep + 1] = id; set[id] = true end
+    end
+    I.sel, I.selSet = keep, set
+    return out
+end
+
+function I.myUnits(list)
+    local out = {}
+    for _, o in ipairs(list) do if o.cat == "unit" and o.owner == me() then out[#out + 1] = o end end
+    return out
+end
+
+-- --- Picking ---------------------------------------------------------------------
+local function rayHit(o, vo, ox, oy, oz, dx, dy, dz)
+    if not vo or not vo.x or not vo.shown then return nil end
+    if o.cat == "bld" then
+        local hw, hd = o.w * D.CELL * 0.5, o.hgt * D.CELL * 0.5
+        local x0, x1 = o.x - hw, o.x + hw
+        local y0, y1 = vo.y - 1, vo.y + (vo.top or 8)
+        local z0, z1 = o.z - hd, o.z + hd
+        local tmin, tmax = 0, 1e9
+        for ax = 1, 3 do
+            local o_, d_, a_, b_
+            if ax == 1 then o_, d_, a_, b_ = ox, dx, x0, x1
+            elseif ax == 2 then o_, d_, a_, b_ = oy, dy, y0, y1
+            else o_, d_, a_, b_ = oz, dz, z0, z1 end
+            if abs(d_) < 1e-9 then
+                if o_ < a_ or o_ > b_ then return nil end
+            else
+                local t1, t2 = (a_ - o_) / d_, (b_ - o_) / d_
+                if t1 > t2 then t1, t2 = t2, t1 end
+                tmin, tmax = max(tmin, t1), min(tmax, t2)
+                if tmin > tmax then return nil end
+            end
+        end
+        return tmin
+    end
+    local r = max(o.radius or 1, (o.def and o.def.infantry) and 1.3 or 1.6)
+    local cy = vo.y + (vo.top or 2) * 0.4
+    local px, py, pz = vo.x - ox, cy - oy, vo.z - oz
+    local t = px * dx + py * dy + pz * dz
+    if t < 0 then return nil end
+    local qx, qy, qz = px - dx * t, py - dy * t, pz - dz * t
+    if qx * qx + qy * qy + qz * qz <= r * r then return t end
+    return nil
+end
+
+function I.pick()
+    local ox, oy, oz, dx, dy, dz = game.mouseRay()
+    if not ox then return nil end
+    local best, bt = nil, 1e18
+    for _, o in ipairs(S.objs) do
+        if o.alive and not o.inside and (o.cat == "unit" or o.cat == "bld" or o.cat == "crystal") then
+            local vo = V.objs[o.id]
+            local t = rayHit(o, vo, ox, oy, oz, dx, dy, dz)
+            -- units win over the building they stand in front of
+            if t and o.cat == "unit" then t = t - 6 end
+            if t and t < bt then best, bt = o, t end
+        end
+    end
+    return best
+end
+
+-- --- Orders ------------------------------------------------------------------------
+local function dm(v) return S.dmStr(v) end
+
+local function marker(x, z, kind)
+    I.markers[#I.markers + 1] = { x = x, z = z, t = 0, kind = kind }
+end
+
+local function ack(kind)
+    if kind == "attack" then A.voice("v_attack", 0.8) else A.voice("v_ack", 0.8) end
+end
+
+function I.orderAt(gx, gz, target, queue)
+    local units = I.myUnits(I.selected())
+    if #units == 0 then
+        -- buildings: right click sets the rally point
+        for _, o in ipairs(I.selected()) do
+            if o.cat == "bld" and o.owner == me() and o.def.trains then
+                I.send(string.format("rl %d %s %s", o.id, dm(gx), dm(gz)))
+                marker(gx, gz, "rally")
+                A.play("click")
+            end
+        end
+        return
+    end
+    local q = queue and "1" or "0"
+    if target then
+        local t = target
+        local enemy = S.enemies(me(), t.owner)
+        if enemy and (t.cat == "unit" or t.cat == "bld") then
+            -- infiltrators take it over, everybody else shoots
+            local cap, rest = {}, {}
+            local capturable = (t.cat == "bld" and t.type ~= "wall") or (t.cat == "unit" and t.def.capturable and not t.flying)
+            for _, u in ipairs(units) do
+                if u.def.capture and capturable then cap[#cap + 1] = u else rest[#rest + 1] = u end
+            end
+            if #cap > 0 then I.send(string.format("cp %s %d", S.encodeIds(cap), t.id)) end
+            if #rest > 0 then I.send(string.format("at %s %d %s", S.encodeIds(rest), t.id, q)) end
+            marker(t.x, t.z, "attack")
+            ack("attack")
+            return
+        end
+        if t.cat == "crystal" then
+            local h = {}
+            for _, u in ipairs(units) do if u.def.harvest then h[#h + 1] = u end end
+            if #h > 0 then
+                I.send(string.format("hv %s %d", S.encodeIds(h), t.id))
+                marker(t.x, t.z, "move"); ack(); return
+            end
+        end
+        if t.owner == me() then
+            -- harvester to its refinery
+            if t.type == "refinery" then
+                local h = {}
+                for _, u in ipairs(units) do if u.def.harvest then h[#h + 1] = u end end
+                if #h > 0 then I.send(string.format("hv %s %d", S.encodeIds(h), t.id)); ack(); return end
+            end
+            -- engineers repair
+            if t.hp < t.maxhp then
+                local e = {}
+                for _, u in ipairs(units) do if u.def.repair then e[#e + 1] = u end end
+                if #e > 0 then I.send(string.format("rp %s %d", S.encodeIds(e), t.id)); marker(t.x, t.z, "move"); ack(); return end
+            end
+            -- damaged units to a depot
+            if t.cat == "bld" and t.def.depot and t.built >= 1 then
+                local hurt = {}
+                for _, u in ipairs(units) do if u.hp < u.maxhp and not u.def.repair then hurt[#hurt + 1] = u end end
+                if #hurt > 0 then I.send(string.format("rr %s %d", S.encodeIds(hurt), t.id)); marker(t.x, t.z, "move"); ack(); return end
+            end
+            -- into a copter
+            if t.cat == "unit" and t.def.transport then
+                local b = {}
+                for _, u in ipairs(units) do if u ~= t and not u.air then b[#b + 1] = u end end
+                if #b > 0 then I.send(string.format("ld %s %d", S.encodeIds(b), t.id)); ack(); return end
+            end
+            -- a copter fetches a unit
+            if t.cat == "unit" and not t.air and #units == 1 and units[1].def.transport then
+                I.send(string.format("pk %d %d", units[1].id, t.id)); ack(); return
+            end
+        end
+    end
+    local kind = (I.mode == "amove") and "am" or "mv"
+    I.send(string.format("%s %s %s %s %s", kind, S.encodeIds(units), dm(gx), dm(gz), q))
+    marker(gx, gz, kind == "am" and "attack" or "move")
+    ack()
+end
+
+-- Command buttons and their keys (the HUD draws them from this list).
+function I.commands()
+    local sel = I.selected()
+    local cmds = {}
+    local units = I.myUnits(sel)
+    if #units > 0 then
+        cmds[#cmds + 1] = { key = "T", label = "Stopp", act = function() I.send("st " .. S.encodeIds(units)) end }
+        cmds[#cmds + 1] = { key = "G", label = "Halten", act = function() I.send("gd " .. S.encodeIds(units)) end }
+        cmds[#cmds + 1] = { key = "Z", label = "Angriff-Zug", act = function() I.mode = "amove" end, on = I.mode == "amove" }
+        if #units == 1 and I.drive then
+            cmds[#cmds + 1] = { key = "C", label = "Steuern",
+                tip = "Selbst ans Steuer: W/S fahren, A/D lenken, Maus zielen, Linksklick feuern. C oder Esc steigt aus.",
+                act = function() I.drive(units[1]) end }
+        end
+        local deploy, fly, copter = {}, {}, nil
+        for _, u in ipairs(units) do
+            if u.def.deploys then deploy[#deploy + 1] = u end
+            if u.def.canFly then fly[#fly + 1] = u end
+            if u.def.transport and #u.cargo > 0 then copter = u end
+        end
+        local hurt, price = {}, 0
+        for _, u in ipairs(units) do
+            if u.hp < u.maxhp then hurt[#hurt + 1] = u; price = price + S.repairCost(u) end
+        end
+        if #hurt > 0 then
+            local depot = false
+            for _, o in ipairs(S.objs) do
+                if o.alive and o.cat == "bld" and o.owner == me() and o.built >= 1 and o.def.depot then depot = true; break end
+            end
+            cmds[#cmds + 1] = { key = "B", label = "Reparieren", cost = floor(price + 0.5), disabled = not depot,
+                tip = depot and "Zur nächsten Werkstatt (Basis, Fabrik, Hangar). Kostet Zellen pro Treffer. Rechtsklick auf eine Werkstatt geht auch."
+                            or "Keine Werkstatt: Basis, Fabrik oder Hangar nötig",
+                act = function() I.send("rr " .. S.encodeIds(hurt)); ack() end }
+        end
+        if #deploy > 0 then cmds[#cmds + 1] = { key = "X", label = "Ausbauen", act = function() I.send("dp " .. S.encodeIds(deploy)); A.play("click") end } end
+        if #fly > 0 then cmds[#cmds + 1] = { key = "X", label = fly[1].flyWant and "Landen" or "Fliegen", act = function() I.send("fl " .. S.encodeIds(fly)) end } end
+        if copter then cmds[#cmds + 1] = { key = "X", label = "Entladen", act = function() I.mode = "unload"; I.unloader = copter.id end, on = I.mode == "unload" } end
+    elseif #sel == 1 and sel[1].cat == "bld" and sel[1].owner == me() then
+        local b = sel[1]
+        local pl = S.players[me()]
+        if b.def.trains then cmds[#cmds + 1] = { key = "V", label = "Sammelpunkt", act = function() I.mode = "rally" end, on = I.mode == "rally" } end
+        if not b.armor and not b.upgrading then
+            local ok = pl.techs[b.type .. "_armor"]
+            cmds[#cmds + 1] = { key = "N", label = "Verstärken", cost = S.upgradeCost(b), disabled = not ok,
+                tip = ok and "+60 % Struktur" or "Erst im Labor erforschen",
+                act = function() I.send("up " .. b.id .. " armor") end }
+        end
+        if not b.ext and not b.upgrading and D.extend[b.type] then
+            local ok = pl.techs[b.type .. "_ext"]
+            cmds[#cmds + 1] = { key = "M", label = "Erweitern", cost = S.upgradeCost(b), disabled = not ok,
+                tip = ok and D.extend[b.type].label or "Erst im Labor erforschen",
+                act = function() I.send("up " .. b.id .. " ext") end }
+        end
+        cmds[#cmds + 1] = { key = "DEL", label = "Verkaufen", act = function() I.send("sl " .. b.id); I.clearSel() end }
+    end
+    return cmds
+end
+
+-- Put a unit or a structure in a building's queue.
+function I.sendQueue(b, type)
+    if not b then return end
+    I.send(string.format("pr %d %s", b.id, type))
+    A.play("click")
+end
+
+-- Start placing a finished structure.
+function I.startPlace(type)
+    if type == "wall" then I.mode = "wall"; I.wallStart = nil
+    else I.mode = "place"; I.placeType = type end
+    A.play("click")
+end
+
+-- The footprint corner cell for a building of type at ground point (x, z).
+function I.footprintAt(type, x, z)
+    local bd = D.buildings[type]
+    local w, h = bd.size[1], bd.size[2]
+    local i = floor((x - M.x0) / D.CELL - w * 0.5 + 0.5)
+    local j = floor((z - M.z0) / D.CELL - h * 0.5 + 0.5)
+    return i, j, w, h
+end
+
+local function nearOwn(i, j, w, h)
+    local R = D.BUILD_RADIUS
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.cat == "bld" and o.owner == me() and o.type ~= "wall" then
+            if i + w > o.i - R and i < o.i + o.w + R and j + h > o.j - R and j < o.j + o.hgt + R then return true end
+        end
+    end
+    return false
+end
+function I.placeOk(type, i, j)
+    local bd = D.buildings[type]
+    local ok, why = M.canBuild(i, j, bd.size[1], bd.size[2])
+    if ok and not nearOwn(i, j, bd.size[1], bd.size[2]) then return false, "zu weit von der Basis" end
+    return ok, why
+end
+
+-- Cells of a wall line from (i0, j0) to (i1, j1): straight along the longer axis.
+function I.wallCells(i0, j0, i1, j1)
+    local out = {}
+    local di, dj = i1 - i0, j1 - j0
+    if abs(di) >= abs(dj) then
+        local s = di >= 0 and 1 or -1
+        for i = i0, i1, s do out[#out + 1] = { i, j0 } end
+    else
+        local s = dj >= 0 and 1 or -1
+        for j = j0, j1, s do out[#out + 1] = { i0, j } end
+    end
+    while #out > 16 do out[#out] = nil end
+    return out
+end
+
+-- --- Per frame --------------------------------------------------------------------
+function I.update(dt, mx, my, over)
+    I.time = I.time + dt
+    local gx, gy, gz = C.groundHit()
+    I.gx, I.gy, I.gz = gx, gy, gz
+    I.hover = (over and not I.overHud) and I.pick() or nil
+    for k = #I.markers, 1, -1 do
+        local m = I.markers[k]
+        m.t = m.t + dt
+        if m.t > 1.2 then table.remove(I.markers, k) end
+    end
+    local ctrl = game.keyDown(game.KEY_LCTRL) or game.keyDown(game.KEY_RCTRL)
+    local shift = game.keyDown(game.KEY_LSHIFT) or game.keyDown(game.KEY_RSHIFT)
+
+    -- keys
+    if game.keyPressed(game.KEY_ESCAPE) then
+        if I.mode then I.mode = nil; I.wallStart = nil
+        elseif #I.sel > 0 then I.clearSel()
+        else I.wantMenu = true end
+    end
+    for n = 1, 9 do
+        local key = game["KEY_" .. n]
+        if game.keyPressed(key) then
+            if ctrl then
+                I.groups[n] = U.copy(I.sel)
+                A.play("click")
+            elseif I.groups[n] then
+                local list = {}
+                for _, id in ipairs(I.groups[n]) do local o = S.get(id); if o and o.owner == me() then list[#list + 1] = o end end
+                if I.lastGroup == n and I.time - (I.lastGroupT or 0) < 0.4 and list[1] then
+                    C.lookAt(list[1].x, list[1].z)
+                end
+                I.lastGroup, I.lastGroupT = n, I.time
+                I.select(list, shift)
+            end
+        end
+    end
+    if ctrl and game.keyPressed(game.KEY_A) then
+        -- every fighting unit
+        local list = {}
+        for _, o in ipairs(S.objs) do
+            if o.alive and o.owner == me() and o.cat == "unit" and not o.inside and S.weaponOf(o) and not o.def.harvest then list[#list + 1] = o end
+        end
+        I.select(list)
+        A.play("select")
+    end
+    if game.keyPressed(game.KEY_H) then
+        for _, o in ipairs(S.objs) do
+            if o.alive and o.owner == me() and o.type == "base" then C.lookAt(o.x, o.z); break end
+        end
+    end
+    if game.keyPressed(game.KEY_SPACE) and I.lastAlert then C.lookAt(I.lastAlert[1], I.lastAlert[2]) end
+    local cmds = I.commands()
+    for _, c in ipairs(cmds) do
+        local k = (c.key == "DEL") and game.KEY_DELETE or game["KEY_" .. c.key]
+        if k and game.keyPressed(k) and not c.disabled then c.act(); A.play("click") end
+    end
+
+    -- the mouse
+    if not over or I.overHud then
+        I.dragging = nil
+        return
+    end
+    local lDown = game.mouseDown(game.MOUSE_LEFT)
+    if game.mousePressed(game.MOUSE_LEFT) then
+        I.dragStart = { mx, my }
+        I.dragging = false
+    end
+    if lDown and I.dragStart and not I.mode then
+        if abs(mx - I.dragStart[1]) + abs(my - I.dragStart[2]) > 14 then I.dragging = true end
+    end
+    if not lDown and I.dragStart then
+        local start = I.dragStart
+        I.dragStart = nil
+        if I.dragging then
+            -- box selection: own units inside the rectangle
+            local x0, x1 = min(start[1], mx), max(start[1], mx)
+            local y0, y1 = min(start[2], my), max(start[2], my)
+            local list = {}
+            for _, o in ipairs(S.objs) do
+                if o.alive and o.cat == "unit" and o.owner == me() and not o.inside then
+                    local vo = V.objs[o.id]
+                    if vo and vo.x then
+                        local hx, hy = game.worldToHud(vo.x, vo.y + 1, vo.z)
+                        if hx and hx >= x0 and hx <= x1 and hy >= y0 and hy <= y1 then list[#list + 1] = o end
+                    end
+                end
+            end
+            if #list > 0 then I.select(list, shift); A.voice("v_sel", 0.6) end
+            I.dragging = nil
+            return
+        end
+        I.dragging = nil
+        I.leftClick(gx, gz, shift, ctrl)
+    end
+    if game.mousePressed(game.MOUSE_RIGHT) then
+        if I.mode then
+            I.mode = nil
+            I.wallStart = nil
+        elseif gx then
+            I.orderAt(gx, gz, I.hover, shift)
+        end
+    end
+end
+
+function I.leftClick(gx, gz, shift, ctrl)
+    if I.mode == "place" then
+        if not gx then return end
+        local i, j = I.footprintAt(I.placeType, gx, gz)
+        local ok, why = I.placeOk(I.placeType, i, j)
+        if ok then
+            I.send(string.format("pl %s %d %d", I.placeType, i, j))
+            A.play("build_place")
+            I.mode = nil
+        else
+            A.play("error")
+            I.flash = why
+        end
+        return
+    elseif I.mode == "wall" then
+        if not gx then return end
+        local i, j = M.cellOf(gx, gz)
+        if not I.wallStart then I.wallStart = { i, j }; A.play("click"); return end
+        for _, c in ipairs(I.wallCells(I.wallStart[1], I.wallStart[2], i, j)) do
+            I.send(string.format("wl %d %d", c[1], c[2]))
+        end
+        A.play("build_place")
+        I.wallStart = shift and { i, j } or nil
+        if not shift then I.mode = nil end
+        return
+    elseif I.mode == "amove" then
+        if gx then I.orderAt(gx, gz, I.hover, shift) end
+        I.mode = nil
+        return
+    elseif I.mode == "unload" then
+        if gx and I.unloader then
+            I.send(string.format("ul %d %s %s", I.unloader, dm(gx), dm(gz)))
+            marker(gx, gz, "move")
+            ack()
+        end
+        I.mode = nil
+        return
+    elseif I.mode == "rally" then
+        if gx then
+            for _, o in ipairs(I.selected()) do
+                if o.cat == "bld" and o.owner == me() then I.send(string.format("rl %d %s %s", o.id, dm(gx), dm(gz))) end
+            end
+            marker(gx, gz, "rally")
+        end
+        I.mode = nil
+        return
+    end
+    local o = I.hover
+    if not o or o.cat == "crystal" then
+        if not shift then I.clearSel() end
+        return
+    end
+    -- double click: everything of that type on screen
+    if I.lastClick.id == o.id and I.time - I.lastClick.t < 0.4 and o.owner == me() and o.cat == "unit" then
+        local list = {}
+        for _, u in ipairs(S.objs) do
+            if u.alive and u.owner == me() and u.type == o.type and not u.inside then
+                local vo = V.objs[u.id]
+                if vo and vo.x then
+                    local hx = game.worldToHud(vo.x, vo.y, vo.z)
+                    if hx then list[#list + 1] = u end
+                end
+            end
+        end
+        I.select(list, shift)
+    elseif shift and o.owner == me() then
+        I.toggle(o)
+    else
+        I.select({ o })
+    end
+    I.lastClick = { t = I.time, id = o.id }
+    if o.owner == me() then
+        if o.cat == "unit" then A.voice("v_sel", 0.6) else A.play("select") end
+    else
+        A.play("select")
+    end
+end
+
+-- Tell the view's alerts where to look (space bar).
+function I.alert(x, z) I.lastAlert = { x, z } end
+
+return I

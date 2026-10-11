@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.6600000262260437,
+    0.33000001311302185,
+    0.18000000715255737
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "ff32c7adcc6247440b7c2b9a027a009e",
+  "ior": 1.5,
+  "name": "City House Roof 4",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.699999988079071,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

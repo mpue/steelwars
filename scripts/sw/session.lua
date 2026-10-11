@@ -1,0 +1,136 @@
+-- STEELWARS -- the lockstep clock.
+--
+-- The simulation advances in turns of D.TICKS_PER_TURN steps. A turn carries
+-- every player's orders; each machine applies the same orders at the start of
+-- the same turn, so all of them compute the same world.
+--
+--   local: this machine makes the turns itself.
+--   net:   the relay (NetRelay.hpp) makes them, every 100 ms, and sends them to
+--          everybody; a turn runs once it has arrived. Our own orders go to the
+--          relay and come back inside a turn like everybody else's.
+-- Steps are paced one by one with the frame clock (the view interpolates
+-- between the last two), and every 25 turns each machine sends a checksum of
+-- its world; the relay compares them and reports a DESYNC if they differ.
+local D = require("sw.defs")
+local S = require("sw.sim")
+local U = require("sw.util")
+
+local N = {}
+local TICK, TPT = D.TICK, D.TICKS_PER_TURN
+local min, max = math.min, math.max
+
+function N.start(mode, slot)
+    N.mode = mode
+    N.slot = slot or 0
+    N.turn = 0              -- the turn being run (or next to start)
+    N.inTurn = 0            -- steps of it done
+    N.pending = {}          -- turn -> { {slot, line}, ... }
+    N.outbox = {}
+    N.clock = 0             -- time since the last step
+    N.paused = false
+    N.speed = 1
+    N.lag = 0
+    N.desync = false
+    N.left = {}
+    N.chat = {}
+    N.lost = false
+end
+
+function N.send(line)
+    if N.mode == "net" then
+        net.send("CMD " .. line)
+    else
+        N.outbox[#N.outbox + 1] = { N.slot, line }
+    end
+end
+
+-- An order for another slot (a commander agent playing it). Locally any slot;
+-- over the relay only our own -- the relay stamps every line with its sender.
+function N.sendAs(slot, line)
+    if N.mode == "net" then
+        if slot == N.slot then net.send("CMD " .. line) end
+    else
+        N.outbox[#N.outbox + 1] = { slot, line }
+    end
+end
+
+-- Messages from the relay during a game.
+local function receive()
+    for _, m in ipairs(net.poll()) do
+        local head, body = m:match("^(%S+)[ \n]?(.*)$")
+        if head == "TURN" then
+            local n = tonumber(body:match("^(%d+)"))
+            local cmds = {}
+            for line in m:gmatch("\n([^\n]*)") do
+                local slot, payload = line:match("^(%d+)\t(.*)$")
+                if slot then cmds[#cmds + 1] = { tonumber(slot), payload } end
+            end
+            if n then N.pending[n] = cmds end
+        elseif head == "LEFT" then
+            local slot, name = body:match("^(%d+)\t(.*)$")
+            if slot then N.left[#N.left + 1] = { slot = tonumber(slot), name = name } end
+        elseif head == "DESYNC" then
+            N.desync = true
+        elseif head == "CHAT" then
+            local name, text = body:match("^([^\t]*)\t(.*)$")
+            N.chat[#N.chat + 1] = { name = name or "?", text = text or body }
+        end
+    end
+    if net.status() ~= "connected" then N.lost = true end
+end
+
+-- One simulation step; at a turn's first step its orders go in first.
+-- False when the turn is not here yet (network).
+local function step()
+    if N.inTurn == 0 then
+        local cmds
+        if N.mode == "local" then
+            cmds = N.outbox
+            N.outbox = {}
+        else
+            cmds = N.pending[N.turn]
+            if not cmds then return false end
+            N.pending[N.turn] = nil
+        end
+        for _, c in ipairs(cmds) do S.apply(c[1], c[2]) end
+    end
+    S.step()
+    N.inTurn = N.inTurn + 1
+    if N.inTurn >= TPT then
+        N.inTurn = 0
+        N.turn = N.turn + 1
+        if N.mode == "net" and N.turn % 25 == 0 then
+            net.send(string.format("HASH %d\t%d", N.turn, S.hash()))
+        end
+    end
+    return true
+end
+
+-- Advance with the frame. Returns the interpolation fraction (0..1) between
+-- the last two steps.
+function N.update(dt)
+    if N.mode == "net" then receive() end
+    if N.paused and N.mode == "local" then return 1 end
+    local speed = N.speed
+    if N.mode == "net" then
+        -- turns queued up: run a little faster until caught up
+        local ready = 0
+        while N.pending[N.turn + ready] do ready = ready + 1 end
+        N.lag = ready
+        speed = (ready > 3) and min(4, 1 + (ready - 3) * 0.5) or 1
+    end
+    N.clock = N.clock + dt * speed
+    local guard = 0
+    while N.clock >= TICK and guard < 12 do
+        if not step() then
+            N.clock = min(N.clock, TICK)   -- waiting for the relay
+            break
+        end
+        N.clock = N.clock - TICK
+        guard = guard + 1
+    end
+    if guard >= 12 then N.clock = 0 end
+    return U.clamp(N.clock / TICK, 0, 1)
+end
+
+return N

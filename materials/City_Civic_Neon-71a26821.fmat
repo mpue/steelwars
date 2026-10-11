@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.8999999761581421,
+    0.8999999761581421,
+    0.8799999952316284
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.949999988079071,
+    0.8500000238418579
+  ],
+  "emissionStrength": 3.0,
+  "glass": false,
+  "id": "71a26821744b37688b3142d009c79bdc",
+  "ior": 1.5,
+  "name": "City Civic Neon",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.4000000059604645,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

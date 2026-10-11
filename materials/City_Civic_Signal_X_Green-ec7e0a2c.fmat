@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.019999999552965164,
+    0.18000000715255737,
+    0.10000000149011612
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.10000000149011612,
+    1.0,
+    0.550000011920929
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "ec7e0a2ca6bd61c30eff5965df6c38b6",
+  "ior": 1.5,
+  "name": "City Civic Signal X Green",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.20000000298023224,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

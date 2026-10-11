@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.07000000029802322,
+    0.20000000298023224,
+    0.12999999523162842
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "7761d6173f20510922ce2c921f54b90e",
+  "ior": 1.5,
+  "name": "City Prop Bin",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.550000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

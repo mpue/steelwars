@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.030000001192092896,
+    0.1275000125169754,
+    0.15000000596046448
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.20000000298023224,
+    0.8500000238418579,
+    1.0
+  ],
+  "emissionStrength": 2.0999999046325684,
+  "glass": false,
+  "id": "2cffb953f74313d20de9d01683e9b65e",
+  "ior": 1.5,
+  "name": "Building F Neon",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.5,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

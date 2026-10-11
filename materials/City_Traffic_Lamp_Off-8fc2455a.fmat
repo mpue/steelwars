@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.44999998807907104,
+    0.30000001192092896,
+    0.11999999731779099
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "8fc2455a75c4d47dd4386cfa1cb1cf7e",
+  "ior": 1.5,
+  "name": "City Traffic Lamp Off",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.15000000596046448,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

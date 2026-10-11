@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.27000001072883606,
+    0.25,
+    0.23000000417232513
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "7626b9616a01eb9ac5c8d7742b3343f2",
+  "ior": 1.5,
+  "name": "City Civic Gravel",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.949999988079071,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

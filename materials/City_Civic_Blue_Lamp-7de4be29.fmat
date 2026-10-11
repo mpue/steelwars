@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.05000000074505806,
+    0.10000000149011612,
+    0.3499999940395355
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.25,
+    0.44999998807907104,
+    1.0
+  ],
+  "emissionStrength": 6.0,
+  "glass": false,
+  "id": "7de4be29039a4f169b2cec6a2e47df91",
+  "ior": 1.5,
+  "name": "City Civic Blue Lamp",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.30000001192092896,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

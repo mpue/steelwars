@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.05000000074505806,
+    0.05999999865889549,
+    0.07999999821186066
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "d027c1f35c31a4f333189747a6e11994",
+  "ior": 1.5,
+  "name": "City Traffic Glass",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.10000000149011612,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

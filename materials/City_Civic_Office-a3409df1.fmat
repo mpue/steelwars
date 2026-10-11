@@ -1,0 +1,41 @@
+{
+  "albedo": [
+    0.7599999904632568,
+    0.75,
+    0.7200000286102295
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "a3409df15ad0757e92206fb0c7abd7d9",
+  "ior": 1.5,
+  "name": "City Civic Office",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.800000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "windowCell": [
+    2.4000000953674316,
+    3.299999952316284
+  ],
+  "windowColor": [
+    1.0,
+    0.8799999952316284,
+    0.699999988079071
+  ],
+  "windowGlow": 2.200000047683716,
+  "windowGrid": true,
+  "windowLit": 0.05999999865889549,
+  "windowSeed": 71.0
+}

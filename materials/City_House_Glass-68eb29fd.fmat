@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.10000000149011612,
+    0.11999999731779099,
+    0.14000000059604645
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "68eb29fd2e3ac358aab6a2192bf9627d",
+  "ior": 1.5,
+  "name": "City House Glass",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.05999999865889549,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

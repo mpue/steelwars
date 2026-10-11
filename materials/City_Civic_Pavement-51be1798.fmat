@@ -1,0 +1,30 @@
+{
+  "albedo": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "51be1798a691eb091ed74f36bb579d82",
+  "ior": 1.5,
+  "name": "City Civic Pavement",
+  "normalMap": "8d41e6b2c9a74f15b3e02c7d9a6f1e84",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8999999761581421,
+  "texture": "5f2a9c1e7b3d4e60a1c8f09d2b6e7a31",
+  "thickness": 0.019999999552965164,
+  "tint": [
+    0.7200000286102295,
+    0.7200000286102295,
+    0.7200000286102295
+  ]
+}

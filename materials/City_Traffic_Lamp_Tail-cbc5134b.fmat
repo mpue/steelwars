@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.3799999952316284,
+    0.029999999329447746,
+    0.029999999329447746
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.05999999865889549,
+    0.03999999910593033
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "cbc5134bf0a289b8544ed4a71be421aa",
+  "ior": 1.5,
+  "name": "City Traffic Lamp Tail",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.15000000596046448,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

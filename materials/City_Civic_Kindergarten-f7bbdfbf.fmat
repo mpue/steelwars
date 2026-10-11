@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.9300000071525574,
+    0.7200000286102295,
+    0.20000000298023224
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "f7bbdfbf6445082acebec0fde2e1bc31",
+  "ior": 1.5,
+  "name": "City Civic Kindergarten",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.75,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

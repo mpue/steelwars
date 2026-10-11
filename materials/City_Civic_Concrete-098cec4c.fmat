@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.5600000023841858,
+    0.550000011920929,
+    0.5199999809265137
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "098cec4cb7fd23bc4eec9e5799df68d6",
+  "ior": 1.5,
+  "name": "City Civic Concrete",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8999999761581421,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

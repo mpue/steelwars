@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.05000000074505806,
+    0.18000000715255737,
+    0.5199999809265137
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "b370acfce9d212fd70c3ed78da7bc648",
+  "ior": 1.5,
+  "name": "City Civic Police Blue",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.44999998807907104,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

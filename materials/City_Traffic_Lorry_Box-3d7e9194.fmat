@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.6000000238418579,
+    0.6000000238418579,
+    0.5799999833106995
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "3d7e9194a1eb4b69d4c5a46314dd3ee4",
+  "ior": 1.5,
+  "name": "City Traffic Lorry Box",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.6000000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

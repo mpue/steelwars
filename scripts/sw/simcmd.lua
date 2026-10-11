@@ -1,0 +1,442 @@
+-- STEELWARS -- orders: the only way anything from outside reaches the
+-- simulation. A player's click becomes a short line of text ("mv 12,13 4310
+-- -2200 0"), the lockstep session hands it to every machine at the same step,
+-- and S.apply turns it into what the units do. Positions travel as integer
+-- decimetres, so a number never means something slightly different on the
+-- other side.
+local D = require("sw.defs")
+local U = require("sw.util")
+local M = require("sw.map")
+
+return function(S)
+
+local floor, sqrt, min, max, sin, cos = math.floor, math.sqrt, math.min, math.max, math.sin, math.cos
+
+local function ids(s)
+    local out = {}
+    if not s or s == "" then return out end
+    for _, v in ipairs(U.split(s, ",")) do
+        local n = tonumber(v)
+        if n then out[#out + 1] = floor(n) end
+    end
+    return out
+end
+
+-- The player's own living units among `list`.
+local function mine(p, list)
+    local out = {}
+    for _, id in ipairs(list) do
+        local o = S.get(id)
+        if o and o.owner == p and o.cat == "unit" and not o.inside then out[#out + 1] = o end
+    end
+    return out
+end
+
+local function dm(v) return (tonumber(v) or 0) / 10 end
+
+-- Slots for a group around (x, z), in rows across the direction of travel.
+local function formation(units, x, z)
+    local n = #units
+    if n == 1 then return { { x, z } } end
+    local cx, cz = 0, 0
+    local space = 0
+    for _, u in ipairs(units) do
+        cx, cz = cx + u.x, cz + u.z
+        space = max(space, u.radius * 2 + 1.2)
+    end
+    cx, cz = cx / n, cz / n
+    local h = U.heading(x - cx, z - cz)
+    local fx, fz = sin(h), cos(h)
+    local rx, rz = fz, -fx
+    local cols = max(1, floor(sqrt(n * 2) + 0.5))
+    local slots = {}
+    for k = 0, n - 1 do
+        local col = k % cols
+        local row = k // cols
+        local off = (col - (cols - 1) * 0.5) * space
+        local back = row * space
+        slots[#slots + 1] = { x + rx * off - fx * back, z + rz * off - fz * back }
+    end
+    return slots
+end
+
+local function groupMove(units, x, z, kind, queue)
+    if #units == 0 then return end
+    x, z = M.clampPos(x, z)
+    -- the slot nearest each unit, in id order, so nobody crosses the group
+    local slots = formation(units, x, z)
+    local taken = {}
+    local lead = nil
+    for _, u in ipairs(units) do
+        local bi, bd = 1, 1e18
+        for k, s in ipairs(slots) do
+            if not taken[k] then
+                local d = U.dist2(u.x, u.z, s[1], s[2])
+                if d < bd then bi, bd = k, d end
+            end
+        end
+        taken[bi] = true
+        local sx, sz = slots[bi][1], slots[bi][2]
+        if not (u.air or u.flying) and not M.walkableAt(sx, sz) then
+            local i, j = M.nearestWalkable(sx, sz, 8)
+            if i then sx, sz = M.center(i, j) end
+        end
+        local ord = { k = kind, x = sx, z = sz }
+        if queue then
+            u.orders[#u.orders + 1] = ord
+        else
+            u.orders = { ord }
+            u.target = 0
+            u.path = nil
+            -- share the leader's way when starting near it: one A* for a group
+            if not (u.air or u.flying) then
+                if lead and U.dist(u.x, u.z, lead.x, lead.z) < 40 and lead.path and #lead.path >= 2
+                    and M.lineClear(u.x, u.z, lead.path[1], lead.path[2]) then
+                    local p = U.copy(lead.path)
+                    p[#p - 1], p[#p] = sx, sz
+                    u.path, u.pi, u.goalX, u.goalZ = p, 1, sx, sz
+                    u.stuck, u.progX, u.progZ, u.progT = 0, u.x, u.z, S.tick
+                else
+                    S.setPath(u, sx, sz)
+                    if u.path then lead = u end
+                end
+            end
+        end
+    end
+end
+
+-- Is the footprint (i, j, w, h) near enough to one of p's own buildings?
+local function nearOwn(p, i, j, w, h)
+    local R = D.BUILD_RADIUS
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.cat == "bld" and o.owner == p and o.type ~= "wall" then
+            if i + w > o.i - R and i < o.i + o.w + R and j + h > o.j - R and j < o.j + o.hgt + R then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+local function pushAside(b)
+    S.query(b.x, b.z, b.radius + 2, function(u)
+        if u.cat == "unit" and not u.air and not u.flying then
+            if not M.walkableAt(u.x, u.z) then
+                local a, c = M.nearestWalkable(u.x, u.z, 14)
+                if a then u.x, u.z = M.center(a, c); u.path = nil end
+            end
+        end
+    end)
+end
+
+local function costOf(type)
+    local d = D.units[type] or D.buildings[type]
+    return d and d.cost or 0
+end
+
+S.handlers = {}
+local H = S.handlers
+
+H.mv = function(p, a) groupMove(mine(p, ids(a[2])), dm(a[3]), dm(a[4]), "move", a[5] == "1") end
+H.am = function(p, a) groupMove(mine(p, ids(a[2])), dm(a[3]), dm(a[4]), "amove", a[5] == "1") end
+H.st = function(p, a) for _, u in ipairs(mine(p, ids(a[2]))) do S.stop(u) end end
+H.gd = function(p, a) for _, u in ipairs(mine(p, ids(a[2]))) do S.stop(u); u.orders = { { k = "guard" } } end end
+
+H.at = function(p, a)
+    local t = S.get(tonumber(a[3]) or 0)
+    if not t then return end
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if S.weaponOf(u) then
+            local ord = { k = "attack", id = t.id }
+            if a[4] == "1" then u.orders[#u.orders + 1] = ord else u.orders = { ord }; u.path = nil end
+        end
+    end
+end
+
+H.hv = function(p, a)
+    local t = S.get(tonumber(a[3]) or 0)
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u.def.harvest then
+            if t and t.cat == "bld" and t.type == "refinery" and t.owner == p then
+                u.orders = { { k = "harvest", id = 0, st = "return", ref = t.id } }
+            else
+                u.orders = { { k = "harvest", id = t and t.id or 0, st = "seek" } }
+            end
+            u.path = nil
+        end
+    end
+end
+
+H.rp = function(p, a)
+    local t = S.get(tonumber(a[3]) or 0)
+    if not t then return end
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u.def.repair then u.orders = { { k = "repair", id = t.id } }; u.path = nil end
+    end
+end
+
+-- To a depot to be mended: the one named, else each unit's nearest.
+H.rr = function(p, a)
+    local want = S.get(tonumber(a[3]) or 0)
+    if want and not (want.cat == "bld" and want.owner == p and want.def.depot) then want = nil end
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u.hp < u.maxhp then
+            local b = want or S.nearestDepot(u)
+            if b then u.orders = { { k = "service", id = b.id } }; u.path = nil end
+        end
+    end
+end
+
+H.cp = function(p, a)
+    local t = S.get(tonumber(a[3]) or 0)
+    if not t then return end
+    local ok = (t.cat == "bld" and t.type ~= "wall") or (t.cat == "unit" and t.def.capturable)
+    if not ok then return end
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u.def.capture then u.orders = { { k = "capture", id = t.id } }; u.path = nil end
+    end
+end
+
+H.ld = function(p, a)
+    local c = S.get(tonumber(a[3]) or 0)
+    if not c or c.owner ~= p or not c.def.transport then return end
+    local any = false
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u ~= c and not u.air then
+            if u.def.infantry then
+                u.orders = { { k = "board", id = c.id } }
+                u.path = nil
+                any = true
+            else
+                -- a vehicle waits; the copter fetches it
+                S.stop(u)
+                c.orders[#c.orders + 1] = { k = "pickup", id = u.id }
+            end
+        end
+    end
+    if any then
+        -- the copter comes down where the troops are, on open ground
+        local x, z, n = 0, 0, 0
+        for _, u in ipairs(mine(p, ids(a[2]))) do
+            if u.def.infantry then x, z, n = x + u.x, z + u.z, n + 1 end
+        end
+        x, z = x / n, z / n
+        local i, j = M.nearestWalkable(x, z, 12)
+        if i then x, z = M.center(i, j) end
+        c.orders = { { k = "wait", x = x, z = z } }
+        c.pad = nil
+    end
+end
+
+H.pk = function(p, a)
+    local c = S.get(tonumber(a[2]) or 0)
+    local u = S.get(tonumber(a[3]) or 0)
+    if not c or not u or c.owner ~= p or u.owner ~= p or not c.def.transport then return end
+    S.stop(u)
+    c.orders = { { k = "pickup", id = u.id } }
+end
+
+H.ul = function(p, a)
+    local c = S.get(tonumber(a[2]) or 0)
+    if not c or c.owner ~= p or not c.def.transport then return end
+    local x, z = M.clampPos(dm(a[3]), dm(a[4]))
+    local i, j = M.nearestWalkable(x, z, 10)
+    if i then x, z = M.center(i, j) end
+    c.orders = { { k = "unload", x = x, z = z } }
+end
+
+H.dp = function(p, a)
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u.def.deploys then u.orders = { { k = "deploy" } } end
+    end
+end
+
+H.fl = function(p, a)
+    for _, u in ipairs(mine(p, ids(a[2]))) do
+        if u.def.canFly then
+            if u.flyWant then
+                -- only where it can stand
+                if M.walkableAt(u.x, u.z) then u.flyWant = false
+                else S.msg(p, "Landen hier nicht möglich", "error") end
+            else
+                u.flyWant = true
+            end
+            u.path = nil
+        end
+    end
+end
+
+H.pr = function(p, a)
+    local b = S.get(tonumber(a[2]) or 0)
+    local type = a[3]
+    if not b or b.owner ~= p or b.cat ~= "bld" or b.built < 1 then return end
+    local pl = S.players[p]
+    local ud, bd = D.units[type], D.buildings[type]
+    local q
+    if ud and ud.at == b.type then q = b.queue2
+    elseif bd and b.type == "base" and type ~= "base" then q = b.queue
+    else return end
+    local ok, why = S.canProduce(p, type)
+    if not ok then S.msg(p, why, "error"); return end
+    if #q >= 9 then return end
+    local cost = costOf(type)
+    if pl.cells < cost then S.msg(p, "Nicht genug Energiezellen", "nocash"); return end
+    pl.cells = pl.cells - cost
+    local d = ud or bd
+    q[#q + 1] = { type = type, kind = ud and "unit" or "bld", prog = 0, time = d.time, paid = cost }
+    S.emit({ t = "queued", p = p, id = b.id, type = type })
+end
+
+H.cn = function(p, a)
+    local b = S.get(tonumber(a[2]) or 0)
+    if not b or b.owner ~= p then return end
+    local q = (a[3] == "2") and b.queue2 or b.queue
+    local n = tonumber(a[4]) or #q
+    local item = q[n]
+    if not item then return end
+    S.players[p].cells = S.players[p].cells + item.paid
+    table.remove(q, n)
+    S.emit({ t = "cancelled", p = p, id = b.id, type = item.type })
+end
+
+H.pl = function(p, a)
+    local type = a[2]
+    local i, j = tonumber(a[3]) or -1, tonumber(a[4]) or -1
+    local bd = D.buildings[type]
+    if not bd then return end
+    -- the base that has it ready
+    local base, item, idx = nil, nil, nil
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.cat == "bld" and o.owner == p and o.queue[1] and o.queue[1].done and o.queue[1].type == type then
+            base, item, idx = o, o.queue[1], 1
+            break
+        end
+    end
+    if not base then return end
+    local ok, why = M.canBuild(i, j, bd.size[1], bd.size[2])
+    if ok and not nearOwn(p, i, j, bd.size[1], bd.size[2]) then ok, why = false, "zu weit weg" end
+    if not ok then S.msg(p, "Hier nicht bauen: " .. why, "error"); return end
+    table.remove(base.queue, idx)
+    local b = S.addBuilding(type, p, i, j, false)
+    pushAside(b)
+    S.players[p].stats.built = S.players[p].stats.built + 1
+    S.emit({ t = "placed", id = b.id, p = p })
+end
+
+H.wl = function(p, a)
+    local i, j = tonumber(a[2]) or -1, tonumber(a[3]) or -1
+    local pl = S.players[p]
+    if (pl.has.base or 0) == 0 then return end
+    local cost = D.buildings.wall.cost
+    if pl.cells < cost then return end
+    if not M.canBuild(i, j, 1, 1) or not nearOwn(p, i, j, 1, 1) then return end
+    pl.cells = pl.cells - cost
+    local b = S.addBuilding("wall", p, i, j, false)
+    pushAside(b)
+end
+
+H.rs = function(p, a)
+    local b = S.get(tonumber(a[2]) or 0)
+    local r = D.researchByKey[a[3] or ""]
+    if not b or not r or b.owner ~= p or not b.def.research or b.built < 1 or b.research then return end
+    local pl = S.players[p]
+    if pl.techs[r.key] then return end
+    if r.after and not pl.techs[r.after] then return end
+    if pl.cells < r.cost then S.msg(p, "Nicht genug Energiezellen", "nocash"); return end
+    pl.cells = pl.cells - r.cost
+    b.research = { key = r.key, prog = 0, time = r.time, paid = r.cost }
+    S.emit({ t = "researching", p = p, key = r.key })
+end
+
+H.rc = function(p, a)   -- cancel research
+    local b = S.get(tonumber(a[2]) or 0)
+    if not b or b.owner ~= p or not b.research then return end
+    S.players[p].cells = S.players[p].cells + b.research.paid
+    b.research = nil
+end
+
+function S.upgradeCost(b)
+    local c = b.def.cost
+    if c <= 0 then c = 2000 end
+    return floor(c * D.UPGRADE_COST)
+end
+
+H.up = function(p, a)
+    local b = S.get(tonumber(a[2]) or 0)
+    local kind = a[3]
+    if not b or b.owner ~= p or b.cat ~= "bld" or b.built < 1 or b.upgrading then return end
+    if kind ~= "armor" and kind ~= "ext" then return end
+    if (kind == "armor" and b.armor) or (kind == "ext" and b.ext) then return end
+    local pl = S.players[p]
+    if not pl.techs[b.type .. "_" .. kind] then S.msg(p, "Erst im Labor erforschen", "error"); return end
+    local cost = S.upgradeCost(b)
+    if pl.cells < cost then S.msg(p, "Nicht genug Energiezellen", "nocash"); return end
+    pl.cells = pl.cells - cost
+    b.upgrading = { kind = kind, prog = 0, time = 12 }
+    S.emit({ t = "upgrading", id = b.id, kind = kind })
+end
+
+H.sl = function(p, a)
+    local b = S.get(tonumber(a[2]) or 0)
+    if not b or b.owner ~= p or b.cat ~= "bld" then return end
+    local refund = floor((b.def.cost > 0 and b.def.cost or 2000) * D.SELL_REFUND * (b.hp / b.maxhp))
+    S.players[p].cells = S.players[p].cells + refund
+    S.remove(b, "sold")
+end
+
+H.rl = function(p, a)
+    local b = S.get(tonumber(a[2]) or 0)
+    if not b or b.owner ~= p then return end
+    b.rally = { dm(a[3]), dm(a[4]) }
+end
+
+-- Driving by hand (sw/drive.lua). "dc id thr steer ax az fire" takes the
+-- unit over (its orders end) or says what its driver does now; "dx id" gives
+-- it back to its crew, who stop where it stands.
+local function dir(v)
+    v = tonumber(v) or 0
+    return (v > 0 and 1) or (v < 0 and -1) or 0
+end
+H.dc = function(p, a)
+    local o = S.get(tonumber(a[2]) or 0)
+    if not o or o.owner ~= p or o.cat ~= "unit" or o.inside then return end
+    if not o.ctl then
+        S.stop(o)
+        S.releaseDock(o)
+        o.spd = 0
+    end
+    o.ctl = { thr = dir(a[3]), steer = dir(a[4]), ax = dm(a[5]), az = dm(a[6]), fire = a[7] == "1" }
+end
+H.dx = function(p, a)
+    local o = S.get(tonumber(a[2]) or 0)
+    if not o or o.owner ~= p or not o.ctl then return end
+    o.ctl, o.spd = nil, 0
+    S.stop(o)
+end
+
+H.gg = function(p)
+    local pl = S.players[p]
+    if not pl.alive then return end
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.owner == p then o.selfDestruct = S.tick + S.rng:int(0, 80) end
+    end
+    S.msg(-1, pl.name .. " gibt auf", "defeat")
+end
+
+-- Apply one order line from player p.
+function S.apply(p, line)
+    if not S.players[p] or not S.players[p].alive then return end
+    local a = U.split(line, " ")
+    local h = H[a[1]]
+    if h then h(p, a) end
+end
+
+-- --- Building orders on the client side (the view uses these to write lines) ---
+function S.encodeIds(list)
+    local t = {}
+    for i, o in ipairs(list) do t[i] = tostring(type(o) == "table" and o.id or o) end
+    return table.concat(t, ",")
+end
+function S.dmStr(v) return tostring(floor(v * 10 + 0.5)) end
+
+end

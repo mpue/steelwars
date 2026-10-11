@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.9300000071525574,
+    0.8799999952316284,
+    0.7599999904632568
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "ce041684cf53b38389cb150ec9e1e3f8",
+  "ior": 1.5,
+  "name": "City House Facade 2",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8500000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

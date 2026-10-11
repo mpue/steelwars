@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.07999999821186066,
+    0.10000000149011612,
+    0.20000000298023224
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "e6507338f9ae3a89a385bf2bd6e18f49",
+  "ior": 1.5,
+  "name": "City Traffic Coat Navy",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8500000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

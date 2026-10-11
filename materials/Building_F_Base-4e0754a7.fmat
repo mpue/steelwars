@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.19637620449066162,
+    0.19237621128559113,
+    0.18707621097564697
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "4e0754a75667ae53c8d07845d6ada99d",
+  "ior": 1.5,
+  "name": "Building F Base",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 1.0,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

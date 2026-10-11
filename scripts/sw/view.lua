@@ -1,0 +1,446 @@
+-- STEELWARS -- what the player sees: one set of engine objects per thing in
+-- the simulation, moved smoothly between simulation steps, legs walking,
+-- turrets turning, buildings rising out of the ground.
+--
+-- Reads the simulation, never writes it. Each unit is a root Empty with its
+-- parts as children (hull, turret, legs ...), one model file per part as the
+-- manifest describes (see design/assets.md); the root carries position and
+-- heading, the parts only their own joint. All transforms of a frame go to
+-- the engine in ONE game.setLocals call.
+local D = require("sw.defs")
+local U = require("sw.util")
+local M = require("sw.map")
+local S = require("sw.sim")
+local MAN = require("sw.manifest")
+
+local V = {}
+local floor, sqrt, abs, min, max, sin, cos, pi = math.floor, math.sqrt, math.abs, math.min, math.max, math.sin, math.cos, math.pi
+local DEG = U.DEG
+
+V.objs = {}          -- sim id -> view object
+V.projs = {}         -- sim projectile table -> entity id
+V.me = 0             -- the local player
+V.teamMat = {}
+V.hideFog = true     -- hide enemies the local player cannot see
+V.eye = nil          -- { x, z, r }: a unit driven by hand (sw/drive.lua) -- its driver sees out to r
+V.loaded = {}
+
+local buf = {}       -- the frame's setLocals list
+local bufN = 0
+local function put(id, x, y, z, rx, ry, rz)
+    buf[bufN + 1], buf[bufN + 2], buf[bufN + 3], buf[bufN + 4] = id, x, y, z
+    buf[bufN + 5], buf[bufN + 6], buf[bufN + 7] = rx, ry, rz
+    bufN = bufN + 7
+end
+
+local function modelFile(part, team)
+    if part.team then return part.file .. "_t" .. team .. ".glb" end
+    return part.file .. ".glb"
+end
+
+-- Every model the game can show, loaded up front: a model's first load is a
+-- disk read and a GPU upload, a visible hitch in the middle of a battle.
+function V.preload(progress)
+    local list = {}
+    for _, group in ipairs({ MAN.units or {}, MAN.buildings or {} }) do
+        for _, m in pairs(group) do
+            for _, part in ipairs(m.parts or {}) do
+                if part.team then
+                    for t = 0, 3 do list[#list + 1] = part.file .. "_t" .. t .. ".glb" end
+                else
+                    list[#list + 1] = part.file .. ".glb"
+                end
+            end
+            if m.wreck then list[#list + 1] = m.wreck .. ".glb" end
+        end
+    end
+    for _, m in pairs(MAN.props or {}) do list[#list + 1] = m.file .. ".glb" end
+    for _, f in ipairs({ "shell.glb", "rocket.glb", "bot_debris.glb" }) do list[#list + 1] = f end
+    table.sort(list)
+    for i, f in ipairs(list) do
+        V.loaded[f] = game.loadModel(f) ~= nil
+        if progress then progress(i / #list) end
+    end
+end
+
+function V.init()
+    -- The models' glow was set for Blender's renders; under the engine's bloom
+    -- it blinds. Every imported emissive material is turned down once.
+    for _, m in ipairs(game.materials()) do
+        if m.fromModel and (m.emissionStrength or 0) > 1.2 then
+            -- bright glow goes white under the tone curve; keep the colour
+            local cap = (m.name or ""):lower():find("energicum") and 0.55 or 1.1
+            game.setMaterialProps(m.id, { emissionStrength = math.min(m.emissionStrength * 0.3, cap) })
+        end
+    end
+    for t = 0, 3 do
+        local c = D.teams[t]
+        V.teamMat[t] = game.createMaterial{ name = "SW Team " .. t, color = { c.r * 0.6, c.g * 0.6, c.b * 0.6 },
+            reflectivity = 0.35, roughness = 0.45 }
+    end
+    V.glowMat = {}
+    V.matShell = game.createMaterial{ name = "SW Shell Glow", color = { 1, 0.6, 0.2 }, emission = { 1, 0.55, 0.15 }, emissionStrength = 6 }
+    V.matPlasma = game.createMaterial{ name = "SW Plasma Glow", color = { 0.4, 0.8, 1 }, emission = { 0.3, 0.8, 1.0 }, emissionStrength = 8 }
+end
+
+-- --- Spawning ------------------------------------------------------------------
+-- Readable from the commander's height: units are drawn larger than life,
+-- as every RTS does (the simulation keeps their real size).
+function V.scaleOf(o)
+    if o.cat ~= "unit" then return 1 end
+    if o.def.infantry then return 1.6 end
+    return 1.2
+end
+
+local function spawnPart(file, parent, x, y, z, rx, ry, rz, scale)
+    if V.loaded[file] == false then return 0 end
+    local id = game.spawn{ model = file, parent = parent, x = x, y = y, z = z, scale = scale or 1,
+                           rx = rx or 0, ry = ry or 0, rz = rz or 0, physics = 0, name = file }
+    return id or 0
+end
+
+local function partPos(part, rx, ry, rz, s)
+    s = s or 1
+    local c, p = part.center, part.pivot or { 0, 0, 0 }
+    local dx, dy, dz = c[1] - p[1], c[2] - p[2], c[3] - p[3]
+    local x, y, z = U.rotate(rx, ry, rz, dx, dy, dz)
+    return (p[1] + x) * s, (p[2] + y) * s, (p[3] + z) * s
+end
+V.partPos = partPos
+
+local function teamOf(o)
+    local pl = S.players[o.owner]
+    return pl and pl.color or 0
+end
+
+-- A stand-in for a model that is not built yet: a team-coloured block.
+local function fallback(o, root)
+    local r = o.radius or 1
+    local h = o.def and o.def.infantry and 1.2 or (o.cat == "bld" and 4 or 1.4)
+    local hw = (o.cat == "bld") and (o.w * D.CELL * 0.45) or r * 0.8
+    local hd = (o.cat == "bld") and (o.hgt * D.CELL * 0.45) or r
+    local id = game.spawn{ type = game.BOX, parent = root, x = 0, y = h, z = 0, sx = hw, sy = h, sz = hd,
+                           physics = 0, material = V.teamMat[teamOf(o)], name = "stand-in" }
+    return { { id = id, part = { name = "body", center = { 0, h, 0 }, pivot = { 0, 0, 0 }, axis = "none" } } }
+end
+
+local function groundY(x, z) return game.terrainHeight(x, z) end
+V.groundY = groundY
+
+function V.spawn(o)
+    if V.objs[o.id] then return end
+    -- born: game.spawn takes effect at the end of the frame, and until then
+    -- setActive on the new id does nothing -- so it is switched from the next frame on
+    local vo = { id = o.id, cat = o.cat, type = o.type, team = teamOf(o), walk = 0, spin = 0, shown = true, born = V.frame }
+    local gy = groundY(o.x, o.z)
+    local man
+    if o.cat == "unit" then man = MAN.units and MAN.units[o.def.model]
+    elseif o.cat == "bld" then man = MAN.buildings and MAN.buildings[o.def.model]
+    elseif o.cat == "crystal" then
+        local key = ({ "crystal_a", "crystal_b", "crystal_c" })[(o.variant or 0) % 3 + 1]
+        man = MAN.props and MAN.props[key]
+        if man then man = { parts = { { name = "main", file = man.file, team = false, center = man.center, pivot = { 0, 0, 0 }, axis = "none" } } } end
+    end
+    vo.man = man
+    vo.scale = V.scaleOf(o)
+    local yaw = o.h * DEG
+    if o.cat == "crystal" then yaw = (o.id * 137) % 360 end
+    vo.root = game.spawn{ type = game.EMPTY, x = o.x, y = gy, z = o.z, ry = yaw, physics = 0, name = (o.cat .. " " .. o.type .. " " .. o.id) }
+    vo.parts = {}
+    if man and man.parts then
+        for _, part in ipairs(man.parts) do
+            local f = modelFile(part, vo.team)
+            local x, y, z = partPos(part, 0, 0, 0, vo.scale)
+            local id = spawnPart(f, vo.root, x, y, z, 0, 0, 0, vo.scale)
+            if id ~= 0 then vo.parts[#vo.parts + 1] = { id = id, part = part } end
+        end
+    end
+    if #vo.parts == 0 then vo.parts = fallback(o, vo.root); vo.standin = true end
+    -- how tall it is (for health bars and the rising animation)
+    local top = 2
+    for _, p in ipairs(vo.parts) do top = max(top, p.part.center[2] * 2 * vo.scale) end
+    vo.top = top
+    if o.cat == "bld" then
+        local sum, n = 0, 0
+        for jj = 0, o.hgt do
+            for ii = 0, o.w do
+                sum = sum + groundY(M.x0 + (o.i + ii) * D.CELL, M.z0 + (o.j + jj) * D.CELL)
+                n = n + 1
+            end
+        end
+        vo.gy = sum / n
+    end
+    V.objs[o.id] = vo
+    return vo
+end
+
+function V.despawn(id)
+    local vo = V.objs[id]
+    if not vo then return end
+    game.destroy(vo.root)
+    for _, p in ipairs(vo.parts) do game.destroy(p.id) end
+    V.objs[id] = nil
+end
+
+-- A unit changed hands: same object, the other side's paint.
+function V.repaint(o)
+    V.despawn(o.id)
+    V.spawn(o)
+end
+
+-- --- Per frame ----------------------------------------------------------------------
+local function lerpAng(a, b, t) return a + U.angDiff(a, b) * t end
+
+local function normalAt(x, z, r)
+    local hl, hr = groundY(x - r, z), groundY(x + r, z)
+    local hd, hu = groundY(x, z - r), groundY(x, z + r)
+    local nx, ny, nz = (hl - hr), 2 * r, (hd - hu)
+    local l = sqrt(nx * nx + ny * ny + nz * nz)
+    return nx / l, ny / l, nz / l
+end
+
+local function updateUnit(o, vo, a, t, dt)
+    local x = o.px + (o.x - o.px) * a
+    local z = o.pz + (o.z - o.pz) * a
+    local h = lerpAng(o.ph, o.h, a)
+    local alt = o.py + (o.y - o.py) * a
+    local gy = groundY(x, z)
+    local d = o.def
+    local rx, ry, rz
+    local y = gy + alt
+    if d.infantry then
+        rx, ry, rz = 0, h * DEG, 0
+        -- a little bob while walking
+        if o.moving then y = y + abs(sin(vo.walk)) * 0.06 end
+    elseif o.air or (o.flying and alt > 1) then
+        -- banks into its turns, noses down when it speeds up
+        local turn = U.angDiff(vo.lastH or h, h) / max(dt, 1e-3)
+        vo.lastH = h
+        vo.bank = U.lerp(vo.bank or 0, U.clamp(-turn * 0.35, -0.5, 0.5), min(1, dt * 4))
+        local pitchWant = o.moving and 0.12 or 0
+        vo.pitch = U.lerp(vo.pitch or 0, pitchWant, min(1, dt * 2))
+        rx, ry, rz = vo.pitch * DEG, h * DEG, vo.bank * DEG
+        -- hover wobble
+        y = y + sin(t * 1.7 + o.id) * 0.25
+    else
+        local nx, ny, nz = normalAt(x, z, max(1.5, o.radius * 0.8))
+        rx, ry, rz = U.eulerOnGround(h, nx, ny, nz)
+    end
+    put(vo.root, x, y, z, rx, ry, rz)
+    -- joints
+    local moved = U.dist(x, z, vo.lx or x, vo.lz or z)
+    vo.lx, vo.lz = x, z
+    vo.walk = vo.walk + moved * 2.2
+    vo.spin = vo.spin + dt
+    local tAng = lerpAng(o.ptAng or 0, o.tAng or 0, a)
+    for _, p in ipairs(vo.parts) do
+        local part = p.part
+        local ax = part.axis
+        if ax and ax ~= "none" then
+            local prx, pry, prz = 0, 0, 0
+            if ax == "yaw" then
+                if part.name == "turret" then pry = tAng * DEG
+                elseif part.name == "crane" then pry = sin(t * 0.3 + o.id) * 25
+                elseif part.name:sub(1, 5) == "rotor" then pry = (vo.spin * 1800) % 360
+                end
+            elseif ax == "pitch" then
+                if part.name:sub(1, 3) == "leg" then
+                    local s = o.moving and sin(vo.walk) * 30 or 0
+                    if part.name == "leg_r" then s = -s end
+                    prx = s
+                elseif part.name:sub(1, 3) == "jet" then
+                    -- engines swing down to lift as it rises
+                    local f = U.clamp(alt / ((d.flyHeight or 20) * 0.5), 0, 1)
+                    prx = -80 * f
+                end
+            elseif ax == "roll" then
+                -- the drill turns while it digs
+                local digging = o.mining and (S.tick - o.mining) < 4
+                vo.drill = (vo.drill or 0) + dt * (digging and 720 or (o.moving and 90 or 0))
+                prz = vo.drill % 360
+            end
+            local px, py, pz = partPos(part, prx, pry, prz, vo.scale)
+            put(p.id, px, py, pz, prx, pry, prz)
+        end
+    end
+    vo.x, vo.y, vo.z, vo.h = x, y, z, h
+end
+
+local function updateBuilding(o, vo, a, t, dt)
+    local x, z = o.x, o.z
+    local gy = vo.gy or groundY(x, z)
+    local rise = 1 - (o.built or 1)
+    local y = gy - rise * (vo.top + 1.5)
+    if rise > 0 or vo.wasRising then
+        put(vo.root, x, y, z, 0, 0, 0)
+        vo.wasRising = rise > 0
+    end
+    vo.x, vo.y, vo.z = x, gy, z
+    for _, p in ipairs(vo.parts) do
+        local part = p.part
+        if part.axis == "yaw" then
+            local ry
+            if part.name == "dish" then
+                local on = S.players[o.owner] and not S.players[o.owner].lowPower
+                vo.dish = (vo.dish or 0) + dt * (on and 40 or 4)
+                ry = vo.dish % 360
+            else
+                ry = lerpAng(o.ptAng or 0, o.tAng or 0, a) * DEG
+            end
+            local px, py, pz = partPos(part, 0, ry, 0)
+            put(p.id, px, py, pz, 0, ry, 0)
+        end
+    end
+end
+
+local function updateCrystal(o, vo)
+    local f = 0.35 + 0.65 * (o.amount / o.max)
+    if not vo.scaleF or abs(vo.scaleF - f) > 0.04 then
+        vo.scaleF = f
+        for _, p in ipairs(vo.parts) do
+            local man = MAN.props and MAN.props[p.part.file]
+            if man then
+                game.setScale(p.id, man.size[1] * 0.5 * f, man.size[2] * 0.5 * f, man.size[3] * 0.5 * f)
+                put(p.id, man.center[1] * f, man.center[2] * f, man.center[3] * f, 0, 0, 0)
+            end
+        end
+    end
+    vo.x, vo.y, vo.z = o.x, groundY(o.x, o.z), o.z
+end
+
+-- Should the local player see this?
+local function visibleTo(o)
+    if not V.hideFog then return true end
+    if o.owner == V.me or o.owner < 0 then return true end
+    if o.cat == "unit" and o.inside then return false end
+    if not S.players[V.me] then return true end
+    if not S.enemies(V.me, o.owner) then return true end
+    local e = V.eye
+    local near = e ~= nil and (o.x - e.x) ^ 2 + (o.z - e.z) ^ 2 <= e.r * e.r
+    if o.cat == "bld" then
+        -- buildings stay where they were last seen
+        if near or S.sees(V.me, o.x, o.z) then o.seenBy = o.seenBy or {}; o.seenBy[V.me] = true end
+        return o.seenBy and o.seenBy[V.me] or false
+    end
+    return near or S.sees(V.me, o.x, o.z)
+end
+V.visibleTo = visibleTo
+
+-- a = how far between the last step and the next (0..1)
+V.frame = 0
+function V.update(a, t, dt)
+    V.frame = V.frame + 1
+    bufN = 0
+    for _, o in ipairs(S.objs) do
+        if o.alive then
+            local vo = V.objs[o.id]
+            if not vo then vo = V.spawn(o) end
+            if vo then
+                if vo.team ~= teamOf(o) and o.cat ~= "crystal" then
+                    V.repaint(o)
+                    vo = V.objs[o.id]
+                end
+                local show = (not o.inside) and visibleTo(o)
+                if show ~= vo.shown and vo.born ~= V.frame then
+                    game.setActive(vo.root, show)
+                    vo.shown = show
+                end
+                if show then
+                    if o.cat == "unit" then updateUnit(o, vo, a, t, dt)
+                    elseif o.cat == "bld" then updateBuilding(o, vo, a, t, dt)
+                    elseif o.cat == "crystal" then updateCrystal(o, vo) end
+                    -- sparks while it is being mended (depot or engineer)
+                    if o.healed and S.tick - o.healed < 4 then
+                        vo.weld = (vo.weld or 0) - dt
+                        if vo.weld <= 0 then
+                            vo.weld = 0.3
+                            local F = package.loaded["sw.fx"]
+                            local x, z = vo.x or o.x, vo.z or o.z
+                            local r = (o.cat == "bld") and o.radius * 0.6 or 0
+                            local ang = V.frame * 2.39996
+                            x, z = x + math.sin(ang) * r, z + math.cos(ang) * r
+                            if F then F.emitAt("FX Weld", x, groundY(x, z) + (o.cat == "bld" and 2.5 or 1.5) + (o.y or 0), z) end
+                        end
+                    end
+                elseif o.inside and o.cat == "unit" and not o.def.infantry then
+                    -- a vehicle hanging under its copter
+                    local c = S.byId[o.inside]
+                    local cv = c and V.objs[c.id]
+                    if cv and cv.x then
+                        if not vo.shown then game.setActive(vo.root, true); vo.shown = true end
+                        put(vo.root, cv.x, cv.y - 5.5, cv.z, 0, cv.h * DEG, 0)
+                        vo.x, vo.y, vo.z = cv.x, cv.y - 5.5, cv.z
+                    end
+                end
+            end
+        end
+    end
+    -- projectiles
+    local seen = {}
+    for _, p in ipairs(S.projs) do
+        if p.delay <= 0 then
+            seen[p] = true
+            local id = V.projs[p]
+            if not id then
+                local file = (p.kind == "rocket") and "rocket.glb" or "shell.glb"
+                if V.loaded[file] then
+                    id = game.spawn{ model = file, x = p.x, y = p.y, z = p.z, physics = 0, name = "proj" }
+                else
+                    id = game.spawn{ type = game.SPHERE, x = p.x, y = p.y, z = p.z, size = 0.25, physics = 0,
+                                     material = (p.class == "plasma") and V.matPlasma or V.matShell, name = "proj" }
+                end
+                V.projs[p] = id
+            end
+            local x = p.px + (p.x - p.px) * a
+            local y = p.py + (p.y - p.py) * a
+            local z = p.pz + (p.z - p.pz) * a
+            local dx, dy, dz = p.x - p.px, p.y - p.py, p.z - p.pz
+            local l = sqrt(dx * dx + dy * dy + dz * dz)
+            local rx, ry, rz = 0, 0, 0
+            if l > 1e-4 then rx, ry, rz = U.eulerFromFrame(dx / l, dy / l, dz / l, 0, 1, 0) end
+            -- sim heights are above flat ground; lift to the terrain
+            put(id, x, y + groundY(x, z), z, rx, ry, rz)
+            if V.onProjectile then V.onProjectile(p, x, y, z) end
+        end
+    end
+    for p, id in pairs(V.projs) do
+        if not seen[p] then game.destroy(id); V.projs[p] = nil end
+    end
+    if bufN > 0 then
+        for k = bufN + 1, #buf do buf[k] = nil end
+        game.setLocals(buf)
+    end
+end
+
+-- Remove the view of a thing the simulation removed.
+function V.removed(ev)
+    V.despawn(ev.id)
+end
+
+-- World position of a unit's muzzle n (for the flash and the tracer).
+function V.muzzle(o, n)
+    local vo = V.objs[o.id]
+    if not vo or not vo.x then return o.x, (vo and vo.y or 0) + 2, o.z end
+    local man = vo.man
+    local mz = man and man.muzzles and man.muzzles[n or 1]
+    if not mz then return vo.x, vo.y + (vo.top or 2) * 0.6, vo.z end
+    local s = vo.scale or 1
+    local mx, my, mzz = mz.pos[1], mz.pos[2], mz.pos[3]
+    -- turret: turn the point about the turret pivot
+    local turret
+    if mz.part then
+        for _, p in ipairs(vo.parts) do if p.part.name == mz.part then turret = p.part end end
+    end
+    local yaw = (o.h or 0)
+    if turret and turret.axis == "yaw" then
+        local pv = turret.pivot
+        local ta = (o.cat == "bld") and (o.tAng or 0) or (o.tAng or 0)
+        local x, y, z = U.rotate(0, ta * DEG, 0, mx - pv[1], my - pv[2], mzz - pv[3])
+        mx, my, mzz = pv[1] + x, pv[2] + y, pv[3] + z
+    end
+    if o.cat == "bld" then yaw = 0 end
+    local wx, wy, wz = U.rotate(0, yaw * DEG, 0, mx * s, my * s, mzz * s)
+    return vo.x + wx, vo.y + wy, vo.z + wz
+end
+
+return V

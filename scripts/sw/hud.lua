@@ -1,0 +1,754 @@
+-- STEELWARS -- the command screen: resources at the top, the radar and the
+-- build menu on the right, what is selected at the bottom, health bars and
+-- selection rings in the world, the ghost of a building being placed.
+--
+-- Drawn fresh every frame on the engine's 1080-high HUD canvas. Every button
+-- is big, and every one also has a key.
+local D = require("sw.defs")
+local U = require("sw.util")
+local M = require("sw.map")
+local S = require("sw.sim")
+local V = require("sw.view")
+local C = require("sw.camera")
+local I = require("sw.ui")
+local A = require("sw.audio")
+local K = require("sw.skin")
+
+local H = {}
+local floor, min, max, sin, cos, abs, pi = math.floor, math.min, math.max, math.sin, math.cos, math.abs, math.pi
+
+H.tab = "bld"
+H.msgs = {}
+H.scroll = 0
+H.minimap = nil
+H.time = 0
+H.TOP = 56          -- height of the header bar
+
+-- palette
+local PANEL = { 0.035, 0.04, 0.05, 0.88 }
+local EDGE = { 0.32, 0.36, 0.40, 0.9 }
+local AMBER = { 1.0, 0.62, 0.12 }
+local CYAN = { 0.35, 0.88, 1.0 }
+local RED = { 1.0, 0.25, 0.18 }
+local GREEN = { 0.35, 1.0, 0.45 }
+local WHITE = { 0.92, 0.94, 0.96 }
+local DIM = { 0.55, 0.6, 0.65 }
+
+local function rect(x, y, w, h, c, a, r) game.hudRect(x, y, w, h, c[1], c[2], c[3], a or c[4] or 1, r or 0) end
+local function frame(x, y, w, h, c, a, t, r) game.hudFrame(x, y, w, h, c[1], c[2], c[3], a or 1, t or 1.5, r or 0) end
+local function text(x, y, s, size, c, a, align, bold) game.hudText(x, y, s, size, c[1], c[2], c[3], a or 1, align or 0, bold or false) end
+
+local function teamColor(p)
+    local pl = S.players[p]
+    local t = D.teams[pl and pl.color or 0]
+    return { t.r, t.g, t.b }
+end
+
+function H.message(text_, color)
+    H.msgs[#H.msgs + 1] = { text = text_, t = H.time, color = color or WHITE }
+    while #H.msgs > 6 do table.remove(H.msgs, 1) end
+end
+
+-- is (mx, my) inside?
+local function inside(mx, my, x, y, w, h) return mx and mx >= x and mx <= x + w and my >= y and my <= y + h end
+
+-- A button; returns true when clicked this frame.
+local function button(x, y, w, h, label, mx, my, opts)
+    opts = opts or {}
+    local hot = inside(mx, my, x, y, w, h) and not opts.disabled
+    if not K.button(x, y, w, h, opts.on and "on" or (hot and "hot" or nil), opts.disabled) then
+        local c = opts.on and { 0.25, 0.18, 0.05, 0.95 } or (hot and { 0.12, 0.14, 0.17, 0.95 } or { 0.07, 0.08, 0.1, 0.92 })
+        rect(x, y, w, h, c, nil, 4)
+        frame(x, y, w, h, opts.on and AMBER or (hot and { 0.6, 0.65, 0.7 } or EDGE), 1, 1.5, 4)
+    end
+    local tc = opts.disabled and DIM or (opts.on and { 0.75, 0.95, 1.0 } or WHITE)
+    text(x + w * 0.5, y + h * 0.5 - (opts.sub and 15 or 10), label, opts.size or 19, tc, 1, 0.5, true)
+    if opts.sub then text(x + w * 0.5, y + h * 0.5 + 3, opts.sub, 15, opts.disabled and DIM or AMBER, 1, 0.5) end
+    if opts.key then text(x + 14, y + 6, opts.key, 13, AMBER, 0.8, 0, true) end
+    if hot then H.hot = true end
+    return hot and H.click
+end
+H.button = button
+
+-- --- Minimap --------------------------------------------------------------------
+-- The terrain picture is made once from the grid and written next to the
+-- project's textures (an uncompressed TGA), then shown with game.hudImage.
+function H.makeMinimap(name)
+    if game.findAsset(name) then H.minimap = name; return end
+    local src = debug.getinfo(1, "S").source
+    local dir = src:match("^@(.*)[/\\]scripts[/\\]sw[/\\]hud%.lua$")
+    if not dir then return end
+    local N = 256
+    local f = io.open(dir .. "/textures/" .. name, "wb")
+    if not f then return end
+    -- 24-bit uncompressed, origin top left
+    f:write(string.char(0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, N % 256, N // 256, N % 256, N // 256, 24, 32))
+    local lo, hi = 1e9, -1e9
+    for k = 1, #M.hgt do lo = min(lo, M.hgt[k]); hi = max(hi, M.hgt[k]) end
+    local rows = {}
+    for py = 0, N - 1 do
+        local row = {}
+        for px = 0, N - 1 do
+            local x = M.x0 + (px + 0.5) / N * M.size
+            local z = M.z0 + (py + 0.5) / N * M.size
+            local i, j = M.cellOf(x, z)
+            i, j = U.clamp(i, 0, M.W - 1), U.clamp(j, 0, M.H - 1)
+            local k = M.index(i, j)
+            local h = (M.hgt[k] - lo) / max(1, hi - lo)
+            -- light from the north-west
+            local hx = M.hgt[M.index(U.clamp(i + 1, 0, M.W - 1), j)] - M.hgt[M.index(U.clamp(i - 1, 0, M.W - 1), j)]
+            local hz = M.hgt[M.index(i, U.clamp(j + 1, 0, M.H - 1))] - M.hgt[M.index(i, U.clamp(j - 1, 0, M.H - 1))]
+            local shade = U.clamp(0.75 - (hx + hz) * 0.08, 0.35, 1.15)
+            local r, g, b = 0.20 + h * 0.25, 0.22 + h * 0.22, 0.16 + h * 0.18
+            local bl = M.block[k]
+            if bl == 2 then r, g, b = 0.06, 0.12, 0.2; shade = 1 end
+            if bl == 3 then r, g, b = 0.28, 0.27, 0.26 end
+            if bl == 1 then r, g, b = r * 0.7, g * 0.7, b * 0.7 end
+            r, g, b = U.clamp(r * shade, 0, 1), U.clamp(g * shade, 0, 1), U.clamp(b * shade, 0, 1)
+            -- the TGA's minimap is drawn with +Z up the screen: flip rows
+            row[#row + 1] = string.char(floor(b * 255), floor(g * 255), floor(r * 255))
+        end
+        rows[N - py] = table.concat(row)
+    end
+    f:write(table.concat(rows))
+    f:close()
+    game.refreshAssets()
+    H.minimap = name
+end
+
+-- Map position -> minimap pixel and back. The minimap shows +Z up.
+local MM = { x = 0, y = 0, s = 330 }
+local function toMini(x, z)
+    return MM.x + (x - M.x0) / M.size * MM.s, MM.y + (1 - (z - M.z0) / M.size) * MM.s
+end
+local function fromMini(px, py)
+    return M.x0 + (px - MM.x) / MM.s * M.size, M.z0 + (1 - (py - MM.y) / MM.s) * M.size
+end
+
+local function drawMinimap(x, y, s, mx, my)
+    MM.x, MM.y, MM.s = x, y, s
+    if not K.nine("ui_frame", x - 16, y - 16, s + 32, s + 32, 40) then rect(x - 6, y - 6, s + 12, s + 12, PANEL) end
+    local pl = S.players[V.me]
+    local radar = pl and pl.radar
+    if not radar then
+        rect(x, y, s, s, { 0.02, 0.025, 0.03, 1 })
+        for k = 1, 60 do
+            local rx, ry = (k * 7919 + floor(H.time * 23) * 104729) % s, (k * 6271 + floor(H.time * 17) * 7727) % s
+            rect(x + rx, y + ry, 3, 2, { 0.2, 0.25, 0.28, 0.6 })
+        end
+        text(x + s * 0.5, y + s * 0.5 - 22, "KEIN RADAR", 26, DIM, 1, 0.5, true)
+        text(x + s * 0.5, y + s * 0.5 + 10, (pl and (pl.has.radar or 0) > 0) and "zu wenig Strom" or "Radar bauen", 17, DIM, 1, 0.5)
+        K.scan(x, y, s, s, H.time)
+        return
+    end
+    if H.minimap then game.hudImage(H.minimap, x, y, s, s, 1, 1, 1, 1) else rect(x, y, s, s, { 0.15, 0.17, 0.13, 1 }) end
+    -- unexplored: dark
+    local VW = S.VW
+    local G = 32
+    local cell = s / G
+    local exp = pl.explored
+    local step = VW // G
+    for gj = 0, G - 1 do
+        for gi = 0, G - 1 do
+            local k = (gj * step) * VW + gi * step + 1
+            if not exp[k] then
+                rect(x + gi * cell, y + (G - 1 - gj) * cell, cell + 0.6, cell + 0.6, { 0, 0, 0, 0.92 })
+            end
+        end
+    end
+    -- crystals
+    for _, c in ipairs(S.crystals) do
+        if c.alive then
+            local px, py = toMini(c.x, c.z)
+            rect(px - 1, py - 1, 2.5, 2.5, { 0.3, 1.0, 0.6, 0.9 })
+        end
+    end
+    -- everything visible
+    for _, o in ipairs(S.objs) do
+        if o.alive and not o.inside and (o.cat == "unit" or o.cat == "bld") and V.visibleTo(o) then
+            local col = teamColor(o.owner)
+            local px, py = toMini(o.x, o.z)
+            if o.cat == "bld" then
+                local w = o.w * D.CELL / M.size * s
+                local h = o.hgt * D.CELL / M.size * s
+                rect(px - w * 0.5, py - h * 0.5, w, h, col, 0.95)
+            else
+                local r = o.def.infantry and 1.5 or 2.5
+                rect(px - r, py - r, r * 2, r * 2, col, 1)
+                if I.selSet[o.id] then frame(px - r - 1, py - r - 1, r * 2 + 2, r * 2 + 2, WHITE, 1, 1) end
+            end
+        end
+    end
+    -- alerts
+    for _, a in ipairs(H.alerts or {}) do
+        local age = H.time - a.t
+        if age < 4 then
+            local px, py = toMini(a.x, a.z)
+            game.hudCircle(px, py, 6 + (age % 1) * 14, 1, 0.3, 0.2, 1 - (age % 1), 2)
+        end
+    end
+    -- the camera's view
+    local q = C.viewQuad()
+    for k = 0, 3 do
+        local ax, ay = toMini(q[k * 2 + 1], q[k * 2 + 2])
+        local n = (k + 1) % 4
+        local bx, by = toMini(q[n * 2 + 1], q[n * 2 + 2])
+        game.hudLine(U.clamp(ax, x, x + s), U.clamp(ay, y, y + s), U.clamp(bx, x, x + s), U.clamp(by, y, y + s), 1, 1, 1, 0.8, 1.5)
+    end
+    K.scan(x, y, s, s, H.time)
+    frame(x, y, s, s, CYAN, 0.35, 1)
+    -- clicks: left jumps, right orders
+    if inside(mx, my, x, y, s, s) then
+        H.hot = true
+        local wx, wz = fromMini(mx, my)
+        if game.mouseDown(game.MOUSE_LEFT) then C.jump(wx, wz) end
+        if game.mousePressed(game.MOUSE_RIGHT) then I.orderAt(wx, wz, nil, false) end
+    end
+end
+
+-- --- Build menu -------------------------------------------------------------------
+local function producer(kind)
+    -- the building of ours that makes this kind: "bld"/"inf" -> base, "veh" -> factory, "res" -> lab
+    local want = (kind == "veh") and "factory" or ((kind == "res") and "lab" or "base")
+    local best
+    for _, o in ipairs(S.objs) do
+        if o.alive and o.cat == "bld" and o.owner == V.me and o.type == want and o.built >= 1 then
+            if not best or (kind ~= "bld" and #o.queue2 < #best.queue2) then best = o end
+            if kind == "bld" and o.queue[1] then best = o; break end
+        end
+    end
+    -- the selected one, if it is that kind
+    for _, id in ipairs(I.sel) do
+        local o = S.get(id)
+        if o and o.type == want and o.owner == V.me and o.built >= 1 then best = o end
+    end
+    return best
+end
+
+local function icon(name, x, y, w, h, tint)
+    local f = "icon_" .. name .. ".png"
+    if game.imageSize(f) then
+        game.hudImage(f, x, y, w, h, tint or 1, tint or 1, tint or 1, 1)
+    else
+        rect(x + 4, y + 4, w - 8, h - 8, { 0.12, 0.14, 0.16, 1 }, nil, 6)
+        local d = D.units[name] or D.buildings[name]
+        local label = d and d.name or name
+        text(x + w * 0.5, y + h * 0.5 - 12, label:sub(1, 3):upper(), 22, (tint or 1) < 0.6 and DIM or AMBER, 1, 0.5, true)
+    end
+end
+H.icon = icon
+
+local function buildItem(kind, type, x, y, w, h, mx, my, prod)
+    local pl = S.players[V.me]
+    local d = D.units[type] or D.buildings[type]
+    local ok, why = S.canProduce(V.me, type)
+    if not prod then ok, why = false, "Kein Produktionsgebäude" end
+    local q = prod and ((kind == "bld") and prod.queue or prod.queue2) or {}
+    local n, prog, done = 0, nil, false
+    for k, it in ipairs(q) do
+        if it.type == type then
+            n = n + 1
+            if k == 1 then prog = it.prog; done = it.done end
+        end
+    end
+    local hot = inside(mx, my, x, y, w, h)
+    local skinned = K.slot(x, y, w, h, hot, ok and 1 or 0.7)
+    if not skinned then rect(x, y, w, h, hot and { 0.1, 0.12, 0.14, 1 } or { 0.05, 0.06, 0.07, 1 }, nil, 5) end
+    local m = skinned and floor(w * 0.1) or 2           -- inside the armoured rim
+    local ih = h - 24 - m
+    icon(type, x + m, y + m, w - m * 2, ih - m * 0.3, ok and 1 or 0.35)
+    if prog then
+        local f = prog
+        rect(x + m, y + m, w - m * 2, (ih - m * 0.3) * (1 - f), { 0, 0, 0, 0.6 })
+        -- progress along the bottom edge, cyan
+        rect(x + m, y + h - m - 3, (w - m * 2) * f, 3, CYAN, 0.9)
+        if done then
+            local blink = 0.5 + 0.5 * sin(H.time * 8)
+            rect(x + m, y + h - 50, w - m * 2, 22, { 0.1, 0.4, 0.1, 0.85 })
+            text(x + w * 0.5, y + h - 49, "BEREIT", 17, { 0.6, 1, 0.6 }, blink, 0.5, true)
+        end
+    end
+    if n > 1 then text(x + w - m - 2, y + m, tostring(n), 20, WHITE, 1, 1, true) end
+    text(x + w * 0.5, y + h - 26 - (skinned and 2 or 0), U.fmtInt(d.cost), 16, pl.cells >= d.cost and AMBER or RED, 1, 0.5, true)
+    if not skinned then frame(x, y, w, h, done and GREEN or (hot and { 0.7, 0.75, 0.8 } or EDGE), 1, done and 2.5 or 1.2, 5) end
+    if done then K.brackets(x + 3, y + 3, w - 6, h - 6, 14, GREEN[1], GREEN[2], GREEN[3], 0.6 + 0.4 * sin(H.time * 8), 2.5) end
+    if hot then
+        H.hot = true
+        H.tip = { title = d.name, body = d.desc, cost = d.cost, why = (not ok) and why or nil,
+                  extra = (d.power and d.power ~= 0) and ((d.power > 0 and "+" or "") .. d.power .. " Strom") or nil }
+        if H.click then
+            if type == "wall" and ok then
+                -- walls are bought block by block while drawing the line
+                I.startPlace("wall")
+            elseif done then
+                I.startPlace(type)
+            elseif ok then
+                I.sendQueue(prod, type)
+            else
+                A.play("error")
+            end
+        end
+        if H.rclick and prod and n > 0 then
+            -- right click cancels the last of these
+            for k = #q, 1, -1 do
+                if q[k].type == type then
+                    I.send(string.format("cn %d %d %d", prod.id, kind == "bld" and 1 or 2, k))
+                    if kind == "bld" and k == 1 and I.mode == "place" then I.mode = nil end
+                    break
+                end
+            end
+            A.play("click")
+        end
+    end
+end
+
+local function researchRow(r, x, y, w, h, mx, my, lab)
+    local pl = S.players[V.me]
+    local known = pl.techs[r.key]
+    local busy = lab and lab.research and lab.research.key == r.key
+    local locked = r.after and not pl.techs[r.after]
+    local hot = inside(mx, my, x, y, w, h)
+    local lit = hot and 1.3 or 1
+    if not K.nine("ui_panel", x, y, w, h, 14, lit, lit, lit, 1) then
+        rect(x, y, w, h, hot and { 0.11, 0.12, 0.14, 1 } or { 0.05, 0.06, 0.07, 1 }, nil, 4)
+    end
+    if known then rect(x + 4, y + 4, w - 8, h - 8, { 0.1, 0.5, 0.2, 0.25 }, nil, 3) end
+    if busy then rect(x, y, w * lab.research.prog, h, { 0.15, 0.35, 0.5, 0.8 }, nil, 4) end
+    if r.building then icon(r.building, x + 3, y + 3, h - 6, h - 6, known and 1 or 0.6) end
+    local tx = r.building and (x + h + 4) or (x + 10)
+    local title = r.building and ((r.upgrade == "armor") and "Verstärkung" or "Erweiterung") or r.name
+    text(tx, y + 4, title, 16, known and GREEN or (locked and DIM or WHITE), 1, 0, true)
+    if r.building then text(tx, y + 22, D.buildings[r.building].name, 13, DIM, 1, 0) end
+    if not known then text(x + w - 8, y + 4, U.fmtInt(r.cost), 15, pl.cells >= r.cost and AMBER or RED, 1, 1, true) end
+    if busy then frame(x + 2, y + 2, w - 4, h - 4, CYAN, 0.8, 1.5, 4) end
+    if hot then
+        H.hot = true
+        H.tip = { title = r.name, body = r.desc, cost = r.cost, why = known and "erforscht" or (locked and "Erst: " .. D.researchByKey[r.after].name or (not lab and "Forschungslabor bauen" or nil)) }
+        if H.click and not known and not locked and lab then
+            if busy then I.send("rc " .. lab.id) else I.send("rs " .. lab.id .. " " .. r.key) end
+            A.play("click")
+        end
+    end
+end
+
+local function drawSidebar(x, y, w, mx, my)
+    local W, Hh = game.hudSize()
+    local top = H.TOP - 4
+    if not K.image("ui_side", x - 14, top, w + 26, Hh - top) then
+        rect(x - 12, top, w + 12, Hh - top, PANEL)
+    end
+    game.hudLine(x - 14, top, x - 14, Hh, 1.0, 0.62, 0.12, 0.35, 2)
+    drawMinimap(x + (w - 320) * 0.5, y + 8, 320, mx, my)
+    local ty = y + 352
+    local tabs = { { "bld", "Gebäude" }, { "inf", "Infanterie" }, { "veh", "Fahrzeuge" }, { "res", "Forschung" } }
+    local tw = (w - 6) / 4
+    for k, t in ipairs(tabs) do
+        local prod = producer(t[1])
+        local tx = x + (k - 1) * (tw + 2)
+        local on = H.tab == t[1]
+        -- a tab with something ready blinks
+        local ready = false
+        if t[1] == "bld" and prod and prod.queue[1] and prod.queue[1].done then ready = true end
+        if button(tx, ty, tw, 34, t[2], mx, my, { on = on, size = 15, disabled = not prod }) then H.tab = t[1]; A.play("click") end
+        if ready and not on then frame(tx, ty, tw, 34, GREEN, 0.5 + 0.5 * sin(H.time * 8), 2, 4) end
+    end
+    local gy = ty + 44
+    local prod = producer(H.tab)
+    if H.tab == "res" then
+        local list = D.research
+        local rowH, rows = 44, floor((Hh - gy - 10) / 46)
+        local maxScroll = max(0, #list - rows)
+        if inside(mx, my, x, gy, w, Hh - gy) then
+            local wheel = game.mouseWheel()
+            if wheel ~= 0 then H.scroll = U.clamp(H.scroll - wheel, 0, maxScroll) end
+        end
+        H.scroll = U.clamp(H.scroll, 0, maxScroll)
+        for k = 1, rows do
+            local r = list[k + floor(H.scroll)]
+            if not r then break end
+            researchRow(r, x, gy + (k - 1) * 46, w, rowH, mx, my, prod)
+        end
+        if maxScroll > 0 then
+            local bh = (Hh - gy - 10) * rows / #list
+            rect(x + w + 2, gy + (Hh - gy - 10 - bh) * (H.scroll / maxScroll), 4, bh, DIM, 0.8, 2)
+        end
+        return
+    end
+    local items
+    if H.tab == "bld" then items = D.buildingOrder
+    elseif H.tab == "inf" then items = D.unitOrder.base
+    else items = D.unitOrder.factory end
+    local cols = 3
+    local cw = (w - (cols - 1) * 6) / cols
+    local ch = cw * 1.05
+    for k, type in ipairs(items) do
+        local c = (k - 1) % cols
+        local r = (k - 1) // cols
+        buildItem(H.tab == "bld" and "bld" or "unit", type, x + c * (cw + 6), gy + r * (ch + 6), cw, ch, mx, my, prod)
+    end
+end
+
+-- --- Top bar ---------------------------------------------------------------------
+local function drawTop(W, mx, my)
+    local T = H.TOP
+    if not K.nine("ui_bar", 0, 0, W, T + 6, (T + 6) * 0.5) then
+        rect(0, 0, W, T, PANEL)
+        game.hudLine(0, T, W, T, EDGE[1], EDGE[2], EDGE[3], 0.9, 2)
+    end
+    if not K.image("sw_logo", 22, 6, 154, 44) then text(16, 12, "STEELWARS", 24, AMBER, 1, 0, true) end
+    local pl = S.players[V.me]
+    if not pl then return end
+    -- a readout: dark glass with brackets, a small caption, a big value
+    local function readout(x, w, caption, c)
+        rect(x, 9, w, 38, { 0.01, 0.025, 0.035, 0.86 }, nil, 3)
+        K.brackets(x, 9, w, 38, 7, c[1], c[2], c[3], 0.7, 1.5)
+        text(x + 10, 11, caption, 11, DIM, 1, 0, true)
+    end
+    local x = 220
+    readout(x, 160, "ENERGIEZELLEN", AMBER)
+    text(x + 10, 23, U.fmtInt(pl.cells), 21, AMBER, 1, 0, true)
+    x = x + 172
+    readout(x, 236, "ENERGICUM", GREEN)
+    text(x + 10, 23, U.fmtInt(pl.raw) .. " / " .. U.fmtInt(pl.rawCap), 19, { 0.4, 1, 0.65 }, 1, 0, true)
+    local f = pl.rawCap > 0 and pl.raw / pl.rawCap or 0
+    rect(x + 160, 29, 64, 8, { 0.1, 0.12, 0.12, 1 }, nil, 2)
+    rect(x + 160, 29, 64 * f, 8, { 0.3, 0.9, 0.55, 1 }, nil, 2)
+    x = x + 248
+    local low = pl.lowPower
+    readout(x, 300, "STROM", low and RED or CYAN)
+    text(x + 10, 23, floor(pl.power) .. " / " .. floor(pl.use), 19, low and RED or CYAN, 1, 0, true)
+    local bw = 170
+    rect(x + 118, 29, bw, 8, { 0.1, 0.12, 0.14, 1 }, nil, 2)
+    local maxv = max(pl.power, pl.use, 1)
+    rect(x + 118, 29, bw * pl.power / maxv, 8, low and { 0.9, 0.3, 0.2, 1 } or { 0.3, 0.8, 1, 1 }, nil, 2)
+    game.hudLine(x + 118 + bw * pl.use / maxv, 24, x + 118 + bw * pl.use / maxv, 42, 1, 1, 1, 0.9, 2)
+    if low then text(x + 312, 20, "ZU WENIG STROM", 16, RED, 0.6 + 0.4 * sin(H.time * 6), 0, true) end
+    -- time and menu
+    readout(W - 268, 104, "EINSATZZEIT", WHITE)
+    text(W - 174, 23, U.fmtTime(S.tick * D.TICK), 20, WHITE, 1, 1, true)
+    if button(W - 154, 7, 138, 42, "Menü", mx, my, { size = 16, key = "Esc" }) then I.wantMenu = true end
+end
+
+-- --- Selection panel ------------------------------------------------------------------
+local function hpColor(f)
+    if f > 0.6 then return GREEN elseif f > 0.3 then return AMBER end
+    return RED
+end
+
+local function drawSelection(x, y, w, h, mx, my)
+    local sel = I.selected()
+    if #sel == 0 then return end
+    K.window(x, y, w, h, 0.97)
+    local cmds = I.commands()
+    local cmdW = 128
+    local cmdX = x + w - (cmdW + 8) * min(#cmds, 4) - 14
+    if #sel == 1 then
+        local o = sel[1]
+        local d = o.def
+        rect(x + 30, y + 22, 120, 120, { 0, 0.02, 0.03, 0.6 }, nil, 4)
+        icon(o.type, x + 30, y + 22, 120, 120, 1)
+        K.brackets(x + 30, y + 22, 120, 120, 12, CYAN[1], CYAN[2], CYAN[3], 0.6, 1.5)
+        local tx = x + 166
+        local owner = S.players[o.owner]
+        text(tx, y + 18, d.name or o.type, 26, WHITE, 1, 0, true)
+        text(tx, y + 44, owner and owner.name or "", 16, teamColor(o.owner), 1, 0, true)
+        local f = o.hp / o.maxhp
+        rect(tx, y + 70, 300, 14, { 0.1, 0.1, 0.1, 1 }, nil, 3)
+        rect(tx, y + 70, 300 * f, 14, hpColor(f), nil, 3)
+        text(tx + 306, y + 68, floor(o.hp) .. " / " .. floor(o.maxhp), 15, DIM)
+        local info = {}
+        if o.cat == "unit" then
+            if d.harvest then info[#info + 1] = "Ladung: " .. floor(o.carry) .. " / " .. d.harvest.cap end
+            if d.transport then info[#info + 1] = "Fracht: " .. S.cargoUsed(o) .. " / " .. d.transport end
+            if d.weapon then
+                local wpn = D.weapons[d.weapon]
+                info[#info + 1] = string.format("Waffe: %d Schaden, %d m", wpn.dmg, wpn.range)
+            end
+            if o.flying then info[#info + 1] = "im Flug" end
+        else
+            if o.armor then info[#info + 1] = "verstärkt" end
+            if o.ext then info[#info + 1] = "erweitert: " .. D.extend[o.type].label end
+            if o.upgrading then info[#info + 1] = string.format("Umbau %d %%", floor(o.upgrading.prog * 100)) end
+            if d.power and d.power ~= 0 then info[#info + 1] = (d.power > 0 and "+" or "") .. d.power .. " Strom" end
+            if o.research then info[#info + 1] = string.format("Forscht: %s %d %%", D.researchByKey[o.research.key].name, floor(o.research.prog * 100)) end
+            -- the queue
+            local q = {}
+            for _, it in ipairs(o.queue) do q[#q + 1] = it end
+            for _, it in ipairs(o.queue2) do q[#q + 1] = it end
+            for k, it in ipairs(q) do
+                if k > 7 then break end
+                local qx = tx + (k - 1) * 58
+                icon(it.type, qx, y + 112, 52, 40, 1)
+                rect(qx, y + 152, 52 * it.prog, 4, CYAN)
+            end
+        end
+        text(tx, y + 90, table.concat(info, "   ·   "), 16, DIM)
+    else
+        -- many: a grid of small icons, click one to pick it out
+        local cols = floor((cmdX - x - 50) / 62)
+        for k, o in ipairs(sel) do
+            if k > cols * 2 then break end
+            local c, r = (k - 1) % cols, (k - 1) // cols
+            local ix, iy = x + 32 + c * 62, y + 22 + r * 70
+            rect(ix, iy, 58, 54, { 0, 0.02, 0.03, 0.55 }, nil, 3)
+            icon(o.type, ix, iy, 58, 54, 1)
+            local f = o.hp / o.maxhp
+            rect(ix, iy + 58, 58 * f, 5, hpColor(f))
+            if inside(mx, my, ix, iy, 58, 64) then
+                H.hot = true
+                if H.click then I.select({ o }) end
+            end
+        end
+    end
+    -- command buttons
+    for k, c in ipairs(cmds) do
+        local col = (k - 1) % 4
+        local row = (k - 1) // 4
+        local bx = cmdX + col * (cmdW + 8)
+        local by = y + 18 + row * 68
+        local sub = c.cost and U.fmtInt(c.cost) or nil
+        if button(bx, by, cmdW, 60, c.label, mx, my, { key = c.key, on = c.on, disabled = c.disabled, sub = sub, size = 17 }) then
+            c.act()
+            A.play("click")
+        end
+        if inside(mx, my, bx, by, cmdW, 60) and c.tip then H.tip = { title = c.label, body = c.tip, cost = c.cost } end
+    end
+end
+
+-- --- In the world ---------------------------------------------------------------------
+local function ring(x, y, z, r, col, a, thick)
+    local n = 20
+    local px, py
+    for k = 0, n do
+        local ang = k / n * pi * 2
+        local hx, hy = game.worldToHud(x + cos(ang) * r, y, z + sin(ang) * r)
+        if hx and px then game.hudLine(px, py, hx, hy, col[1], col[2], col[3], a, thick or 2) end
+        px, py = hx, hy
+    end
+end
+
+local function healthBar(o, vo, always)
+    local f = o.hp / o.maxhp
+    if not always and f >= 0.999 then return end
+    local hx, hy = game.worldToHud(vo.x, vo.y + (vo.top or 2) + 1, vo.z)
+    if not hx then return end
+    local w = (o.cat == "bld") and 70 or ((o.def.infantry) and 26 or 44)
+    rect(hx - w * 0.5 - 1, hy - 1, w + 2, 7, { 0, 0, 0, 0.75 })
+    rect(hx - w * 0.5, hy, w * f, 5, hpColor(f))
+    if o.cat == "unit" and o.def.harvest and o.carry > 0 then
+        rect(hx - w * 0.5, hy + 6, w * o.carry / o.def.harvest.cap, 3, { 0.3, 1, 0.6 })
+    end
+    if o.cat == "bld" and (o.armor or o.ext) then
+        text(hx + w * 0.5 + 4, hy - 6, (o.armor and "◆" or "") .. (o.ext and "▲" or ""), 14, AMBER)
+    end
+end
+
+-- The fog of war over the field: black where nobody of ours has been, a veil
+-- where we have been but see nothing now. Drawn as screen triangles over a
+-- 16 m lattice around the camera (corners projected once each).
+local function drawShroud()
+    if not V.hideFog then return end
+    local pl = S.players[V.me]
+    if not pl then return end
+    local VW, VC = S.VW, S.VC
+    local step = 2                      -- vision cells per shroud cell (16 m)
+    local SC = VC * step
+    local reach = C.dist * 2.2 + 80
+    local i0 = math.max(0, floor((C.x - reach - M.x0) / SC))
+    local i1 = math.min(VW // step - 1, floor((C.x + reach - M.x0) / SC))
+    local j0 = math.max(0, floor((C.z - reach - M.z0) / SC))
+    local j1 = math.min(VW // step - 1, floor((C.z + reach - M.z0) / SC))
+    local proj = {}
+    local function corner(i, j)
+        local key = j * 4096 + i
+        local p = proj[key]
+        if p == nil then
+            local x, z = M.x0 + i * SC, M.z0 + j * SC
+            local hx, hy = game.worldToHud(x, V.groundY(x, z) + 0.5, z)
+            p = hx and { hx, hy } or false
+            proj[key] = p
+        end
+        return p
+    end
+    local exp, team = pl.explored, pl.team
+    for j = j0, j1 do
+        for i = i0, i1 do
+            local k = (j * step) * VW + i * step + 1
+            local a
+            if not exp[k] then a = 0.93
+            elseif not S.sees(V.me, M.x0 + (i + 0.5) * SC, M.z0 + (j + 0.5) * SC) then a = 0.38 end
+            if a then
+                local p1, p2, p3, p4 = corner(i, j), corner(i + 1, j), corner(i + 1, j + 1), corner(i, j + 1)
+                if p1 and p2 and p3 and p4 then
+                    game.hudTri(p1[1], p1[2], p2[1], p2[2], p3[1], p3[2], 0.0, 0.0, 0.01, a)
+                    game.hudTri(p1[1], p1[2], p3[1], p3[2], p4[1], p4[2], 0.0, 0.0, 0.01, a)
+                end
+            end
+        end
+    end
+end
+
+local function drawWorld()
+    for _, o in ipairs(S.objs) do
+        if o.alive and not o.inside and (o.cat == "unit" or o.cat == "bld") then
+            local vo = V.objs[o.id]
+            if vo and vo.shown and vo.x then
+                local sel = I.selSet[o.id]
+                if sel then
+                    local col = (o.owner == V.me) and GREEN or ((S.enemies(V.me, o.owner)) and RED or AMBER)
+                    local r = (o.cat == "bld") and o.radius * 0.95 or max(1.2, o.radius * 1.1)
+                    ring(vo.x, (o.cat == "bld" and vo.y or vo.y - (o.y or 0)) + 0.3, vo.z, r, col, 0.9, 2)
+                end
+                if sel or I.hover == o or o.hp < o.maxhp then healthBar(o, vo, sel or I.hover == o) end
+                -- rally point of a selected building
+                if sel and o.cat == "bld" and o.rally then
+                    local gx = V.groundY(o.rally[1], o.rally[2])
+                    local ax, ay = game.worldToHud(vo.x, vo.y + 2, vo.z)
+                    local bx, by = game.worldToHud(o.rally[1], gx + 0.5, o.rally[2])
+                    if ax and bx then game.hudLine(ax, ay, bx, by, 1, 0.8, 0.3, 0.6, 1.5) end
+                    ring(o.rally[1], gx + 0.3, o.rally[2], 2, AMBER, 0.9, 2)
+                end
+                -- path of a selected unit
+                if sel and o.cat == "unit" and o.owner == V.me and o.orders[1] and o.orders[1].x then
+                    local od = o.orders[1]
+                    local gx = V.groundY(od.x, od.z)
+                    local ax, ay = game.worldToHud(vo.x, vo.y + 0.5, vo.z)
+                    local bx, by = game.worldToHud(od.x, gx + 0.5, od.z)
+                    if ax and bx then game.hudLine(ax, ay, bx, by, 0.4, 1, 0.5, 0.35, 1.2) end
+                end
+            end
+        end
+    end
+    for _, m in ipairs(I.markers) do
+        local col = (m.kind == "attack") and RED or ((m.kind == "rally") and AMBER or GREEN)
+        local f = m.t / 1.2
+        ring(m.x, V.groundY(m.x, m.z) + 0.3, m.z, 0.8 + f * 4, col, 1 - f, 2.5)
+    end
+end
+
+-- The ghost of the building being placed: its cells, green or red.
+local function drawPlacement()
+    if not (I.mode == "place" or I.mode == "wall") or not I.gx then return end
+    local cells = {}
+    local ok = true
+    if I.mode == "place" then
+        local i, j, w, h = I.footprintAt(I.placeType, I.gx, I.gz)
+        ok = I.placeOk(I.placeType, i, j)
+        for jj = j, j + h - 1 do for ii = i, i + w - 1 do cells[#cells + 1] = { ii, jj } end end
+    else
+        local i, j = M.cellOf(I.gx, I.gz)
+        if I.wallStart then cells = I.wallCells(I.wallStart[1], I.wallStart[2], i, j)
+        else cells = { { i, j } } end
+    end
+    for _, c in ipairs(cells) do
+        local i, j = c[1], c[2]
+        local cok = M.inside(i, j) and M.block[M.index(i, j)] == 0 and M.occ[M.index(i, j)] == 0
+            and M.crystal[M.index(i, j)] == 0
+        if I.mode == "place" then cok = cok and ok end
+        local x0, z0 = M.x0 + i * D.CELL, M.z0 + j * D.CELL
+        local pts = {}
+        for k, d in ipairs({ { 0.1, 0.1 }, { 0.9, 0.1 }, { 0.9, 0.9 }, { 0.1, 0.9 } }) do
+            local x, z = x0 + d[1] * D.CELL, z0 + d[2] * D.CELL
+            local hx, hy = game.worldToHud(x, V.groundY(x, z) + 0.2, z)
+            if not hx then pts = nil; break end
+            pts[k] = { hx, hy }
+        end
+        if pts then
+            local r, g, b = cok and 0.2 or 1, cok and 1 or 0.2, 0.25
+            game.hudTri(pts[1][1], pts[1][2], pts[2][1], pts[2][2], pts[3][1], pts[3][2], r, g, b, 0.35)
+            game.hudTri(pts[1][1], pts[1][2], pts[3][1], pts[3][2], pts[4][1], pts[4][2], r, g, b, 0.35)
+        end
+    end
+    local d = D.buildings[I.placeType or "wall"]
+    local hx, hy = game.mousePos()
+    if hx then
+        text(hx + 18, hy + 18, d.name .. (I.mode == "wall" and (I.wallStart and "  (Endpunkt klicken)" or "  (Startpunkt klicken)") or ""), 17, WHITE, 1, 0, true)
+        text(hx + 18, hy + 40, "Rechtsklick / Esc: abbrechen", 14, DIM)
+    end
+end
+
+local function drawTip(mx, my, W)
+    local t = H.tip
+    if not t or not mx then return end
+    local w = 360
+    local lines = {}
+    local body = t.body or ""
+    -- wrap
+    local line = ""
+    for word in body:gmatch("%S+") do
+        if #line + #word > 38 then lines[#lines + 1] = line; line = word
+        else line = (line == "" and word) or (line .. " " .. word) end
+    end
+    if line ~= "" then lines[#lines + 1] = line end
+    local h = 44 + #lines * 20 + (t.why and 22 or 0) + (t.extra and 20 or 0)
+    local x = min(mx - w - 16, W - w - 10)
+    local y = U.clamp(my - h * 0.5, 50, 1080 - h - 10)
+    h = h + 10
+    if not K.nine("ui_frame", x - 6, y - 6, w + 12, h + 12, 30, 1, 1, 1, 0.98) then
+        rect(x, y, w, h, { 0.02, 0.025, 0.03, 0.96 }, nil, 6)
+        frame(x, y, w, h, AMBER, 0.8, 1.5, 6)
+    end
+    x, y = x + 4, y + 4
+    text(x + 12, y + 8, t.title or "", 19, WHITE, 1, 0, true)
+    if t.cost then text(x + w - 12, y + 9, U.fmtInt(t.cost), 17, AMBER, 1, 1, true) end
+    for k, l in ipairs(lines) do text(x + 12, y + 14 + k * 20, l, 15, DIM) end
+    local yy = y + 18 + (#lines + 1) * 20
+    if t.extra then text(x + 12, yy, t.extra, 15, CYAN); yy = yy + 20 end
+    if t.why then text(x + 12, yy, t.why, 15, RED, 1, 0, true) end
+end
+
+local function drawMessages()
+    local y = 1080 - 230
+    for k = #H.msgs, 1, -1 do
+        local m = H.msgs[k]
+        local age = H.time - m.t
+        if age < 8 then
+            local a = age > 6 and (8 - age) / 2 or 1
+            text(20, y, m.text, 19, m.color, a, 0, true)
+            y = y - 26
+        end
+    end
+end
+
+-- --- Frame -----------------------------------------------------------------------------
+-- `driving`: a unit is steered by hand (sw/drive.lua) -- only the header,
+-- the messages and what is in the world; the build menu and the selection
+-- panel would cover the road. No shroud either: from the driver's seat its
+-- black squares lie flat on the ground up to the horizon; enemies beyond
+-- the driver's eyes stay hidden all the same (V.visibleTo, V.eye).
+function H.draw(dt, driving)
+    H.time = H.time + dt
+    local W, Hh = game.hudSize()
+    local mx, my, over = game.mousePos()
+    H.click = over and game.mousePressed(game.MOUSE_LEFT)
+    H.rclick = over and game.mousePressed(game.MOUSE_RIGHT)
+    H.hot = false
+    H.tip = nil
+    if not driving then drawShroud() end
+    drawWorld()
+    if driving then
+        drawTop(W, mx, my)
+        drawMessages()
+        drawTip(mx, my, W)
+        I.overHud = H.hot or (mx ~= nil and my < H.TOP)
+        return
+    end
+    drawPlacement()
+    if I.dragging and I.dragStart and mx then
+        local x0, y0 = I.dragStart[1], I.dragStart[2]
+        rect(min(x0, mx), min(y0, my), abs(mx - x0), abs(my - y0), { 0.3, 1, 0.5, 0.08 })
+        frame(min(x0, mx), min(y0, my), abs(mx - x0), abs(my - y0), GREEN, 0.8, 1.5)
+    end
+    local sw = 380
+    drawSidebar(W - sw + 6, H.TOP + 14, sw - 24, mx, my)
+    drawTop(W, mx, my)
+    drawSelection(12, Hh - 176, W - sw - 30, 164, mx, my)
+    drawMessages()
+    drawTip(mx, my, W)
+    -- the mouse is over a panel: the world does not get this click
+    local overPanel = mx and (my < H.TOP or mx > W - sw - 8 or (my > Hh - 176 and #I.sel > 0 and mx < W - sw - 18))
+    I.overHud = H.hot or overPanel or false
+    if I.flash then H.message(I.flash, RED); I.flash = nil end
+end
+
+return H

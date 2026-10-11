@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.5354999899864197,
+    0.40799999237060547,
+    0.28050002455711365
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "ee4f75a41b042048c1f4ba6e9f032590",
+  "ior": 1.5,
+  "name": "City House Stair",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.5,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

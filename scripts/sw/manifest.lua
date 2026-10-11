@@ -1,0 +1,641 @@
+-- GENERATED from models/manifest.json by design/manifest2lua.py -- do not edit.
+return {
+    units = {
+        tank = {
+            size = { 4.2, 3.0, 7.0 },
+            parts = {
+                {
+                    name = "hull",
+                    file = "tank_hull",
+                    team = true,
+                    center = { 0.0, 0.943, -0.041 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "turret",
+                    file = "tank_turret",
+                    team = true,
+                    center = { 0.0, 2.763, 1.03 },
+                    pivot = { 0.0, 1.6, -0.05 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {
+                {
+                    part = "turret",
+                    pos = { 0.0, 2.08, 4.45 },
+                },
+            },
+            wreck = "tank_wreck",
+        },
+        soldier = {
+            size = { 1.2, 2.4, 1.2 },
+            parts = {
+                {
+                    name = "torso",
+                    file = "soldier_torso",
+                    team = true,
+                    center = { 0.0, 1.734, 0.418 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "leg_l",
+                    file = "soldier_leg_l",
+                    team = true,
+                    center = { 0.23, 0.625, 0.031 },
+                    pivot = { 0.22, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+                {
+                    name = "leg_r",
+                    file = "soldier_leg_r",
+                    team = true,
+                    center = { -0.23, 0.625, 0.031 },
+                    pivot = { -0.22, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+            },
+            muzzles = {
+                {
+                    part = "torso",
+                    pos = { -0.13, 1.47, 1.266 },
+                },
+            },
+        },
+        harvester = {
+            size = { 4.5, 4.0, 8.0 },
+            parts = {
+                {
+                    name = "hull",
+                    file = "harvester_hull",
+                    team = true,
+                    center = { 0.0, 2.036, 0.04 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "drill",
+                    file = "harvester_drill",
+                    team = false,
+                    center = { 0.03, 1.2, 4.85 },
+                    pivot = { 0.0, 1.2, 4.0 },
+                    axis = "roll",
+                },
+            },
+            muzzles = {  },
+            wreck = "harvester_wreck",
+        },
+        mcv = {
+            size = { 5.0, 4.5, 10.0 },
+            parts = {
+                {
+                    name = "hull",
+                    file = "mcv_hull",
+                    team = true,
+                    center = { 0.0, 2.183, 0.04 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "crane",
+                    file = "mcv_crane",
+                    team = true,
+                    center = { 0.095, 4.0, 0.53 },
+                    pivot = { 0.0, 3.35, -2.6 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {  },
+            wreck = "mcv_wreck",
+        },
+        rocketeer = {
+            size = { 1.4, 2.5, 1.4 },
+            parts = {
+                {
+                    name = "torso",
+                    file = "rocketeer_torso",
+                    team = true,
+                    center = { -0.159, 1.653, 0.075 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "leg_l",
+                    file = "rocketeer_leg_l",
+                    team = true,
+                    center = { 0.273, 0.637, 0.031 },
+                    pivot = { 0.26, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+                {
+                    name = "leg_r",
+                    file = "rocketeer_leg_r",
+                    team = true,
+                    center = { -0.273, 0.637, 0.031 },
+                    pivot = { -0.26, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+            },
+            muzzles = {
+                {
+                    part = "torso",
+                    pos = { -0.704, 1.98, 0.52 },
+                },
+                {
+                    part = "torso",
+                    pos = { -0.704, 2.16, 0.52 },
+                },
+                {
+                    part = "torso",
+                    pos = { -0.494, 1.98, 0.52 },
+                },
+                {
+                    part = "torso",
+                    pos = { -0.494, 2.16, 0.52 },
+                },
+            },
+        },
+        engineer = {
+            size = { 1.2, 2.4, 1.2 },
+            parts = {
+                {
+                    name = "torso",
+                    file = "engineer_torso",
+                    team = true,
+                    center = { -0.006, 1.684, 0.282 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "leg_l",
+                    file = "engineer_leg_l",
+                    team = true,
+                    center = { 0.23, 0.625, 0.031 },
+                    pivot = { 0.22, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+                {
+                    name = "leg_r",
+                    file = "engineer_leg_r",
+                    team = true,
+                    center = { -0.23, 0.625, 0.031 },
+                    pivot = { -0.22, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+            },
+            muzzles = {
+                {
+                    part = "torso",
+                    pos = { -0.3, 1.5, 1.12 },
+                },
+            },
+        },
+        infiltrator = {
+            size = { 1.0, 2.4, 1.0 },
+            parts = {
+                {
+                    name = "torso",
+                    file = "infiltrator_torso",
+                    team = true,
+                    center = { 0.007, 1.737, 0.44 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "leg_l",
+                    file = "infiltrator_leg_l",
+                    team = false,
+                    center = { 0.18, 0.613, 0.031 },
+                    pivot = { 0.18, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+                {
+                    name = "leg_r",
+                    file = "infiltrator_leg_r",
+                    team = false,
+                    center = { -0.18, 0.613, 0.031 },
+                    pivot = { -0.18, 1.12, 0.0 },
+                    axis = "pitch",
+                },
+            },
+            muzzles = {
+                {
+                    part = "torso",
+                    pos = { -0.24, 1.34, 1.23 },
+                },
+            },
+        },
+        eliminator = {
+            size = { 6.0, 4.5, 10.0 },
+            parts = {
+                {
+                    name = "hull",
+                    file = "eliminator_hull",
+                    team = true,
+                    center = { 0.0, 1.206, 0.166 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "turret",
+                    file = "eliminator_turret",
+                    team = true,
+                    center = { 0.0, 3.527, 1.258 },
+                    pivot = { 0.0, 2.05, -0.3 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {
+                {
+                    part = "turret",
+                    pos = { -0.55, 2.77, 5.75 },
+                },
+                {
+                    part = "turret",
+                    pos = { 0.55, 2.77, 5.75 },
+                },
+            },
+            wreck = "eliminator_wreck",
+        },
+        terminator = {
+            size = { 6.0, 4.5, 9.0 },
+            parts = {
+                {
+                    name = "hull",
+                    file = "terminator_hull",
+                    team = true,
+                    center = { 0.0, 1.535, 0.004 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "turret",
+                    file = "terminator_turret",
+                    team = true,
+                    center = { 0.0, 2.973, 1.57 },
+                    pivot = { 0.0, 1.8, -0.2 },
+                    axis = "yaw",
+                },
+                {
+                    name = "jet_l",
+                    file = "terminator_jet_l",
+                    team = true,
+                    center = { 2.53, 2.763, -0.705 },
+                    pivot = { 2.07, 2.75, -0.6 },
+                    axis = "pitch",
+                },
+                {
+                    name = "jet_r",
+                    file = "terminator_jet_r",
+                    team = true,
+                    center = { -2.53, 2.763, -0.705 },
+                    pivot = { -2.07, 2.75, -0.6 },
+                    axis = "pitch",
+                },
+            },
+            muzzles = {
+                {
+                    part = "turret",
+                    pos = { 0.0, 2.42, 4.98 },
+                },
+            },
+            wreck = "terminator_wreck",
+        },
+        hypercopter = {
+            size = { 10.0, 4.0, 12.0 },
+            parts = {
+                {
+                    name = "body",
+                    file = "hypercopter_body",
+                    team = true,
+                    center = { 0.0, 2.175, 0.125 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "rotor_l",
+                    file = "hypercopter_rotor_l",
+                    team = true,
+                    center = { 3.2, 2.385, 0.6 },
+                    pivot = { 3.2, 2.3, 0.6 },
+                    axis = "yaw",
+                },
+                {
+                    name = "rotor_r",
+                    file = "hypercopter_rotor_r",
+                    team = true,
+                    center = { -3.2, 2.385, 0.6 },
+                    pivot = { -3.2, 2.3, 0.6 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {  },
+            wreck = "hypercopter_wreck",
+        },
+    },
+    buildings = {
+        base = {
+            footprint = { 28, 28 },
+            parts = {
+                {
+                    name = "main",
+                    file = "base",
+                    team = true,
+                    center = { 0.0, 8.0, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+            exit = { 0.0, 0.0, 15.0 },
+        },
+        refinery = {
+            footprint = { 20, 16 },
+            parts = {
+                {
+                    name = "main",
+                    file = "refinery",
+                    team = true,
+                    center = { 0.0, 4.775, 1.034 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+            dock = { 0.0, 0.0, 9.5 },
+        },
+        powerplant = {
+            footprint = { 16, 16 },
+            parts = {
+                {
+                    name = "main",
+                    file = "powerplant",
+                    team = true,
+                    center = { 0.0, 4.029, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+        },
+        factory = {
+            footprint = { 24, 24 },
+            parts = {
+                {
+                    name = "main",
+                    file = "factory",
+                    team = true,
+                    center = { -0.052, 5.05, -0.034 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+            exit = { 0.0, 0.0, 13.0 },
+        },
+        silo = {
+            footprint = { 12, 12 },
+            parts = {
+                {
+                    name = "main",
+                    file = "silo",
+                    team = true,
+                    center = { 0.0, 3.85, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+        },
+        hangar = {
+            footprint = { 28, 28 },
+            parts = {
+                {
+                    name = "main",
+                    file = "hangar",
+                    team = true,
+                    center = { 0.0, 5.211, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+            pads = {
+                { -7.0, 0.3, -7.0 },
+                { 7.0, 0.3, -7.0 },
+                { -7.0, 0.3, 7.0 },
+                { 7.0, 0.3, 7.0 },
+            },
+        },
+        radar = {
+            footprint = { 12, 12 },
+            parts = {
+                {
+                    name = "main",
+                    file = "radar",
+                    team = true,
+                    center = { 0.0, 3.0, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "dish",
+                    file = "radar_dish",
+                    team = true,
+                    center = { 0.0, 8.299, 0.486 },
+                    pivot = { 0.0, 5.85, 1.2 },
+                    axis = "yaw",
+                },
+            },
+        },
+        rocket_tower = {
+            footprint = { 8, 8 },
+            parts = {
+                {
+                    name = "main",
+                    file = "rocket_tower",
+                    team = true,
+                    center = { 0.0, 1.125, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "head",
+                    file = "rocket_tower_head",
+                    team = true,
+                    center = { 0.0, 4.977, 0.0 },
+                    pivot = { 0.0, 3.75, 0.0 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {
+                {
+                    part = "head",
+                    pos = { -1.7, 4.3, 0.948 },
+                },
+                {
+                    part = "head",
+                    pos = { -1.7, 4.597, 0.989 },
+                },
+                {
+                    part = "head",
+                    pos = { -1.7, 4.894, 1.031 },
+                },
+                {
+                    part = "head",
+                    pos = { -1.2, 4.3, 0.948 },
+                },
+                {
+                    part = "head",
+                    pos = { -1.2, 4.597, 0.989 },
+                },
+                {
+                    part = "head",
+                    pos = { -1.2, 4.894, 1.031 },
+                },
+                {
+                    part = "head",
+                    pos = { 1.2, 4.3, 0.948 },
+                },
+                {
+                    part = "head",
+                    pos = { 1.2, 4.597, 0.989 },
+                },
+                {
+                    part = "head",
+                    pos = { 1.2, 4.894, 1.031 },
+                },
+                {
+                    part = "head",
+                    pos = { 1.7, 4.3, 0.948 },
+                },
+                {
+                    part = "head",
+                    pos = { 1.7, 4.597, 0.989 },
+                },
+                {
+                    part = "head",
+                    pos = { 1.7, 4.894, 1.031 },
+                },
+            },
+        },
+        laser_tower = {
+            footprint = { 8, 8 },
+            parts = {
+                {
+                    name = "main",
+                    file = "laser_tower",
+                    team = true,
+                    center = { 0.0, 1.645, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "head",
+                    file = "laser_tower_head",
+                    team = true,
+                    center = { 0.0, 5.18, 0.626 },
+                    pivot = { 0.0, 4.15, 0.0 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {
+                {
+                    part = "head",
+                    pos = { 0.0, 5.55, 2.65 },
+                },
+            },
+        },
+        wall = {
+            footprint = { 4, 4 },
+            parts = {
+                {
+                    name = "main",
+                    file = "wall",
+                    team = true,
+                    center = { 0.0, 1.745, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+        },
+        watchtower = {
+            footprint = { 8, 8 },
+            parts = {
+                {
+                    name = "main",
+                    file = "watchtower",
+                    team = true,
+                    center = { 0.0, 4.718, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+                {
+                    name = "head",
+                    file = "watchtower_head",
+                    team = true,
+                    center = { 0.0, 11.62, 0.68 },
+                    pivot = { 0.0, 10.1, 0.0 },
+                    axis = "yaw",
+                },
+            },
+            muzzles = {
+                {
+                    part = "head",
+                    pos = { -0.18, 10.9, 2.38 },
+                },
+                {
+                    part = "head",
+                    pos = { 0.18, 10.9, 2.38 },
+                },
+            },
+        },
+        lab = {
+            footprint = { 20, 20 },
+            parts = {
+                {
+                    name = "main",
+                    file = "lab",
+                    team = true,
+                    center = { 0.0, 6.34, 0.0 },
+                    pivot = { 0.0, 0.0, 0.0 },
+                    axis = "none",
+                },
+            },
+        },
+    },
+    props = {
+        crystal_a = {
+            file = "crystal_a",
+            team = false,
+            center = { -0.245, 1.076, -0.016 },
+            size = { 3.356, 3.148, 2.378 },
+        },
+        crystal_b = {
+            file = "crystal_b",
+            team = false,
+            center = { 0.403, 1.48, 0.215 },
+            size = { 4.533, 4.34, 3.118 },
+        },
+        crystal_c = {
+            file = "crystal_c",
+            team = false,
+            center = { 0.162, 0.791, 0.183 },
+            size = { 1.724, 2.319, 2.308 },
+        },
+        bot_debris = {
+            file = "bot_debris",
+            team = false,
+            center = { 0.029, 0.26, -0.001 },
+            size = { 2.01, 0.655, 2.096 },
+        },
+        shell = {
+            file = "shell",
+            team = false,
+            center = { 0.0, 0.0, 0.0 },
+            size = { 0.18, 0.18, 0.6 },
+        },
+        rocket = {
+            file = "rocket",
+            team = false,
+            center = { 0.0, 0.0, -0.105 },
+            size = { 0.272, 0.272, 1.41 },
+        },
+    },
+}

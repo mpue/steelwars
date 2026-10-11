@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.07999999821186066,
+    0.1899999976158142,
+    0.14000000059604645
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "e5f36abd779b18742253a4ccdcfcc792",
+  "ior": 1.5,
+  "name": "City Prop Column",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.6000000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

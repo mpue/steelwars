@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.25331050157546997,
+    0.24661052227020264,
+    0.23591050505638123
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "4b3bc6734743082039ee7144d0f27440",
+  "ior": 1.5,
+  "name": "Building G Base",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 1.0,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

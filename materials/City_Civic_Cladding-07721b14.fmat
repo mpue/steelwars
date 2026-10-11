@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.4699999988079071,
+    0.5199999809265137,
+    0.5600000023841858
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "07721b148f26b980f6348fd53ca2cbf9",
+  "ior": 1.5,
+  "name": "City Civic Cladding",
+  "opacity": 1.0,
+  "reflectivity": 0.15000000596046448,
+  "roughness": 0.550000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

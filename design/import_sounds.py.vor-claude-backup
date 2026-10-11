@@ -1,0 +1,901 @@
+#!/usr/bin/env python3
+"""STEELWARS -- rebuilds every sound and every music track from the sample library.
+
+    python design/import_sounds.py                 # everything
+    python design/import_sounds.py --only sfx      # sfx | voice | music  (comma list ok)
+    python design/import_sounds.py --only voice --verify   # + German speech-recognition check
+
+Writes sounds/sw_*.wav (mono 44.1 kHz 16 bit; the announcer too) and music/sw_music1..3 +
+sw_menu (stereo). The file names are the ones scripts/sw/audio.lua asks for.
+
+Needs: Python 3 with numpy, ffmpeg (PATH or env FFMPEG). The voices come from ElevenLabs takes
+in design/voice_el/<name>.mp3 (announcer "Lola - Modern Agent", units "Mark - Confident and
+Striking", eleven_multilingual_v2); a line without a take falls back to Windows WinRT speech
+("Microsoft Katja" / "Microsoft Stefan") through the old robot() chain.
+Samples come from D:\\Samples (env SW_SAMPLES): Bluezone BC0197/BC0200/BC0214 (royalty-free
+sound-effect packs), NI Battery 4 Factory Library, RD-Cinematic drums/hits and the RC
+"Cinematic Electronica" loop packs. Nothing from the Celldweller remix stems, no songs.
+
+Music is written as WAV: the engine decodes music with miniaudio, which here is compiled
+without stb_vorbis, so an .ogg would not load (MUSIC_EXT below; .mp3 would also work).
+"""
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import tempfile
+import wave
+from pathlib import Path
+
+import numpy as np
+
+HERE = Path(__file__).resolve().parent
+PROJ = HERE.parent
+SOUNDS = PROJ / "sounds"
+MUSIC = PROJ / "music"
+SRC = Path(os.environ.get("SW_SAMPLES", r"D:\Samples"))
+FFMPEG = os.environ.get("FFMPEG") or shutil.which("ffmpeg") or "ffmpeg"
+SR = 44100
+MUSIC_EXT = "mp3"
+RNG = np.random.default_rng(1977)
+
+# --- source shorthands ------------------------------------------------------------------
+BZ197 = "ExplosionSounds/BC0197-wav"
+BZ200 = "ExplosionSounds/BC0200-wav"
+BZ214 = "ExplosionSounds/BC0214-wav"
+BAT = "Maschine Kits/Battery 4 Factory Library"
+RDH = "RD-Cinematic__hits"
+RDD = "RD-Cinematic__big_cinematic_drums"
+RDK = "RD-Cinematic__kicks"
+
+
+def bz214(kind, n):
+    folder = {"shot": "shots", "explosion": "explosions", "whooshes-debris": "whooshes-debris",
+              "explosion-debris": "explosions-debris", "beep": "beeps"}[kind]
+    return f"{BZ214}/{folder}/Bluezone-BC0214-{kind}-{n:03d}.wav"
+
+
+def bz200(kind, n):
+    folder = {"grenade-launcher": "grenade-launchers",
+              "howitzer-shot-distant-explosion": "howitzer-shot-distant-explosions",
+              "howitzer-shot-metallic-part": "howitzer-shot-metallic-parts",
+              "howitzer-mechanical-parts-handling": "howitzer-mechanical-parts-handling",
+              "howitzer-falling-rubble-explosion-impact": "howitzer-falling-rubble-explosion-impacts",
+              "artillery-falling-rubble-explosion-impact": "artillery-falling-rubble-explosion-impacts",
+              "howitzer-explosion-single": "howitzer-falling-rubble-explosion-impacts",
+              "beep": "beeps"}[kind]
+    return f"{BZ200}/{folder}/Bluezone-BC0200-{kind}-{n:03d}.wav"
+
+
+def bz197(kind, n):
+    folder = {"mixed-falling-rubble-explosion-impact": "mixed-falling-rubble-explosion-impacts",
+              "falling-metal-debris": "falling-metal-debris",
+              "falling-glass-debris": "falling-glass-debris"}[kind]
+    return f"{BZ197}/{folder}/Bluezone-BC0197-{kind}-{n:03d}.wav"
+
+
+def bat(name):
+    return f"{BAT}/{name}.wav"
+
+
+# --- audio core ---------------------------------------------------------------------------
+def _run(args, data=None):
+    r = subprocess.run(args, input=data, capture_output=True)
+    if r.returncode != 0:
+        raise RuntimeError(f"{args[0]} failed: {r.stderr.decode(errors='replace')[-800:]}")
+    return r
+
+
+def src(rel):
+    p = SRC / rel
+    if not p.exists():
+        raise FileNotFoundError(p)
+    return p
+
+
+_cache = {}
+
+
+def load(rel, rate=1.0, stereo=False):
+    """Decode any file to float64 at 44.1 kHz. rate > 1 plays it faster (pitch up)."""
+    key = (rel, rate)
+    if key not in _cache:
+        af = f"aresample={SR}"
+        if abs(rate - 1.0) > 1e-6:
+            af += f",asetrate={SR * rate:.3f},aresample={SR}"
+        out = _run([FFMPEG, "-v", "error", "-i", str(src(rel)), "-af", af,
+                    "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"]).stdout
+        _cache[key] = np.frombuffer(out, np.float32).reshape(-1, 2).astype(np.float64)
+    a = _cache[key]
+    return a.copy() if stereo else a.mean(axis=1)
+
+
+def ffx(x, filt):
+    """Run an array through an ffmpeg audio filter chain."""
+    ch = 1 if x.ndim == 1 else x.shape[1]
+    out = _run([FFMPEG, "-v", "error", "-f", "f32le", "-ar", str(SR), "-ac", str(ch), "-i", "-",
+                "-af", filt, "-f", "f32le", "-ar", str(SR), "-ac", str(ch), "-"],
+               x.astype(np.float32).tobytes()).stdout
+    y = np.frombuffer(out, np.float32).astype(np.float64)
+    return y if ch == 1 else y.reshape(-1, ch)
+
+
+def hp(x, f, order=2):
+    return ffx(x, ",".join([f"highpass=f={f}"] * order))
+
+
+def lp(x, f, order=2):
+    return ffx(x, ",".join([f"lowpass=f={f}"] * order))
+
+
+def eq(x, f, g, w=1.0):
+    return ffx(x, f"equalizer=f={f}:t=q:w={w}:g={g}")
+
+
+def db(v):
+    return 10 ** (v / 20)
+
+
+def peak(x):
+    return float(np.max(np.abs(x))) if len(x) else 0.0
+
+
+def onset(x, thr_db=-36.0):
+    m = np.abs(x) if x.ndim == 1 else np.abs(x).max(axis=1)
+    i = np.argmax(m > peak(x) * db(thr_db))
+    return max(0, int(i - 0.002 * SR))
+
+
+def trim(x, thr_db=-36.0):
+    return x[onset(x, thr_db):]
+
+
+def fades(x, fin=0.002, fout=0.05):
+    x = x.copy()
+    n_in, n_out = min(len(x), int(fin * SR)), min(len(x), int(fout * SR))
+    if n_in > 1:
+        ramp = np.sin(np.linspace(0, np.pi / 2, n_in)) ** 2
+        x[:n_in] *= ramp if x.ndim == 1 else ramp[:, None]
+    if n_out > 1:
+        ramp = np.cos(np.linspace(0, np.pi / 2, n_out)) ** 2
+        x[-n_out:] *= ramp if x.ndim == 1 else ramp[:, None]
+    return x
+
+
+def cut(x, dur, fout=None):
+    x = x[:int(dur * SR)]
+    return fades(x, 0.002, fout if fout is not None else min(0.35 * len(x) / SR, 0.6))
+
+
+def decay(x, hold, tau):
+    """Keep the first `hold` seconds, then fall off exponentially (shortens long tails)."""
+    t = np.arange(len(x)) / SR
+    env = np.where(t < hold, 1.0, np.exp(-(t - hold) / tau))
+    return x * (env if x.ndim == 1 else env[:, None])
+
+
+def tailtrim(x, thr_db=-60.0):
+    m = np.abs(x) if x.ndim == 1 else np.abs(x).max(axis=1)
+    idx = np.nonzero(m > peak(x) * db(thr_db))[0]
+    return x[: idx[-1] + 1] if len(idx) else x
+
+
+def mix(parts, stereo=False):
+    """parts: (signal, offset seconds, gain dB)."""
+    n = max(int(o * SR) + len(s) for s, o, g in parts)
+    out = np.zeros((n, 2) if stereo else n)
+    for s, o, g in parts:
+        i = int(o * SR)
+        out[i:i + len(s)] += s * db(g)
+    return out
+
+
+def norm(x, peak_db):
+    p = peak(x)
+    return x * (db(peak_db) / p) if p > 0 else x
+
+
+def to_int16(x):
+    tpdf = (RNG.random(x.shape) - RNG.random(x.shape)) / 32768.0
+    return np.clip(np.round((x + tpdf) * 32767.0), -32768, 32767).astype("<i2")
+
+
+def write_wav(path, x):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    ch = 1 if x.ndim == 1 else x.shape[1]
+    with wave.open(str(path), "wb") as w:
+        w.setnchannels(ch)
+        w.setsampwidth(2)
+        w.setframerate(SR)
+        w.writeframes(to_int16(x).tobytes())
+
+
+REPORT = []
+
+
+def loudness(x):
+    """Rough perceived level: max 100 ms RMS after a K-weighting-like pre-filter (dB)."""
+    m = x if x.ndim == 1 else x.mean(axis=1)
+    k = ffx(m, "highpass=f=60,highshelf=f=1500:g=4")
+    c = np.concatenate([[0.0], np.cumsum(k ** 2)])
+    w = min(len(k), int(0.1 * SR))
+    ms = (c[w:] - c[:-w]) / w
+    return 10 * np.log10(ms.max() + 1e-12)
+
+
+def stats(x):
+    m = x if x.ndim == 1 else x.mean(axis=1)
+    rms = 20 * np.log10(np.sqrt(np.mean(m ** 2)) + 1e-12)
+    seg = m[: min(len(m), SR)]
+    sp = np.abs(np.fft.rfft(seg * np.hanning(len(seg))))
+    f = np.fft.rfftfreq(len(seg), 1 / SR)
+    cen = float((sp * f).sum() / (sp.sum() + 1e-12))
+    return len(m) / SR, 20 * np.log10(peak(x) + 1e-12), rms, cen
+
+
+# Target level per file family (loudness() dB). Battle sounds share one level so the cue
+# volumes in audio.lua do the balancing; machinery sits lower, the interface lower still.
+LOUD = [("sw_v_ack", -12), ("sw_v_sel", -12), ("sw_v_atk", -12), ("sw_v_", -11),
+        ("sw_click", -24), ("sw_select", -25), ("sw_error", -20), ("sw_harvest", -17),
+        ("sw_place", -14), ("sw_construct", -14), ("sw_deploy", -13), ("sw_unitout", -14),
+        ("sw_unload", -15), ("sw_capture", -13), ("sw_", -9)]
+
+
+def save(name, x, peak_db=-1.0, sources=(), mono=True, loud=None):
+    """Normalise to `loud` (see loudness(); default from LOUD) but never above `peak_db`."""
+    if loud is None:
+        loud = next(v for k, v in LOUD if name.startswith(k))
+    if mono and x.ndim == 2:
+        x = x.mean(axis=1)
+    x = x - (np.mean(x) if x.ndim == 1 else np.mean(x, axis=0))   # DC
+    x = tailtrim(x, -66.0)
+    x = fades(x, 0.0015, min(0.02, len(x) / SR / 4))
+    x = norm(x, peak_db)
+    if loud is not None:
+        x = x * min(1.0, db(loud - loudness(x)))
+    write_wav(SOUNDS / name, x)
+    d, p, r, c = stats(x)
+    L = loudness(x)
+    REPORT.append((name, d, p, L, c, " + ".join(sources)))
+    print(f"  {name:20s} {d:5.2f}s pk {p:5.1f} L {L:6.1f} cen {c:5.0f}  <- {' + '.join(Path(s).name for s in sources)}")
+
+
+# --- weapon building blocks -------------------------------------------------------------------
+def transient(rel, dur, rate=1.0, hold=0.012, tau=0.06, hpf=150, lpf=None, thr=-30.0):
+    """The first moments of a recorded shot/blast, pitched and shortened."""
+    x = trim(load(rel, rate), thr)
+    x = decay(x[: int((dur + 0.1) * SR)], hold, tau)
+    x = cut(x, dur, fout=dur * 0.4)
+    if hpf:
+        x = hp(x, hpf)
+    if lpf:
+        x = lp(x, lpf)
+    return x
+
+
+def sat(x, drive_db):
+    """Soft clipping: denser, louder shots without a higher peak (like a game-audio limiter)."""
+    g = db(drive_db)
+    x = norm(x, 0)
+    return np.tanh(x * g) / np.tanh(g)
+
+
+def burst(rels_rates, gap, dur, tau):
+    parts = []
+    for k, (rel, rate) in enumerate(rels_rates):
+        parts.append((transient(rel, dur, rate, hold=0.006, tau=tau, hpf=180), k * gap, -k * 0.8))
+    return mix(parts)
+
+
+def build_sfx():
+    print("sound effects ->", SOUNDS)
+    S = []
+
+    # rifle: the crack of real shots, pitched up and cut short
+    r1, r2, r3 = bz214("shot", 1), bz200("grenade-launcher", 4), bz200("howitzer-shot-metallic-part", 12)
+    save("sw_rifle1.wav", sat(transient(r1, 0.28, 1.3, tau=0.06, hpf=160, lpf=9000), 10), -1, [r1])
+    save("sw_rifle2.wav", sat(transient(r2, 0.26, 1.15, hold=0.015, tau=0.06, hpf=160, lpf=9000), 10), -1, [r2])
+    save("sw_rifle3.wav", sat(transient(r3, 0.28, 1.25, tau=0.06, hpf=160, lpf=8000), 9), -1, [r3])
+
+    # mg: three-round bursts (the tower fires every 0.35 s, the gunship every 0.25 s)
+    s7 = bz214("shot", 7)
+    save("sw_mg1.wav", sat(burst([(s7, 1.8), (s7, 1.87), (s7, 1.75)], 0.085, 0.13, 0.032), 6), -1, [s7])
+    m19 = bz200("howitzer-shot-metallic-part", 19)
+    save("sw_mg2.wav", sat(lp(burst([(m19, 1.6), (m19, 1.68), (m19, 1.55)], 0.08, 0.12, 0.03), 8000), 6), -1, [m19])
+
+    # rocket: launcher thump + a real whoosh
+    gl1 = bz200("grenade-launcher", 1)
+    w11 = bz214("whooshes-debris", 11)
+    thump = transient(gl1, 0.35, 1.0, hold=0.02, tau=0.1, hpf=60)
+    whoosh = cut(fades(trim(load(w11, 0.9), -30), 0.03, 0), 1.0)
+    save("sw_rocket1.wav", sat(mix([(thump, 0, 0), (hp(whoosh, 200), 0.04, -3)]), 5), -1, [gl1, w11])
+    gl3 = bz200("grenade-launcher", 3)
+    w38 = bz214("whooshes-debris", 38)
+    thump = transient(gl3, 0.3, 0.9, hold=0.02, tau=0.09, hpf=60)
+    whoosh = cut(fades(trim(load(w38, 1.0), -30), 0.03, 0), 1.1)
+    save("sw_rocket2.wav", sat(mix([(thump, 0, 0), (hp(whoosh, 200), 0.03, -2)]), 5), -1, [gl3, w38])
+
+    # cannon: real tank/howitzer shots, ~1.3 s
+    for i, (rel, rate) in enumerate([(bz214("shot", 7), 1.0),
+                                     (bz200("howitzer-shot-metallic-part", 5), 1.0),
+                                     (bz214("shot", 8), 1.08)], 1):
+        x = transient(rel, 1.3, rate, hold=0.06, tau=0.35, hpf=45)
+        save(f"sw_cannon{i}.wav", sat(x, 4), -1, [rel])
+
+    # heavy cannon (twin): howitzer shots, slowed a touch
+    for i, (rel, rate) in enumerate([(bz200("howitzer-shot-distant-explosion", 1), 0.88),
+                                     (bz200("howitzer-shot-metallic-part", 10), 0.9)], 1):
+        x = transient(rel, 2.0, rate, hold=0.1, tau=0.6, hpf=35)
+        save(f"sw_heavy{i}.wav", sat(x, 4), -1, [rel])
+
+    # plasma: a heavy synth zap over the low body of a real shot
+    ln, s3 = bat("Laser Neu"), bz214("shot", 3)
+    zap = cut(trim(load(ln, 0.8)), 1.4)
+    body = lp(transient(s3, 1.0, 0.8, hold=0.04, tau=0.3, hpf=30), 500)
+    save("sw_plasma1.wav", mix([(zap, 0, 0), (body, 0, -3)]), -1, [ln, s3])
+    lm1, mp5 = bat("Laser Mirror 1"), bz200("howitzer-shot-metallic-part", 5)
+    zap = cut(trim(load(lm1, 0.85)), 1.5)
+    body = lp(transient(mp5, 1.0, 0.75, hold=0.04, tau=0.3, hpf=30), 450)
+    save("sw_plasma2.wav", mix([(zap, 0, 0), (body, 0, -4)]), -1, [lm1, mp5])
+
+    # laser (tower beam)
+    lm2 = bat("Laser Mirror 2")
+    save("sw_laser1.wav", hp(cut(trim(load(lm2)), 0.9), 250), -1, [lm2])
+    zr1, ze = bat("Zap Robati 1"), bat("Zap Exile 9 V3")
+    a = cut(trim(load(zr1, 0.75)), 0.95)
+    b = cut(trim(load(ze, 0.7)), 0.6)
+    save("sw_laser2.wav", hp(mix([(a, 0, 0), (b, 0, -5)]), 250), -1, [zr1, ze])
+
+    # impacts of shells and rockets
+    for i, (rel, rate, d) in enumerate([(bz197("mixed-falling-rubble-explosion-impact", 14), 1.0, 1.0),
+                                        (bz200("artillery-falling-rubble-explosion-impact", 5), 1.05, 1.1),
+                                        (bz197("mixed-falling-rubble-explosion-impact", 18), 1.1, 1.0)], 1):
+        x = transient(rel, d, rate, hold=0.05, tau=0.3, hpf=60)
+        save(f"sw_impact{i}.wav", sat(x, 4), -1.5, [rel])
+    for i, rel in enumerate([bz200("howitzer-falling-rubble-explosion-impact", 20),
+                             bz200("howitzer-falling-rubble-explosion-impact", 14)], 1):
+        x = transient(rel, 2.2, 1.0, hold=0.15, tau=0.6, hpf=35)
+        save(f"sw_impactbig{i}.wav", sat(x, 4), -1, [rel])
+
+    # explosions
+    for i, (n, rate, d) in enumerate([(13, 1.1, 1.6), (31, 1.0, 1.8), (16, 1.05, 1.6)], 1):
+        rel = bz214("explosion", n)
+        save(f"sw_expl_s{i}.wav", hp(cut(trim(load(rel, rate)), d), 35), -1, [rel])
+    for i, (n, d) in enumerate([(4, 2.8), (29, 3.0)], 1):
+        rel = bz214("explosion", n)
+        save(f"sw_expl_m{i}.wav", sat(hp(cut(trim(load(rel)), d), 30), 3), -1, [rel])
+    big = [(bz200("howitzer-explosion-single", 2), f"{RDD}/Cinematic__Big_Drum-13.wav"),
+           (bz214("explosion", 20), f"{RDD}/Cinematic__Big_Drum-7.wav")]
+    for i, (rel, drum) in enumerate(big, 1):
+        x = cut(trim(load(rel)), 4.0, fout=1.4)
+        sub = lp(cut(trim(load(drum, 0.9)), 1.4), 180)
+        save(f"sw_expl_b{i}.wav", sat(hp(mix([(x, 0, 0), (sub, 0, -5)]), 28), 4), -1, [rel, drum])
+
+    # robots dying: metal crash + debris + a power-down
+    parts = [
+        [(bat("Metallic Bomb 1"), 1.0, 0, 0), (bz197("falling-metal-debris", 14), 1.0, 0.05, -4),
+         (bat("Dive Robati"), 0.9, 0.0, -8)],
+        [(bz200("howitzer-mechanical-parts-handling", 15), 0.9, 0, 0), (bz214("explosion", 11), 1.4, 0, -6),
+         (bat("Fall Elektro 1"), 1.0, 0.05, -6)],
+        [(bat("Impact Robati 1"), 0.9, 0, -2), (bz197("falling-metal-debris", 8), 1.0, 0.03, -3),
+         (bat("Dive Davis 2 V1"), 1.0, 0.0, -9)],
+    ]
+    for i, layer in enumerate(parts, 1):
+        sig = mix([(cut(trim(load(rel, rate)), 1.5), off, g) for rel, rate, off, g in layer])
+        save(f"sw_botdie{i}.wav", hp(cut(sig, 1.5, 0.5), 60), -1.5, [l[0] for l in layer])
+
+    # building / economy
+    m1, k6 = bz200("howitzer-mechanical-parts-handling", 1), f"{RDK}/Cinematic__Kick-6.wav"
+    save("sw_place.wav", mix([(cut(trim(load(m1, 0.85)), 0.6), 0, 0), (lp(cut(load(k6), 0.3), 250), 0, -3)]),
+         -3, [m1, k6])
+    m14, mn3 = bz200("howitzer-mechanical-parts-handling", 14), bat("Machine Noise 3")
+    save("sw_construct.wav", hp(mix([(cut(trim(load(m14, 0.9)), 2.6), 0, 0),
+                                     (cut(fades(load(mn3), 0.2, 0), 2.1), 0.2, -12)]), 60), -2, [m14, mn3])
+    m20, sl2 = bz200("howitzer-mechanical-parts-handling", 20), bat("Impact Slam 2")
+    save("sw_deploy.wav", hp(mix([(cut(trim(load(m20, 0.85)), 2.8, 0.8), 0, 0),
+                                  (cut(trim(load(sl2)), 1.2), 2.2, -3)]), 40), -1.5, [m20, sl2])
+    m11, sw10 = bz200("howitzer-mechanical-parts-handling", 11), bat("Sweep SciFi 10")
+    save("sw_unitout.wav", hp(mix([(cut(trim(load(m11, 0.9)), 1.4), 0, 0),
+                                   (cut(load(sw10, 0.8), 0.8), 0.05, -8)]), 60), -2, [m11, sw10])
+    g20, mn3b = bz197("falling-glass-debris", 20), bat("Machine Noise 3")
+    save("sw_harvest.wav", hp(mix([(cut(trim(load(g20, 0.8)), 0.9), 0, 0),
+                                   (cut(fades(load(mn3b, 0.7), 0.05, 0), 0.9), 0, -9)]), 120), -4, [g20, mn3b])
+    g9, m17 = bz197("falling-glass-debris", 9), bz200("howitzer-mechanical-parts-handling", 17)
+    save("sw_unload.wav", hp(mix([(cut(trim(load(m17, 0.85)), 0.45), 0, 0),
+                                  (cut(trim(load(g9, 0.85)), 1.6), 0.08, -2)]), 90), -3, [m17, g9])
+    rt, is6 = bat("Rise Toksin"), bat("Impact Sintheti 6")
+    rise = fades(load(rt)[: int(1.36 * SR)], 0.05, 0.01)
+    save("sw_capture.wav", mix([(rise, 0, -3), (cut(trim(load(is6)), 1.1), 1.34, 0)]), -1.5, [rt, is6])
+
+    # interface (2D, quieter)
+    c2 = bat("Click SW 2")
+    save("sw_click.wav", hp(cut(trim(load(c2)), 0.08, 0.04), 300), -6, [c2])
+    br1 = bat("Blip Robati 1")
+    save("sw_select.wav", hp(cut(trim(load(br1, 0.9)), 0.11, 0.05), 300), -11, [br1])
+    b1 = bz214("beep", 1)
+    beep = cut(trim(load(b1, 0.75)), 0.09, 0.02)
+    save("sw_error.wav", lp(mix([(beep, 0, 0), (beep, 0.13, 0)]), 4000), -8, [b1])
+
+
+# --- the voices -------------------------------------------------------------------------------
+ANNOUNCER = {
+    "sw_v_building": "Bau begonnen.",
+    "sw_v_ready": "Gebäude bereit zur Platzierung.",
+    "sw_v_unitready": "Einheit bereit.",
+    "sw_v_lowpower": "Warnung: Energie niedrig.",
+    "sw_v_baseattack": "Unsere Basis wird angegriffen.",
+    "sw_v_unitattack": "Einheiten unter Beschuss.",
+    "sw_v_research": "Forschung abgeschlossen.",
+    "sw_v_nocash": "Nicht genug Energiezellen.",
+    "sw_v_captured": "Ziel übernommen.",
+    "sw_v_lost": "Einheit verloren.",
+    "sw_v_storage": "Energicum-Lager voll.",
+    "sw_v_cantdeploy": "Ausbau hier nicht möglich.",
+    "sw_v_victory": "Sieg. Der Feind ist vernichtet.",
+    "sw_v_defeat": "Niederlage. Die Basis ist gefallen.",
+    "sw_v_upgraded": "Aufrüstung abgeschlossen.",
+}
+UNITS = {
+    "sw_v_ack1": "Verstanden.", "sw_v_ack2": "Bestätigt.", "sw_v_ack3": "Bewege mich.",
+    "sw_v_ack4": "Auf dem Weg.",
+    "sw_v_sel1": "Bereit.", "sw_v_sel2": "Befehl?", "sw_v_sel3": "Einheit meldet sich.",
+    "sw_v_atk1": "Ziel erfasst.", "sw_v_atk2": "Feuer frei!", "sw_v_atk3": "Greife an!",
+}
+
+TTS_PS1 = r"""
+param([string]$Jobs)
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Add-Type -AssemblyName System.Runtime.WindowsRuntime
+$null = [Windows.Media.SpeechSynthesis.SpeechSynthesizer, Windows.Media.SpeechSynthesis, ContentType = WindowsRuntime]
+$null = [Windows.Storage.Streams.DataReader, Windows.Storage.Streams, ContentType = WindowsRuntime]
+$asTask = [System.WindowsRuntimeSystemExtensions].GetMethods() | Where-Object {
+  $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' } | Select-Object -First 1
+function Await($op, [Type]$t) { $task = $asTask.MakeGenericMethod($t).Invoke($null, @($op)); $task.Wait(); $task.Result }
+$all = [Windows.Media.SpeechSynthesis.SpeechSynthesizer]::AllVoices
+foreach ($j in (Get-Content -Raw -Encoding UTF8 $Jobs | ConvertFrom-Json)) {
+  $s = New-Object Windows.Media.SpeechSynthesis.SpeechSynthesizer
+  $v = $all | Where-Object { $_.DisplayName -like ('*' + $j.voice + '*') } | Select-Object -First 1
+  if (-not $v) { $v = $all | Where-Object { $_.Language -like 'de*' } | Select-Object -First 1 }
+  if ($v) { $s.Voice = $v }
+  $s.Options.SpeakingRate = [double]$j.rate
+  $s.Options.AudioPitch = [double]$j.pitch
+  $st = Await ($s.SynthesizeTextToStreamAsync($j.text)) ([Windows.Media.SpeechSynthesis.SpeechSynthesisStream])
+  $size = [uint32]$st.Size
+  $r = New-Object Windows.Storage.Streams.DataReader($st.GetInputStreamAt(0))
+  $null = Await ($r.LoadAsync($size)) ([uint32])
+  $b = New-Object byte[] $size
+  $r.ReadBytes($b)
+  [System.IO.File]::WriteAllBytes($j.out, $b)
+  Write-Output ($j.out + ' <- ' + $v.DisplayName)
+}
+"""
+
+
+def tts(jobs, tmp):
+    ps1 = Path(tmp) / "tts.ps1"
+    ps1.write_text(TTS_PS1, encoding="utf-8-sig")
+    jf = Path(tmp) / "jobs.json"
+    jf.write_text(json.dumps(jobs, ensure_ascii=False), encoding="utf-8")
+    r = _run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ps1), "-Jobs", str(jf)])
+    return r.stdout.decode("utf-8", errors="replace")
+
+
+def robot(x, ring_hz, ring_mix, crush_bits, crush_mix, down, drive):
+    """Cold machine voice, intelligibility first: band-limit, ring modulation blended in,
+    a short metallic comb, a little bit-crush, gentle saturation and compression."""
+    x = trim(x, -45)
+    x = norm(x, -3)
+    x = ffx(x, "highpass=f=200,highpass=f=200,lowpass=f=5000,lowpass=f=5000")
+    t = np.arange(len(x)) / SR
+    x = (1 - ring_mix) * x + ring_mix * x * np.sin(2 * np.pi * ring_hz * t) * 1.6
+    x = np.concatenate([x, np.zeros(int(0.12 * SR))])
+    x = ffx(x, "aecho=1.0:0.75:7|13:0.32|0.2")                                   # metallic comb
+    x = ffx(x, f"acrusher=level_in=1:level_out=1:bits={crush_bits}:mix={crush_mix}:mode=lin:aa=1:samples={down}")
+    if drive > 0:
+        x = np.tanh(x * (1 + drive)) / np.tanh(1 + drive)
+    x = ffx(x, "equalizer=f=2600:t=q:w=1.2:g=3,highpass=f=170,lowpass=f=6500")    # presence for words
+    # only gentle compression: a hard, fast compressor cost the most intelligibility in the
+    # speech-recognition test (the robot effects themselves cost little)
+    x = ffx(x, "acompressor=threshold=-12dB:ratio=2:attack=15:release=250:makeup=1")
+    return x
+
+
+# ElevenLabs takes (design/voice_el/<name>.mp3, eleven_multilingual_v2): announcer "Lola -
+# Modern Agent", units "Mark - Confident and Striking". A missing file falls back to the old
+# Windows TTS + robot() chain.
+VOICE_EL = HERE / "voice_el"
+
+
+def polish(x, radio):
+    """Light touch for real voice takes: the recording already sounds right, so only tidy it.
+    radio=True gives the unit lines a mild field-radio band (no ring mod, no crush)."""
+    x = trim(x, -45)
+    x = norm(x, -3)
+    if radio:
+        x = ffx(x, "highpass=f=280,highpass=f=280,lowpass=f=4200,lowpass=f=4200,"
+                   "equalizer=f=1800:t=q:w=1.0:g=3")
+        x = np.tanh(x * 1.6) / np.tanh(1.6)
+    else:
+        x = ffx(x, "highpass=f=90,equalizer=f=3000:t=q:w=1.2:g=1.5")
+    x = ffx(x, "acompressor=threshold=-14dB:ratio=2:attack=10:release=200:makeup=1")
+    return x
+
+
+def build_voice(verify=False):
+    print("voices ->", SOUNDS)
+    lines = {**ANNOUNCER, **UNITS}
+    el = {k for k in lines if (VOICE_EL / f"{k}.mp3").exists()}
+    for k in sorted(el):
+        raw = _run([FFMPEG, "-v", "error", "-i", str(VOICE_EL / f"{k}.mp3"),
+                    "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"]).stdout
+        x = np.frombuffer(raw, np.float32).astype(np.float64)
+        y = polish(x, radio=k in UNITS)
+        save(k + ".wav", y, -1.5 if k in ANNOUNCER else -2.0, [f"ElevenLabs: {lines[k]}"])
+    rest = [k for k in lines if k not in el]
+    if rest:
+        build_voice_tts(rest)
+    if verify:
+        verify_voices()
+
+
+def build_voice_tts(names):
+    with tempfile.TemporaryDirectory() as tmp:
+        jobs = []
+        for k, txt in ANNOUNCER.items():
+            if k in names:
+                jobs.append({"voice": "Katja", "text": txt, "rate": 0.95, "pitch": 0.95, "out": str(Path(tmp) / f"{k}.wav")})
+        for k, txt in UNITS.items():
+            if k in names:
+                jobs.append({"voice": "Stefan", "text": txt, "rate": 0.95, "pitch": 0.85, "out": str(Path(tmp) / f"{k}.wav")})
+        log = tts(jobs, tmp)
+        voice_of = {Path(l.split(" <- ")[0]).stem: l.split(" <- ")[1] for l in log.splitlines() if " <- " in l}
+        for j in jobs:
+            name = Path(j["out"]).stem
+            raw = _run([FFMPEG, "-v", "error", "-i", j["out"], "-f", "f32le", "-ac", "1", "-ar", str(SR), "-"]).stdout
+            x = np.frombuffer(raw, np.float32).astype(np.float64)
+            if name in ANNOUNCER:
+                y = robot(x, ring_hz=48, ring_mix=0.3, crush_bits=10, crush_mix=0.18, down=1, drive=0.4)
+                save(name + ".wav", y, -1.5, [f"TTS {voice_of.get(name, '?')}: {ANNOUNCER[name]}"])
+            else:
+                y = robot(x, ring_hz=34, ring_mix=0.45, crush_bits=8, crush_mix=0.3, down=2, drive=1.2)
+                save(name + ".wav", y, -2.0, [f"TTS {voice_of.get(name, '?')}: {UNITS[name]}"])
+
+
+VERIFY_PS1 = r"""
+param([string]$Dir, [string]$Names)
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+Add-Type -AssemblyName System.Speech
+$ci = New-Object System.Globalization.CultureInfo('de-DE')
+foreach ($n in ($Names -split ',')) {
+  $e = New-Object System.Speech.Recognition.SpeechRecognitionEngine($ci)
+  $e.LoadGrammar((New-Object System.Speech.Recognition.DictationGrammar))
+  $e.SetInputToWaveFile((Join-Path $Dir ($n + '.wav')))
+  $r = $e.Recognize()
+  if ($r) { Write-Output ($n + "`t" + $r.Text + "`t" + [math]::Round($r.Confidence, 2)) } else { Write-Output ($n + "`t-`t0") }
+  $e.Dispose()
+}
+"""
+
+
+def verify_voices():
+    """Free dictation by the Windows German recognizer over the processed files."""
+    with tempfile.TemporaryDirectory() as tmp:
+        ps1 = Path(tmp) / "verify.ps1"
+        ps1.write_text(VERIFY_PS1, encoding="utf-8-sig")
+        names = list(ANNOUNCER) + list(UNITS)
+        out = _run(["powershell", "-NoProfile", "-ExecutionPolicy", "Bypass", "-File", str(ps1),
+                    "-Dir", str(SOUNDS), "-Names", ",".join(names)]).stdout.decode("utf-8", errors="replace")
+        print("speech recognition of the processed lines (dictation, de-DE):")
+        for line in out.splitlines():
+            n, heard, conf = (line.split("\t") + ["", "", ""])[:3]
+            want = {**ANNOUNCER, **UNITS}.get(n, "")
+            print(f"  {n:18s} want '{want}'  heard '{heard}' ({conf})")
+
+
+# --- music --------------------------------------------------------------------------------------
+RCD = "RC Cinematic Electronica Drum Loops"
+RCB = "RC Cinematic Electronica Basses"
+RCM = "RC Cinematic Electronica Melodic Additionals"
+RCF = "RC Cinematic Electronica Fx Loops"
+RCS = "RC Cinematic Electronica Snare Fills"
+RCC = "RC Cinematic Electronica Crashes"
+
+
+def drum(kit, bpm, part, drop):
+    if drop:
+        return f"{RCD}/Drop/DrumLoop_{kit} {bpm} {part} Drop.wav"
+    if kit == 2:
+        return f"{RCD}/Breakdown/DrumLoop_2 100 Full Breakdown 100.wav" if part == "Full" else \
+            f"{RCD}/Breakdown/DrumLoop_2 {part} Breakdown 100.wav"
+    return f"{RCD}/Breakdown/DrumLoop_{kit} {part} Breakdown {bpm}.wav"
+
+
+def bass(n, bpm, drop):
+    if drop:
+        return f"{RCB}/Drop/{n:02d} Bass {bpm} Drop Fm.wav"
+    word = "Beakdown" if n in (1, 7) else "Breakdown"
+    return f"{RCB}/Breakdown/{n:02d} Bass {word} {bpm} Fm.wav"
+
+
+def mel(n, kind, bpm, drop):
+    return f"{RCM}/{'Drop' if drop else 'Breakdown'}/{n:02d} {kind} {'Drop' if drop else 'Breakdown'} {bpm} Fm.wav"
+
+
+def stretch(x, factor):
+    """Tempo change without pitch change (ffmpeg atempo); factor > 1 = faster."""
+    return ffx(x, f"atempo={factor:.6f}")
+
+
+class Song:
+    def __init__(self, bpm, bars):
+        self.bpm = bpm
+        self.bar = 240.0 / bpm
+        self.n = int(round(bars * self.bar * SR))
+        self.out = np.zeros((self.n, 2))
+        self.used = []
+
+    def loop(self, rel, b0, b1, gain=0.0, fin=0.01, fout=0.02, tail=0.0):
+        """Tile a loop from bar b0 to bar b1 (song-relative phase); optional release tail."""
+        x = load(rel, stereo=True)
+        L = len(x)
+        i0, i1 = int(round(b0 * self.bar * SR)), min(self.n, int(round(b1 * self.bar * SR + tail * SR)))
+        idx = np.arange(i0, i1) % L
+        seg = fades(x[idx], fin, fout + tail)
+        self.out[i0:i1] += seg * db(gain)
+        self.used.append(rel)
+
+    def hit(self, rel, at_bar, gain=0.0, align="start", rate=1.0, tempo=None):
+        x = load(rel, rate, stereo=True)
+        if tempo:
+            x = stretch(x, self.bpm / tempo)
+        x = tailtrim(x, -70)
+        t = at_bar * self.bar
+        if align == "peak":
+            t -= np.argmax(np.abs(x).max(axis=1)) / SR
+        elif align == "end":
+            t -= len(x) / SR
+        i0 = int(round(t * SR))
+        if i0 < 0:
+            x, i0 = x[-i0:], 0
+        x = x[: self.n - i0]
+        self.out[i0:i0 + len(x)] += fades(x, 0.003, 0.05) * db(gain)
+        self.used.append(rel)
+
+    def master(self, name, fade_in=1.5, fade_out=6.0):
+        y = fades(self.out, fade_in, fade_out)
+        y = y / (peak(y) + 1e-9) * 0.7
+        tmp = Path(tempfile.gettempdir()) / f"sw_premaster_{name}.f32"
+        tmp.write_bytes(y.astype(np.float32).tobytes())
+        base = [FFMPEG, "-v", "info", "-f", "f32le", "-ar", str(SR), "-ac", "2", "-i", str(tmp)]
+        glue = "highpass=f=28,acompressor=threshold=-16dB:ratio=2.2:attack=25:release=300:makeup=1.5"
+        r = _run(base + ["-af", glue + ",loudnorm=I=-14:TP=-1.0:LRA=11:print_format=json", "-f", "null", "-"])
+        err = r.stderr.decode(errors="replace")
+        m = json.loads(err[err.rindex("{"): err.rindex("}") + 1])
+        ln = (f"loudnorm=I=-14:TP=-1.0:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+              f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
+        out = MUSIC / f"{name}.{MUSIC_EXT}"
+        MUSIC.mkdir(parents=True, exist_ok=True)
+        codec = {"wav": ["-c:a", "pcm_s16le"], "ogg": ["-c:a", "libvorbis", "-q:a", "6"],
+                 "mp3": ["-c:a", "libmp3lame", "-b:a", "224k"]}[MUSIC_EXT]
+        _run(base + ["-af", glue + "," + ln + ",alimiter=limit=0.89:level=false", "-ar", str(SR)] + codec
+             + ["-y", str(out)])
+        tmp.unlink()
+        # measure the result
+        r = _run([FFMPEG, "-v", "info", "-i", str(out), "-af", "ebur128=peak=true", "-f", "null", "-"])
+        e = r.stderr.decode(errors="replace")
+        summ = e[e.rindex("Summary:"):]
+        I = float(summ.split("I:")[1].split("LUFS")[0])
+        tp = float(summ.split("Peak:")[1].split("dBFS")[0])
+        dur = self.n / SR
+        uniq = sorted(set(self.used))
+        REPORT.append((out.name, dur, tp, I, 0, " + ".join(Path(u).name for u in uniq)))
+        print(f"  {out.name:16s} {int(dur // 60)}:{dur % 60:04.1f}  {I:5.1f} LUFS  true peak {tp:5.1f} dBFS  "
+              f"({len(uniq)} source files)")
+        for u in uniq:
+            print("      ", u)
+
+
+def song_110():
+    """sw_music1 -- 110 BPM, F minor: RC Cinematic Electronica kits 1 and 7."""
+    s = Song(110, 96)
+    P1, M2 = mel(1, "Pad", 110, False), mel(2, "Mallet", 110, False)
+    P13, S14 = mel(13, "Pad", 110, False), mel(14, "Synth", 110, False)
+    # intro 0-8
+    s.loop(P1, 0, 16, -3, fin=8.0, tail=0.5)
+    s.loop(drum(1, 110, "TopLoop", False), 2, 16, -4, fin=4.0)
+    s.loop(M2, 4, 16, -4, fin=2.0)
+    s.hit(f"{RCC}/Rev Crash 3.wav", 8, -4, align="peak")
+    # build 8-16
+    s.loop(bass(1, 110, False), 8, 16, -3)
+    s.loop(drum(1, 110, "Perc", False), 8, 16, -1)
+    s.hit(f"{RCS}/Snare Fill 1 110.wav", 12, -2)
+    s.hit(f"{RCF}/Rev Hit 110.wav", 16, -2, align="peak")
+    # drop A 16-32, drop B 32-48
+    s.hit(f"{RCC}/Crash Fx 2.wav", 16, -3)
+    s.hit(f"{RDH}/Cinematic__Hit-14.wav", 16, -4)
+    s.loop(drum(1, 110, "Full", True), 16, 48, 0)
+    s.loop(bass(1, 110, True), 16, 48, -2)
+    s.loop(mel(1, "Synth", 110, True), 16, 48, -2)
+    s.loop(mel(2, "Lead", 110, True), 32, 48, -1)
+    s.hit(f"{RCC}/Crash Fx 4.wav", 32, -6)
+    s.hit(f"{RCS}/Snare Fill 7 110.wav", 44, -3)
+    # breakdown 48-64
+    s.hit(f"{RCF}/Hit 1 110.wav", 48, -2)
+    s.loop(P13, 48, 64, -2, fin=0.5, tail=0.4)
+    s.loop(S14, 48, 64, -4)
+    s.loop(bass(7, 110, False), 52, 64, -3)
+    s.loop(drum(7, 110, "NoKick", False), 52, 56, -3)
+    s.loop(drum(7, 110, "Full", False), 56, 64, -1)
+    s.hit(f"{RCF}/Noise Riser 105.wav", 64, -5, align="peak", tempo=105)
+    # drop C 64-80, drop D 80-88
+    s.hit(f"{RCC}/Crash Fx 2.wav", 64, -3)
+    s.hit(f"{RDH}/Cinematic__Hit-7.wav", 64, -4)
+    s.loop(drum(7, 110, "Full", True), 64, 88, 0)
+    s.loop(bass(7, 110, True), 64, 88, -2)
+    s.loop(mel(13, "Stabs", 110, True), 64, 88, -1)
+    s.loop(mel(14, "Lead", 110, True), 72, 88, -2)
+    s.loop(mel(1, "Synth", 110, True), 80, 88, -4)
+    s.hit(f"{RCC}/Crash Fx 4.wav", 80, -6)
+    s.hit(f"{RCF}/Rev Hit 110.wav", 88, -3, align="peak")
+    # outro 88-96
+    s.loop(P1, 88, 96, -3, fin=0.3)
+    s.loop(drum(1, 110, "TopLoop", False), 88, 96, -5)
+    s.hit(f"{RDH}/Cinematic__Hit-10.wav", 88, -4)
+    s.master("sw_music1", fade_out=8.0)
+
+
+def song_105():
+    """sw_music2 -- 105 BPM, F minor: kits 3 and 6."""
+    s = Song(105, 88)
+    P11, A12 = mel(11, "Pad", 105, False), mel(12, "Arpg", 105, False)
+    # intro 0-8
+    s.loop(P11, 0, 16, -3, fin=8.0, tail=0.5)
+    s.loop(A12, 4, 16, -5, fin=3.0)
+    s.loop(drum(6, 105, "TopLoop", False), 4, 16, -4, fin=2.0)
+    # build 8-16
+    s.loop(bass(6, 105, False), 8, 16, -3)
+    s.loop(drum(6, 105, "Perc", False), 8, 16, -2)
+    s.hit(f"{RCF}/Noise Riser 105.wav", 16, -4, align="peak")
+    s.hit(f"{RCS}/Snare Fill 6 105.wav", 12, -3)
+    # drop A 16-32
+    s.hit(f"{RCC}/Crash Fx 1.wav", 16, -2)
+    s.hit(f"{RCF}/Hit 3 105.wav", 16, -2)
+    s.loop(drum(3, 105, "Full", True), 16, 32, 0)
+    s.loop(bass(3, 105, True), 16, 32, -4)
+    s.loop(mel(6, "Lead", 105, True), 16, 32, -3)
+    s.loop(mel(5, "Synth", 105, True), 24, 32, 0)
+    # breakdown 32-48
+    s.loop(mel(5, "Synth", 105, False), 32, 48, -3, fin=0.3)
+    s.loop(mel(6, "Pad", 105, False), 32, 48, -2)
+    s.loop(bass(3, 105, False), 36, 48, -3)
+    s.loop(drum(3, 105, "NoKick", False), 40, 48, -3)
+    s.hit(f"{RCS}/Snare Fill 3 105.wav", 44, -3)
+    s.hit(f"{RCC}/Rev Crash 2.wav", 48, -4, align="peak")
+    # drop B 48-64
+    s.hit(f"{RCC}/Crash Fx 1.wav", 48, -2)
+    s.hit(f"{RDH}/Cinematic__Hit-15.wav", 48, -4)
+    s.loop(drum(6, 105, "Full", True), 48, 64, 0)
+    s.loop(bass(6, 105, True), 48, 64, -2)
+    s.loop(mel(12, "Lead", 105, True), 48, 64, -1)
+    s.loop(mel(11, "Synth", 105, True), 48, 64, -2)
+    s.loop(A12, 56, 64, -6)
+    # drop C 64-80
+    s.hit(f"{RCF}/Hit 3 105.wav", 64, -2)
+    s.loop(drum(3, 105, "Full", True), 64, 80, 0)
+    s.loop(bass(3, 105, True), 64, 80, -4)
+    s.loop(mel(6, "Lead", 105, True), 64, 80, -3)
+    s.loop(A12, 64, 80, -6)
+    s.hit(f"{RCF}/Perc Fx 105.wav", 79, -3)
+    # outro 80-88
+    s.loop(P11, 80, 88, -3, fin=0.3)
+    s.loop(drum(6, 105, "TopLoop", False), 80, 88, -5)
+    s.hit(f"{RDH}/Cinematic__Hit-11.wav", 80, -4)
+    s.master("sw_music2", fade_out=8.0)
+
+
+def song_100():
+    """sw_music3 -- 100 BPM, F minor: kits 2 and 4 (drop material)."""
+    s = Song(100, 80)
+    S4, S8 = mel(4, "Synth", 100, False), mel(8, "Synth", 100, False)
+    # intro 0-8
+    s.loop(S4, 0, 16, -3, fin=6.0)
+    s.loop(drum(4, 100, "TopLoop", False), 2, 16, -4, fin=3.0)
+    s.hit(f"{RCF}/Toms Fx 100.wav", 6, -6)
+    # build 8-16
+    s.loop(bass(4, 100, False), 8, 16, -5)
+    s.loop(drum(4, 100, "Perc", False), 8, 16, -1)
+    s.hit(f"{RCS}/Snare Fill 4 100.wav", 12, -3)
+    s.hit(f"{RCC}/Rev Crash 1.wav", 16, -4, align="peak")
+    # drop A 16-32
+    s.hit(f"{RCC}/Crash Fx 5.wav", 16, -2)
+    s.hit(f"{RCF}/Hit 2 100.wav", 16, -1)
+    s.loop(drum(2, 100, "Full", True), 16, 32, 0)
+    s.loop(bass(2, 100, True), 16, 32, -3)
+    s.loop(mel(3, "Synth", 100, True), 16, 32, -2)
+    s.loop(mel(7, "Lead", 100, True), 24, 32, -3)
+    # breakdown 32-48
+    s.loop(S8, 32, 48, -3, fin=0.3)
+    s.loop(S4, 32, 48, -5)
+    s.loop(bass(2, 100, False), 36, 48, 0)
+    s.loop(drum(2, 100, "NoKick", False), 36, 48, 0)
+    s.hit(f"{RCF}/Synth Screams Fx 100.wav", 40, -9)
+    s.hit(f"{RCS}/Snare Fill 2 100.wav", 40, -3)
+    # drop B 48-64
+    s.hit(f"{RCC}/Crash Fx 5.wav", 48, -2)
+    s.hit(f"{RDH}/Cinematic__Hit-12.wav", 48, -4)
+    s.loop(drum(4, 100, "Full", True), 48, 64, 0)
+    s.loop(bass(4, 100, True), 48, 64, -3)
+    s.loop(mel(8, "Synth", 100, True), 48, 64, -2)
+    s.loop(mel(7, "Lead", 100, True), 56, 64, -3)
+    s.loop(mel(4, "Sonar", 100, True), 48, 64, -3)
+    # drop C 64-72
+    s.hit(f"{RCF}/Hit 2 100.wav", 64, -1)
+    s.loop(drum(2, 100, "Full", True), 64, 72, 0)
+    s.loop(bass(2, 100, True), 64, 72, -3)
+    s.loop(mel(3, "Synth", 100, True), 64, 72, -2)
+    s.loop(mel(8, "Synth", 100, True), 64, 72, -4)
+    # outro 72-80
+    s.loop(S4, 72, 80, -3, fin=0.3)
+    s.loop(drum(4, 100, "TopLoop", False), 72, 80, -5)
+    s.hit(f"{RDH}/Cinematic__Hit-2.wav", 72, -4)
+    s.master("sw_music3", fade_out=8.0)
+
+
+def song_menu():
+    """sw_menu -- slow and brooding, 100 BPM felt in half time: strings, pad, sonar, big drums."""
+    s = Song(100, 64)
+    ST, P7 = mel(3, "Strings", 100, False), mel(7, "Pad", 100, False)
+    s.loop(ST, 0, 64, -2, fin=6.0)
+    s.loop(P7, 16, 56, -4, fin=4.0)
+    s.loop(bass(2, 100, False), 16, 56, -2, fin=2.0)
+    s.loop(mel(4, "Sonar", 100, True), 32, 56, -6, fin=0.5)
+    s.loop(drum(2, 100, "Perc", False), 40, 56, -6, fin=4.0)
+    s.hit(f"{RCF}/Synth Screams Fx 100.wav", 44, -14)
+    booms = [f"{RDD}/Cinematic__Big_Drum-13.wav", f"{RDD}/Cinematic__Big_Drum-3.wav",
+             f"{RDD}/Cinematic__Big_Drum-10.wav", f"{RDD}/Cinematic__Big_Drum-7.wav"]
+    k = 0
+    for b in range(8, 60, 4):
+        s.hit(booms[k % 4], b, -6 if b < 16 else -4)
+        if 24 <= b < 56:
+            s.hit(booms[(k + 1) % 4], b + 2, -9)
+        k += 1
+    s.hit(f"{RCF}/Toms Fx 100.wav", 30, -6)
+    s.hit(f"{RCC}/Rev Crash 1.wav", 32, -8, align="peak")
+    s.hit(f"{RDH}/Cinematic__Hit-10.wav", 32, -5)
+    s.hit(f"{RCF}/Hit 2 100.wav", 56, -6)
+    s.master("sw_menu", fade_in=3.0, fade_out=10.0)
+
+
+def build_music():
+    print("music ->", MUSIC)
+    song_110()
+    song_105()
+    song_100()
+    song_menu()
+
+
+def main():
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--only", default="sfx,voice,music")
+    ap.add_argument("--verify", action="store_true", help="speech-recognise the voice lines afterwards")
+    a = ap.parse_args()
+    parts = a.only.split(",")
+    if not SRC.exists():
+        sys.exit(f"sample library not found: {SRC} (set SW_SAMPLES)")
+    if "sfx" in parts:
+        build_sfx()
+    if "voice" in parts:
+        build_voice(a.verify)
+    if "music" in parts:
+        build_music()
+    print(f"done: {len(REPORT)} files")
+
+
+if __name__ == "__main__":
+    main()

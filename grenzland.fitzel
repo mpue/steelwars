@@ -1,0 +1,5450 @@
+{
+  "app": "0.6.0.424 (29e4882, dirty)",
+  "entities": [
+    {
+      "active": true,
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "components": [
+        {
+          "color": [
+            1.0,
+            0.7200000286102295,
+            0.47999998927116394
+          ],
+          "intensity": 0.8500000238418579,
+          "type": "sun"
+        }
+      ],
+      "half": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "id": 0,
+      "name": "Sun",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 5
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "components": [
+        {
+          "backdropAngle": 188.0,
+          "backdropCenterX": -600.0,
+          "backdropCenterZ": 120.0,
+          "backdropHeight": 2800.0,
+          "backdropLake": 40.0,
+          "backdropOutlet": 16000.0,
+          "backdropRadius": 2300.0,
+          "backdropScale": 3400.0,
+          "backdropStretch": 0.550000011920929,
+          "backdropWidth": 3200.0,
+          "biomeFreq": 0.0017999999690800905,
+          "chunkSize": 64.0,
+          "continentAmp": 1.0,
+          "frequency": 0.014000000432133675,
+          "gain": 0.5,
+          "heightScale": 10.0,
+          "islandCenterX": 0.0,
+          "islandCenterZ": 0.0,
+          "islandRadius": 0.0,
+          "islandShape": 0.0,
+          "lacunarity": 2.0,
+          "octaves": 5,
+          "peakSharpness": 0.800000011920929,
+          "reliefGain": 1.0,
+          "resolution": 96,
+          "ridgeScale": 6.0,
+          "seed": 0.0,
+          "terrace": 0.0,
+          "type": "terrain",
+          "valleyDepth": 0.0,
+          "warpFrequency": 0.009999999776482582,
+          "warpStrength": 10.0
+        }
+      ],
+      "half": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "id": 1,
+      "name": "Terrain",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "components": [
+        {
+          "file": "steelwars.lua",
+          "type": "script"
+        }
+      ],
+      "half": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "id": 2,
+      "name": "Steelwars",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "half": [
+        2.0,
+        2.0,
+        2.0
+      ],
+      "id": 3,
+      "name": "SW Map",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        -378.8800048828125,
+        0.0,
+        -378.8800048828125
+      ],
+      "half": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "id": 4,
+      "name": "SW Start",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        378.8800048828125,
+        0.0,
+        378.8800048828125
+      ],
+      "half": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "id": 5,
+      "name": "SW Start",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        -378.8800048828125,
+        0.0,
+        378.8800048828125
+      ],
+      "half": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "id": 6,
+      "name": "SW Start",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        378.8800048828125,
+        0.0,
+        -378.8800048828125
+      ],
+      "half": [
+        3.0,
+        3.0,
+        3.0
+      ],
+      "id": 7,
+      "name": "SW Start",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        -300.2509765625,
+        0.0,
+        -364.1329650878906
+      ],
+      "half": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "id": 8,
+      "name": "SW Field",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        300.2509765625,
+        0.0,
+        364.1329650878906
+      ],
+      "half": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "id": 9,
+      "name": "SW Field",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        -364.1329650878906,
+        0.0,
+        300.2509765625
+      ],
+      "half": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "id": 10,
+      "name": "SW Field",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        364.1329650878906,
+        0.0,
+        -300.2509765625
+      ],
+      "half": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "id": 11,
+      "name": "SW Field",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        -210.0,
+        0.0,
+        10.0
+      ],
+      "half": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "id": 12,
+      "name": "SW Field",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        210.0,
+        0.0,
+        -10.0
+      ],
+      "half": [
+        1.5,
+        1.5,
+        1.5
+      ],
+      "id": 13,
+      "name": "SW Field",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 4.0,
+          "burst": 70.0,
+          "colorEnd": [
+            0.8999999761581421,
+            0.20000000298023224,
+            0.029999999329447746
+          ],
+          "colorStart": [
+            1.0,
+            0.75,
+            0.3499999940395355
+          ],
+          "coneAngle": 25.0,
+          "drag": 2.5,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            2.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.4000000059604645,
+          "lifetime": 0.8999999761581421,
+          "loop": false,
+          "maxCount": 900.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 5.5,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 9.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 5.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 14,
+      "name": "FX Explosion",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 24.0,
+          "colorEnd": [
+            0.4000000059604645,
+            0.07999999821186066,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.550000011920929,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 1.5,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            3.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.2999999523162842,
+          "loop": false,
+          "maxCount": 500.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 7.0,
+          "sizeStart": 2.5,
+          "sizeVar": 0.25,
+          "speed": 3.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 2.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 15,
+      "name": "FX Fireball",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.800000011920929,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 22.0,
+          "colorEnd": [
+            0.09000000357627869,
+            0.08799999952316284,
+            0.08500000089406967
+          ],
+          "colorStart": [
+            0.03500000014901161,
+            0.03200000151991844,
+            0.029999999329447746
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.8999999761581421,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            1.600000023841858,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.4000000059604645,
+          "lifetime": 4.0,
+          "loop": false,
+          "maxCount": 800.0,
+          "playing": true,
+          "radius": 0.5,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 7.5,
+          "sizeStart": 1.7999999523162842,
+          "sizeVar": 0.25,
+          "speed": 2.200000047683716,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.2000000476837158,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            1.5,
+            0.0,
+            0.6000000238418579
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 16,
+      "name": "FX Smoke Puff",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 5.0,
+          "burst": 45.0,
+          "colorEnd": [
+            1.0,
+            0.4000000059604645,
+            0.10000000149011612
+          ],
+          "colorStart": [
+            1.0,
+            0.8500000238418579,
+            0.5
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.6000000238418579,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            -14.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.5,
+          "lifetime": 0.699999988079071,
+          "loop": false,
+          "maxCount": 1500.0,
+          "playing": true,
+          "radius": 0.30000001192092896,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.03999999910593033,
+          "sizeStart": 0.11999999731779099,
+          "sizeVar": 0.25,
+          "speed": 16.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 8.0,
+          "spin": 20.0,
+          "sprite": "",
+          "stretch": 0.05999999865889549,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 17,
+      "name": "FX Sparks",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.800000011920929,
+          "alphaStart": 1.0,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 30.0,
+          "colorEnd": [
+            0.05000000074505806,
+            0.05000000074505806,
+            0.05000000074505806
+          ],
+          "colorStart": [
+            0.05999999865889549,
+            0.05999999865889549,
+            0.05999999865889549
+          ],
+          "coneAngle": 60.0,
+          "drag": 0.30000001192092896,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            -18.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.7999999523162842,
+          "loop": false,
+          "maxCount": 600.0,
+          "playing": true,
+          "radius": 0.5,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 2,
+          "sizeEnd": 0.3499999940395355,
+          "sizeStart": 0.44999998807907104,
+          "sizeVar": 0.25,
+          "speed": 12.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 6.0,
+          "spin": 360.0,
+          "sprite": "",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 18,
+      "name": "FX Debris",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.6000000238418579,
+          "alphaStart": 1.0,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 40.0,
+          "colorEnd": [
+            0.009999999776482582,
+            0.009999999776482582,
+            0.012000000104308128
+          ],
+          "colorStart": [
+            0.019999999552965164,
+            0.019999999552965164,
+            0.02500000037252903
+          ],
+          "coneAngle": 55.0,
+          "drag": 0.20000000298023224,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            -16.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.2000000476837158,
+          "loop": false,
+          "maxCount": 600.0,
+          "playing": true,
+          "radius": 0.5,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 2,
+          "sizeEnd": 0.11999999731779099,
+          "sizeStart": 0.25,
+          "sizeVar": 0.25,
+          "speed": 7.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 4.0,
+          "spin": 20.0,
+          "sprite": "",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 19,
+      "name": "FX Oil",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 6.0,
+          "burst": 8.0,
+          "colorEnd": [
+            1.0,
+            0.44999998807907104,
+            0.10000000149011612
+          ],
+          "colorStart": [
+            1.0,
+            0.800000011920929,
+            0.44999998807907104
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.20000000298023224,
+          "lifetime": 0.09000000357627869,
+          "loop": false,
+          "maxCount": 500.0,
+          "playing": true,
+          "radius": 0.10000000149011612,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.20000000298023224,
+          "sizeStart": 0.8999999761581421,
+          "sizeVar": 0.25,
+          "speed": 2.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 20,
+      "name": "FX Muzzle",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.44999998807907104,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 30.0,
+          "colorEnd": [
+            0.1599999964237213,
+            0.14000000059604645,
+            0.11999999731779099
+          ],
+          "colorStart": [
+            0.11999999731779099,
+            0.10000000149011612,
+            0.07999999821186066
+          ],
+          "coneAngle": 25.0,
+          "drag": 1.600000023841858,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            0.4000000059604645,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 2.5999999046325684,
+          "loop": false,
+          "maxCount": 800.0,
+          "playing": true,
+          "radius": 2.0,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 6.0,
+          "sizeStart": 1.5,
+          "sizeVar": 0.25,
+          "speed": 4.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 2.0,
+          "spin": 20.0,
+          "sprite": "shmup_puff.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 21,
+      "name": "FX Dust",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 6.0,
+          "burst": 6.0,
+          "colorEnd": [
+            0.10000000149011612,
+            1.0,
+            0.5
+          ],
+          "colorStart": [
+            0.4000000059604645,
+            1.0,
+            0.699999988079071
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            -6.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 0.800000011920929,
+          "loop": false,
+          "maxCount": 400.0,
+          "playing": true,
+          "radius": 0.6000000238418579,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.05000000074505806,
+          "sizeStart": 0.18000000715255737,
+          "sizeVar": 0.25,
+          "speed": 5.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 3.0,
+          "spin": 20.0,
+          "sprite": "",
+          "stretch": 0.03999999910593033,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 22,
+      "name": "FX Energicum",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 7.0,
+          "burst": 20.0,
+          "colorEnd": [
+            0.20000000298023224,
+            0.6000000238418579,
+            1.0
+          ],
+          "colorStart": [
+            0.6000000238418579,
+            0.949999988079071,
+            1.0
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            -4.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 0.3499999940395355,
+          "loop": false,
+          "maxCount": 500.0,
+          "playing": true,
+          "radius": 0.5,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.10000000149011612,
+          "sizeStart": 0.5,
+          "sizeVar": 0.25,
+          "speed": 8.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 4.0,
+          "spin": 20.0,
+          "sprite": "",
+          "stretch": 0.029999999329447746,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 23,
+      "name": "FX Laser Hit",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 5.0,
+          "burst": 30.0,
+          "colorEnd": [
+            0.15000000596046448,
+            0.30000001192092896,
+            1.0
+          ],
+          "colorStart": [
+            0.5,
+            0.8500000238418579,
+            1.0
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            1.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 0.6000000238418579,
+          "loop": false,
+          "maxCount": 500.0,
+          "playing": true,
+          "radius": 0.5,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 4.0,
+          "sizeStart": 1.7999999523162842,
+          "sizeVar": 0.25,
+          "speed": 6.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 3.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 24,
+      "name": "FX Plasma Hit",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": true,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 6.0,
+          "burst": 10.0,
+          "colorEnd": [
+            1.0,
+            0.699999988079071,
+            0.30000001192092896
+          ],
+          "colorStart": [
+            0.699999988079071,
+            0.8999999761581421,
+            1.0
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 0.10000000149011612,
+          "gravity": [
+            0.0,
+            -12.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 0.5,
+          "loop": false,
+          "maxCount": 400.0,
+          "playing": true,
+          "radius": 0.5,
+          "rate": 0.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.029999999329447746,
+          "sizeStart": 0.10000000149011612,
+          "sizeVar": 0.25,
+          "speed": 6.0,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 3.0,
+          "spin": 20.0,
+          "sprite": "",
+          "stretch": 0.03999999910593033,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 25,
+      "name": "FX Weld",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 26,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 27,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 28,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 29,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 30,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 31,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 32,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 33,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 34,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 35,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 36,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 1.0,
+          "blend": 1,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 3.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.800000011920929,
+            0.15000000596046448,
+            0.019999999552965164
+          ],
+          "colorStart": [
+            1.0,
+            0.6000000238418579,
+            0.20000000298023224
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.4000000059604645,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            5.0,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 1.100000023841858,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.2000000476837158,
+          "rate": 45.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 0.4000000059604645,
+          "sizeStart": 1.600000023841858,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_fire.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 37,
+      "name": "FX Fire",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 38,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 39,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 40,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 41,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 42,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 43,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 44,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 45,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 46,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 47,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 48,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    },
+    {
+      "active": false,
+      "center": [
+        0.0,
+        -200.0,
+        0.0
+      ],
+      "components": [
+        {
+          "alphaEnd": 0.0,
+          "alphaStart": 0.699999988079071,
+          "blend": 0,
+          "boxSize": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "brightness": 1.0,
+          "burst": 0.0,
+          "colorEnd": [
+            0.07999999821186066,
+            0.07999999821186066,
+            0.07999999821186066
+          ],
+          "colorStart": [
+            0.029999999329447746,
+            0.02800000086426735,
+            0.026000000536441803
+          ],
+          "coneAngle": 25.0,
+          "drag": 0.5,
+          "duration": 3.0,
+          "gravity": [
+            0.0,
+            2.200000047683716,
+            0.0
+          ],
+          "inherit": 0.0,
+          "lifeVar": 0.30000001192092896,
+          "lifetime": 7.0,
+          "loop": true,
+          "maxCount": 200.0,
+          "playing": true,
+          "radius": 1.0,
+          "rate": 14.0,
+          "rotation": 180.0,
+          "shape": 1,
+          "sizeEnd": 10.0,
+          "sizeStart": 2.0,
+          "sizeVar": 0.25,
+          "speed": 2.5,
+          "speedGlowMax": 1.0,
+          "speedGlowMin": 1.0,
+          "speedVar": 1.0,
+          "spin": 20.0,
+          "sprite": "shmup_smoke.png",
+          "stretch": 0.0,
+          "type": "particles",
+          "wind": [
+            2.0,
+            0.0,
+            0.800000011920929
+          ],
+          "worldSpace": true
+        }
+      ],
+      "half": [
+        0.10000000149011612,
+        0.10000000149011612,
+        0.10000000149011612
+      ],
+      "id": 49,
+      "name": "FX Smoke",
+      "parent": -1,
+      "rotation": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "type": 7
+    }
+  ],
+  "settings": {
+    "adaptSpeed": 1.5,
+    "anim": {
+      "clips": []
+    },
+    "animGraphs": [
+      {
+        "entry": 0,
+        "name": "Graph 1",
+        "params": [],
+        "states": [],
+        "transitions": []
+      }
+    ],
+    "autoExposure": true,
+    "autoMaxEv": 2.5,
+    "autoMinEv": -1.5,
+    "autoWeather": false,
+    "birdsEnabled": false,
+    "bloom": 0.4869999885559082,
+    "bloomKnee": 1.5,
+    "bloomThreshold": 4.0,
+    "camPath": "",
+    "camPathLoop": true,
+    "camPathOnStart": false,
+    "camPathSpeed": 0.6399999856948853,
+    "camPreview": true,
+    "cascadeSplit": 0.847000002861023,
+    "cloudBottom": 900.0,
+    "cloudDensity": 1.0,
+    "cloudScale": 0.0017999999690800905,
+    "cloudShadows": true,
+    "cloudTop": 2600.0,
+    "cloudWind": 4.0,
+    "contactShadows": true,
+    "contrails": false,
+    "contrast": 0.5199999809265137,
+    "coverage": 0.34599998593330383,
+    "cursorGrid": 1.0,
+    "cursorX": -138.69845581054688,
+    "cursorY": 7.584833145141602,
+    "cursorZ": -73.74562072753906,
+    "dayLength": 600.0,
+    "detailStrength": 1.5,
+    "dofBlur": 0.0,
+    "dofFar": 140.0,
+    "dofNear": 25.0,
+    "ecoCover": 0.550000011920929,
+    "ecoForest": true,
+    "ecoSlopeLove": 0.6000000238418579,
+    "ecoSolitary": 0.029999999329447746,
+    "ecoStandSize": 260.0,
+    "editorCamera": {
+      "pitch": -73.30000305175781,
+      "x": -838.4715576171875,
+      "y": 1651.6241455078125,
+      "yaw": 42.40000534057617,
+      "z": -806.5138549804688
+    },
+    "envProbeFaces": 6,
+    "envProbeRes": 512,
+    "exposure": 0.8640000224113464,
+    "farPlane": 900.0,
+    "farPlaneAuto": true,
+    "farSnowLevel": 2050.0,
+    "farTerrain": true,
+    "farTreeLine": 1650.0,
+    "filmGrain": 0.05000000074505806,
+    "fireflyEnabled": false,
+    "flowerDensity": 1.0,
+    "flowerEnabled": true,
+    "foamWidth": 1.2380000352859497,
+    "fogDensity": 0.0008999999845400453,
+    "fogFalloff": 0.017999999225139618,
+    "forestFloorLayer": 1,
+    "forestRadius": 1600.0,
+    "gradeSplit": 0.4740000069141388,
+    "gradeVibrance": 0.47099998593330383,
+    "grassChaos": 2.0,
+    "grassDensity": 1.600000023841858,
+    "grassDryGrowth": 1.0,
+    "grassEnabled": true,
+    "grassHeight": 0.4259999990463257,
+    "grassRadius": 68.0,
+    "grassTintB": 0.25,
+    "grassTintG": 0.6200000047683716,
+    "grassTintR": 0.550000011920929,
+    "gridFade": 220.0,
+    "hdri": "textures/cowboy_town_hall_4k.exr",
+    "herdCount": 0,
+    "herdGrazeClip": 0,
+    "herdHeight": 2.0,
+    "herdModel": "content/models/horse.fbx",
+    "herdRadius": 30.0,
+    "herdWalkClip": 2,
+    "herdWalkSpeed": 1.399999976158142,
+    "herdX": 70.0,
+    "herdYaw": 0.0,
+    "herdZ": 125.0,
+    "hue": 1.0,
+    "ibl": false,
+    "iblIntensity": 1.0,
+    "iblSkybox": false,
+    "impostorShadowDist": 0.0,
+    "impostorStart": 130.0,
+    "lightning": false,
+    "meadowTint": 0.6000000238418579,
+    "mixAmbient": 1.0,
+    "mixAmbientMute": false,
+    "mixSfx": 1.0,
+    "mixSfxMute": false,
+    "modelMaterialAssign": {
+      "02c12eb34bea3c8a5080c3681fccfcdd|mcv_crane_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "02c12eb34bea3c8a5080c3681fccfcdd|mcv_crane_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "02c12eb34bea3c8a5080c3681fccfcdd|mcv_crane_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "02c12eb34bea3c8a5080c3681fccfcdd|mcv_crane_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "06241bf46f941b28a7dd1fe6f0a42372|rocketeer_torso_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "06241bf46f941b28a7dd1fe6f0a42372|rocketeer_torso_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "06241bf46f941b28a7dd1fe6f0a42372|rocketeer_torso_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "06241bf46f941b28a7dd1fe6f0a42372|rocketeer_torso_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "08788eb77ee7a75c00c3a11fdaa11319|base_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "08788eb77ee7a75c00c3a11fdaa11319|base_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "08788eb77ee7a75c00c3a11fdaa11319|base_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "08788eb77ee7a75c00c3a11fdaa11319|base_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "09128ea81d3c1b54dfbf6b013a5cb7b1|radar_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "09128ea81d3c1b54dfbf6b013a5cb7b1|radar_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "09128ea81d3c1b54dfbf6b013a5cb7b1|radar_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "09128ea81d3c1b54dfbf6b013a5cb7b1|radar_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "096a1f0d32f56ab2b26c10a68abfdde1|terminator_wreck|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "096a1f0d32f56ab2b26c10a68abfdde1|terminator_wreck|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "096a1f0d32f56ab2b26c10a68abfdde1|terminator_wreck|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0970a7eb45df5dfcb4df10d77cd79247|laser_tower_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0970a7eb45df5dfcb4df10d77cd79247|laser_tower_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0970a7eb45df5dfcb4df10d77cd79247|laser_tower_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0970a7eb45df5dfcb4df10d77cd79247|laser_tower_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b5f92746fed99c9b21c3c2fb7a20cc9|engineer_leg_l_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b5f92746fed99c9b21c3c2fb7a20cc9|engineer_leg_l_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b5f92746fed99c9b21c3c2fb7a20cc9|engineer_leg_l_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b5f92746fed99c9b21c3c2fb7a20cc9|engineer_leg_l_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b66e072a0986c4c4a72a3941f3c07d0|lab_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b66e072a0986c4c4a72a3941f3c07d0|lab_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b66e072a0986c4c4a72a3941f3c07d0|lab_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b66e072a0986c4c4a72a3941f3c07d0|lab_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b9c5d5144a63c64160d716740d43de0|rocketeer_leg_l_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b9c5d5144a63c64160d716740d43de0|rocketeer_leg_l_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b9c5d5144a63c64160d716740d43de0|rocketeer_leg_l_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0b9c5d5144a63c64160d716740d43de0|rocketeer_leg_l_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0c4f1d2247b8f4c6d5e56a5048aafb41|hypercopter_rotor_r_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0c4f1d2247b8f4c6d5e56a5048aafb41|hypercopter_rotor_r_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0c4f1d2247b8f4c6d5e56a5048aafb41|hypercopter_rotor_r_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0e48c6426bf461a3d7be40051e73cf16|wall_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0e48c6426bf461a3d7be40051e73cf16|wall_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0e48c6426bf461a3d7be40051e73cf16|wall_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "0e48c6426bf461a3d7be40051e73cf16|wall_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "11903da65289dab4a0162dba21f086d9|silo_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "11903da65289dab4a0162dba21f086d9|silo_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "11903da65289dab4a0162dba21f086d9|silo_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "11903da65289dab4a0162dba21f086d9|silo_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "12e8979f44cd4350ec078624250312ff|hypercopter_rotor_r_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "12e8979f44cd4350ec078624250312ff|hypercopter_rotor_r_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "12e8979f44cd4350ec078624250312ff|hypercopter_rotor_r_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "139e1347a5a253411950ab945f2f8ba5|refinery_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "139e1347a5a253411950ab945f2f8ba5|refinery_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "139e1347a5a253411950ab945f2f8ba5|refinery_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "139e1347a5a253411950ab945f2f8ba5|refinery_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1458b218475406b92f585a78bb30d23a|refinery_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1458b218475406b92f585a78bb30d23a|refinery_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1458b218475406b92f585a78bb30d23a|refinery_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1458b218475406b92f585a78bb30d23a|refinery_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "145e669164a440c50faa18c5e81fd09f|refinery_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "145e669164a440c50faa18c5e81fd09f|refinery_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "145e669164a440c50faa18c5e81fd09f|refinery_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "145e669164a440c50faa18c5e81fd09f|refinery_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "16aa0520ad9b2fcc187eaf76c77b3a55|hypercopter_rotor_l_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "16aa0520ad9b2fcc187eaf76c77b3a55|hypercopter_rotor_l_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "16aa0520ad9b2fcc187eaf76c77b3a55|hypercopter_rotor_l_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "17af8d18fc84f73364e51d7c5480473c|radar_dish_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "17af8d18fc84f73364e51d7c5480473c|radar_dish_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "17af8d18fc84f73364e51d7c5480473c|radar_dish_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "17af8d18fc84f73364e51d7c5480473c|radar_dish_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1972040bc0ca2b68be1eb10f5ff93909|harvester_wreck|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1972040bc0ca2b68be1eb10f5ff93909|harvester_wreck|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1972040bc0ca2b68be1eb10f5ff93909|harvester_wreck|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "19753d3bc9640b1551d693fe6075b270|rocket_tower_head_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "19753d3bc9640b1551d693fe6075b270|rocket_tower_head_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "19753d3bc9640b1551d693fe6075b270|rocket_tower_head_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "19753d3bc9640b1551d693fe6075b270|rocket_tower_head_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1cad3ed12d19cabcbea1c504e1fca476|engineer_torso_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1cad3ed12d19cabcbea1c504e1fca476|engineer_torso_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1cad3ed12d19cabcbea1c504e1fca476|engineer_torso_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "1cad3ed12d19cabcbea1c504e1fca476|engineer_torso_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "204b2675fba6821ad5bbbb460608da23|eliminator_hull_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "204b2675fba6821ad5bbbb460608da23|eliminator_hull_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "204b2675fba6821ad5bbbb460608da23|eliminator_hull_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "204b2675fba6821ad5bbbb460608da23|eliminator_hull_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2119b95d415966785cae5ea171970f9c|eliminator_turret_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2119b95d415966785cae5ea171970f9c|eliminator_turret_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2119b95d415966785cae5ea171970f9c|eliminator_turret_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2119b95d415966785cae5ea171970f9c|eliminator_turret_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "23f7692674be15836660eb4882368994|mcv_wreck|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "23f7692674be15836660eb4882368994|mcv_wreck|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "23f7692674be15836660eb4882368994|mcv_wreck|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "25887a3108db017b8e4a6925261ff1a4|mcv_crane_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "25887a3108db017b8e4a6925261ff1a4|mcv_crane_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "25887a3108db017b8e4a6925261ff1a4|mcv_crane_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "25887a3108db017b8e4a6925261ff1a4|mcv_crane_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2671ad85985846743418700e5ce6c717|terminator_hull_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2671ad85985846743418700e5ce6c717|terminator_hull_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2671ad85985846743418700e5ce6c717|terminator_hull_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2671ad85985846743418700e5ce6c717|terminator_hull_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "26b62251fc12d32daeab388e30dfaa61|engineer_leg_r_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "26b62251fc12d32daeab388e30dfaa61|engineer_leg_r_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "26b62251fc12d32daeab388e30dfaa61|engineer_leg_r_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "26b62251fc12d32daeab388e30dfaa61|engineer_leg_r_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "280f4aa8dd298364cc5071e674fce82f|rocketeer_torso_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "280f4aa8dd298364cc5071e674fce82f|rocketeer_torso_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "280f4aa8dd298364cc5071e674fce82f|rocketeer_torso_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "280f4aa8dd298364cc5071e674fce82f|rocketeer_torso_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "28d98e6eb68ca093de550197e0f67f9d|tank_hull_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "28d98e6eb68ca093de550197e0f67f9d|tank_hull_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "28d98e6eb68ca093de550197e0f67f9d|tank_hull_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "28d98e6eb68ca093de550197e0f67f9d|tank_hull_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2a824f375a7dcc255274c69285e064c7|hangar_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2a824f375a7dcc255274c69285e064c7|hangar_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2a824f375a7dcc255274c69285e064c7|hangar_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2a824f375a7dcc255274c69285e064c7|hangar_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2dad079ca4c9c11ce7af770b4e6b22ff|rocket_tower_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2dad079ca4c9c11ce7af770b4e6b22ff|rocket_tower_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2dad079ca4c9c11ce7af770b4e6b22ff|rocket_tower_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "2dad079ca4c9c11ce7af770b4e6b22ff|rocket_tower_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "31568f78bbe5f10a44caf2123c2f1160|tank_turret_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "31568f78bbe5f10a44caf2123c2f1160|tank_turret_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "31568f78bbe5f10a44caf2123c2f1160|tank_turret_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "31568f78bbe5f10a44caf2123c2f1160|tank_turret_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3411a51933d1519a7ba005c7b5e11ef6|rocketeer_torso_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3411a51933d1519a7ba005c7b5e11ef6|rocketeer_torso_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3411a51933d1519a7ba005c7b5e11ef6|rocketeer_torso_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3411a51933d1519a7ba005c7b5e11ef6|rocketeer_torso_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "36ccd2cd6ed1e102f857a296029d9816|terminator_jet_l_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "36ccd2cd6ed1e102f857a296029d9816|terminator_jet_l_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "36ccd2cd6ed1e102f857a296029d9816|terminator_jet_l_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "36ccd2cd6ed1e102f857a296029d9816|terminator_jet_l_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "372e854cd651d4eefc9edae8588d927a|terminator_jet_l_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "372e854cd651d4eefc9edae8588d927a|terminator_jet_l_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "372e854cd651d4eefc9edae8588d927a|terminator_jet_l_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "372e854cd651d4eefc9edae8588d927a|terminator_jet_l_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3985b7405ac1c8e417f30ebc4b162c0d|rocket|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3985b7405ac1c8e417f30ebc4b162c0d|rocket|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3985b7405ac1c8e417f30ebc4b162c0d|rocket|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3b0e6522cc1b0938626072bbdb221cb6|laser_tower_head_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3b0e6522cc1b0938626072bbdb221cb6|laser_tower_head_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3b0e6522cc1b0938626072bbdb221cb6|laser_tower_head_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3b0e6522cc1b0938626072bbdb221cb6|laser_tower_head_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3e23740347540df30521c8b3ca9016ff|rocket_tower_head_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3e23740347540df30521c8b3ca9016ff|rocket_tower_head_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3e23740347540df30521c8b3ca9016ff|rocket_tower_head_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "3e23740347540df30521c8b3ca9016ff|rocket_tower_head_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "40d41bfecabc7e4aaa52be03c79e4a87|tank_hull_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "40d41bfecabc7e4aaa52be03c79e4a87|tank_hull_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "40d41bfecabc7e4aaa52be03c79e4a87|tank_hull_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "40d41bfecabc7e4aaa52be03c79e4a87|tank_hull_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "41f207bd0a5ce429116c75fb5fb1af00|rocketeer_leg_l_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "41f207bd0a5ce429116c75fb5fb1af00|rocketeer_leg_l_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "41f207bd0a5ce429116c75fb5fb1af00|rocketeer_leg_l_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "41f207bd0a5ce429116c75fb5fb1af00|rocketeer_leg_l_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "485addca6a9cf01130ab77785cd8b5ca|harvester_hull_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "485addca6a9cf01130ab77785cd8b5ca|harvester_hull_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "485addca6a9cf01130ab77785cd8b5ca|harvester_hull_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "485addca6a9cf01130ab77785cd8b5ca|harvester_hull_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b0f2b02b8bb3cdac962999fad14628b|soldier_torso_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b0f2b02b8bb3cdac962999fad14628b|soldier_torso_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b0f2b02b8bb3cdac962999fad14628b|soldier_torso_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b0f2b02b8bb3cdac962999fad14628b|soldier_torso_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b91fc872d75bd0ded869f2abcc22330|terminator_jet_r_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b91fc872d75bd0ded869f2abcc22330|terminator_jet_r_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b91fc872d75bd0ded869f2abcc22330|terminator_jet_r_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b91fc872d75bd0ded869f2abcc22330|terminator_jet_r_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b922825c64f622e3ecd78d847b7143e|hypercopter_rotor_l_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b922825c64f622e3ecd78d847b7143e|hypercopter_rotor_l_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b922825c64f622e3ecd78d847b7143e|hypercopter_rotor_l_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b98a3f305e048ce804dc9996b9c9ab1|rocketeer_leg_r_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b98a3f305e048ce804dc9996b9c9ab1|rocketeer_leg_r_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b98a3f305e048ce804dc9996b9c9ab1|rocketeer_leg_r_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4b98a3f305e048ce804dc9996b9c9ab1|rocketeer_leg_r_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4cc1186c7d919255899b9d9004d1b50a|hypercopter_body_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4cc1186c7d919255899b9d9004d1b50a|hypercopter_body_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4cc1186c7d919255899b9d9004d1b50a|hypercopter_body_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4cc1186c7d919255899b9d9004d1b50a|hypercopter_body_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e69559d83ffa6e00e0de9e2af1ef27f|harvester_hull_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e69559d83ffa6e00e0de9e2af1ef27f|harvester_hull_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e69559d83ffa6e00e0de9e2af1ef27f|harvester_hull_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e69559d83ffa6e00e0de9e2af1ef27f|harvester_hull_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e953f94fd13b2490ae360a7ba800b02|watchtower_head_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e953f94fd13b2490ae360a7ba800b02|watchtower_head_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e953f94fd13b2490ae360a7ba800b02|watchtower_head_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "4e953f94fd13b2490ae360a7ba800b02|watchtower_head_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "511278023e8d1efc9592a812997fb7e6|terminator_turret_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "511278023e8d1efc9592a812997fb7e6|terminator_turret_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "511278023e8d1efc9592a812997fb7e6|terminator_turret_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "511278023e8d1efc9592a812997fb7e6|terminator_turret_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "519deec7b6a30258cf336b617347bac4|terminator_turret_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "519deec7b6a30258cf336b617347bac4|terminator_turret_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "519deec7b6a30258cf336b617347bac4|terminator_turret_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "519deec7b6a30258cf336b617347bac4|terminator_turret_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5410bf91710acbfab80d403ad03dd075|factory_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5410bf91710acbfab80d403ad03dd075|factory_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5410bf91710acbfab80d403ad03dd075|factory_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5410bf91710acbfab80d403ad03dd075|factory_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "55a79d66b7997c82fe1b13a83fa6b0b6|rocketeer_leg_r_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "55a79d66b7997c82fe1b13a83fa6b0b6|rocketeer_leg_r_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "55a79d66b7997c82fe1b13a83fa6b0b6|rocketeer_leg_r_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "55a79d66b7997c82fe1b13a83fa6b0b6|rocketeer_leg_r_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "57fdfadcb2ac53324bd34cbf83e53591|silo_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "57fdfadcb2ac53324bd34cbf83e53591|silo_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "57fdfadcb2ac53324bd34cbf83e53591|silo_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "57fdfadcb2ac53324bd34cbf83e53591|silo_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "59830692e001780f7e771e391bac40e2|terminator_hull_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "59830692e001780f7e771e391bac40e2|terminator_hull_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "59830692e001780f7e771e391bac40e2|terminator_hull_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "59830692e001780f7e771e391bac40e2|terminator_hull_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5b991f7caad39cb2093a28cc6017cace|factory_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5b991f7caad39cb2093a28cc6017cace|factory_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5b991f7caad39cb2093a28cc6017cace|factory_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5b991f7caad39cb2093a28cc6017cace|factory_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bc93027432da5d04ecf3da1a1effbd5|soldier_leg_l_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bc93027432da5d04ecf3da1a1effbd5|soldier_leg_l_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bc93027432da5d04ecf3da1a1effbd5|soldier_leg_l_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bc93027432da5d04ecf3da1a1effbd5|soldier_leg_l_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bdefb0707b653ca36314e1d163e2f89|engineer_leg_r_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bdefb0707b653ca36314e1d163e2f89|engineer_leg_r_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bdefb0707b653ca36314e1d163e2f89|engineer_leg_r_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5bdefb0707b653ca36314e1d163e2f89|engineer_leg_r_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5cd3e74efecbc2e4e3d47a95e7588d72|radar_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5cd3e74efecbc2e4e3d47a95e7588d72|radar_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5cd3e74efecbc2e4e3d47a95e7588d72|radar_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5cd3e74efecbc2e4e3d47a95e7588d72|radar_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5dea7272d635f469f17dc91d2af7e819|harvester_hull_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5dea7272d635f469f17dc91d2af7e819|harvester_hull_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5dea7272d635f469f17dc91d2af7e819|harvester_hull_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5dea7272d635f469f17dc91d2af7e819|harvester_hull_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5e2bff71e9eb600202322073920668a4|bot_debris|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5e2bff71e9eb600202322073920668a4|bot_debris|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5e2bff71e9eb600202322073920668a4|bot_debris|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5e2bff71e9eb600202322073920668a4|bot_debris|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5f07bd09d52aafb5cdd7152d39d63dbf|lab_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5f07bd09d52aafb5cdd7152d39d63dbf|lab_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5f07bd09d52aafb5cdd7152d39d63dbf|lab_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5f07bd09d52aafb5cdd7152d39d63dbf|lab_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5fe958d3a9b2315a1893eecaab51583c|radar_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5fe958d3a9b2315a1893eecaab51583c|radar_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5fe958d3a9b2315a1893eecaab51583c|radar_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "5fe958d3a9b2315a1893eecaab51583c|radar_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "63aa45fca6c229a76909708cfbb3de64|hypercopter_rotor_l_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "63aa45fca6c229a76909708cfbb3de64|hypercopter_rotor_l_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "63aa45fca6c229a76909708cfbb3de64|hypercopter_rotor_l_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "64c893425f0eba58a24c787830200c53|watchtower_head_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "64c893425f0eba58a24c787830200c53|watchtower_head_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "64c893425f0eba58a24c787830200c53|watchtower_head_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "64c893425f0eba58a24c787830200c53|watchtower_head_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6583177d30d1b4b04e477b9a6b584ed7|tank_turret_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6583177d30d1b4b04e477b9a6b584ed7|tank_turret_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6583177d30d1b4b04e477b9a6b584ed7|tank_turret_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6583177d30d1b4b04e477b9a6b584ed7|tank_turret_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6626f042d6d572f997e9a214cfc67244|soldier_leg_l_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6626f042d6d572f997e9a214cfc67244|soldier_leg_l_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6626f042d6d572f997e9a214cfc67244|soldier_leg_l_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6626f042d6d572f997e9a214cfc67244|soldier_leg_l_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6b587801a5d8d413eb29f1e231a9dba0|powerplant_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6b587801a5d8d413eb29f1e231a9dba0|powerplant_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6b587801a5d8d413eb29f1e231a9dba0|powerplant_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6b587801a5d8d413eb29f1e231a9dba0|powerplant_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6ba70d3acb8ef77d0d5deed49810a7b7|laser_tower_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6ba70d3acb8ef77d0d5deed49810a7b7|laser_tower_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6ba70d3acb8ef77d0d5deed49810a7b7|laser_tower_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6ba70d3acb8ef77d0d5deed49810a7b7|laser_tower_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6d6a726a60048b251a837e6b25353571|factory_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6d6a726a60048b251a837e6b25353571|factory_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6d6a726a60048b251a837e6b25353571|factory_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6d6a726a60048b251a837e6b25353571|factory_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6edb1b6ca152e756591fd9ab4b1f252d|soldier_leg_r_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6edb1b6ca152e756591fd9ab4b1f252d|soldier_leg_r_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6edb1b6ca152e756591fd9ab4b1f252d|soldier_leg_r_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "6edb1b6ca152e756591fd9ab4b1f252d|soldier_leg_r_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73d761d443ad80e20e37bcf2badff8e6|eliminator_turret_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73d761d443ad80e20e37bcf2badff8e6|eliminator_turret_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73d761d443ad80e20e37bcf2badff8e6|eliminator_turret_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73d761d443ad80e20e37bcf2badff8e6|eliminator_turret_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73de9edc3b8f65b6158c653223cff63a|shell|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73de9edc3b8f65b6158c653223cff63a|shell|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "73de9edc3b8f65b6158c653223cff63a|shell|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "74739dadb087c1b2bd8cf3e6a6a11ed9|radar_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "74739dadb087c1b2bd8cf3e6a6a11ed9|radar_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "74739dadb087c1b2bd8cf3e6a6a11ed9|radar_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "74739dadb087c1b2bd8cf3e6a6a11ed9|radar_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "754048358b79b7c41120ae8b184da0a4|soldier_torso_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "754048358b79b7c41120ae8b184da0a4|soldier_torso_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "754048358b79b7c41120ae8b184da0a4|soldier_torso_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "754048358b79b7c41120ae8b184da0a4|soldier_torso_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7642b4ec9f5a02705de953ce78b029db|base_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7642b4ec9f5a02705de953ce78b029db|base_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7642b4ec9f5a02705de953ce78b029db|base_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7642b4ec9f5a02705de953ce78b029db|base_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76aef6445227f67d0a387f4b4e8e8278|powerplant_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76aef6445227f67d0a387f4b4e8e8278|powerplant_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76aef6445227f67d0a387f4b4e8e8278|powerplant_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76aef6445227f67d0a387f4b4e8e8278|powerplant_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76f753a3d4e00f69085e88ce654ef80a|lab_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76f753a3d4e00f69085e88ce654ef80a|lab_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76f753a3d4e00f69085e88ce654ef80a|lab_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "76f753a3d4e00f69085e88ce654ef80a|lab_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7793879a83c6ed33a134250754e71808|radar_dish_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7793879a83c6ed33a134250754e71808|radar_dish_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7793879a83c6ed33a134250754e71808|radar_dish_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7793879a83c6ed33a134250754e71808|radar_dish_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "77a5aebcf11322f736ceaf4c95eb2ab6|radar_dish_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "77a5aebcf11322f736ceaf4c95eb2ab6|radar_dish_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "77a5aebcf11322f736ceaf4c95eb2ab6|radar_dish_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "77a5aebcf11322f736ceaf4c95eb2ab6|radar_dish_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7bca0c081ad36193a70606812dc16d55|mcv_crane_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7bca0c081ad36193a70606812dc16d55|mcv_crane_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7bca0c081ad36193a70606812dc16d55|mcv_crane_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "7bca0c081ad36193a70606812dc16d55|mcv_crane_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "802f3d147feb9216800c3d895bcc3c18|mcv_hull_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "802f3d147feb9216800c3d895bcc3c18|mcv_hull_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "802f3d147feb9216800c3d895bcc3c18|mcv_hull_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "802f3d147feb9216800c3d895bcc3c18|mcv_hull_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "838e3b2a7f70461ff31ae02d9d2db6c7|infiltrator_torso_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "838e3b2a7f70461ff31ae02d9d2db6c7|infiltrator_torso_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "838e3b2a7f70461ff31ae02d9d2db6c7|infiltrator_torso_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "838e3b2a7f70461ff31ae02d9d2db6c7|infiltrator_torso_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "86573c8e3e87704952f6d8e3b12150bf|tank_hull_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "86573c8e3e87704952f6d8e3b12150bf|tank_hull_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "86573c8e3e87704952f6d8e3b12150bf|tank_hull_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "86573c8e3e87704952f6d8e3b12150bf|tank_hull_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8bc8533ffc2c9b8c3d9c8baee74fbdcc|hypercopter_body_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8bc8533ffc2c9b8c3d9c8baee74fbdcc|hypercopter_body_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8bc8533ffc2c9b8c3d9c8baee74fbdcc|hypercopter_body_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8bc8533ffc2c9b8c3d9c8baee74fbdcc|hypercopter_body_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8ce90ccf5217a94d7f7098f18112aa97|infiltrator_torso_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8ce90ccf5217a94d7f7098f18112aa97|infiltrator_torso_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8ce90ccf5217a94d7f7098f18112aa97|infiltrator_torso_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8ce90ccf5217a94d7f7098f18112aa97|infiltrator_torso_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8d0b8474a5be9b3b7c58ae6416d42e65|powerplant_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8d0b8474a5be9b3b7c58ae6416d42e65|powerplant_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8d0b8474a5be9b3b7c58ae6416d42e65|powerplant_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8d0b8474a5be9b3b7c58ae6416d42e65|powerplant_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f32f9514d5321f5b110b286715237a3|rocket_tower_head_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f32f9514d5321f5b110b286715237a3|rocket_tower_head_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f32f9514d5321f5b110b286715237a3|rocket_tower_head_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f32f9514d5321f5b110b286715237a3|rocket_tower_head_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f3dffeb49c9eb3856270afe94428fde|terminator_jet_r_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f3dffeb49c9eb3856270afe94428fde|terminator_jet_r_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f3dffeb49c9eb3856270afe94428fde|terminator_jet_r_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f3dffeb49c9eb3856270afe94428fde|terminator_jet_r_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f777735a950ce59087ffaa116fc7732|wall_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f777735a950ce59087ffaa116fc7732|wall_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f777735a950ce59087ffaa116fc7732|wall_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "8f777735a950ce59087ffaa116fc7732|wall_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "918796cf46befd199dded41aa8bd848e|terminator_jet_r_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "918796cf46befd199dded41aa8bd848e|terminator_jet_r_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "918796cf46befd199dded41aa8bd848e|terminator_jet_r_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "918796cf46befd199dded41aa8bd848e|terminator_jet_r_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "91adbf02cfc9df27b97dd254e26c201e|engineer_leg_l_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "91adbf02cfc9df27b97dd254e26c201e|engineer_leg_l_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "91adbf02cfc9df27b97dd254e26c201e|engineer_leg_l_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "91adbf02cfc9df27b97dd254e26c201e|engineer_leg_l_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92188aed952cb0b6b60dcdf907c1e8a2|hypercopter_rotor_l_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92188aed952cb0b6b60dcdf907c1e8a2|hypercopter_rotor_l_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92188aed952cb0b6b60dcdf907c1e8a2|hypercopter_rotor_l_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92bacf3473da75ebed347950c6f6045b|wall_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92bacf3473da75ebed347950c6f6045b|wall_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92bacf3473da75ebed347950c6f6045b|wall_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "92bacf3473da75ebed347950c6f6045b|wall_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "93e5d0f75a7f0a6d0c228a135cf2f661|base_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "93e5d0f75a7f0a6d0c228a135cf2f661|base_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "93e5d0f75a7f0a6d0c228a135cf2f661|base_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "93e5d0f75a7f0a6d0c228a135cf2f661|base_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "94fcbd664ceaa05dea5a69a5550d060a|crystal_a|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "94fcbd664ceaa05dea5a69a5550d060a|crystal_a|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "956b3c5d46367f70fa8fcecef06c208d|powerplant_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "956b3c5d46367f70fa8fcecef06c208d|powerplant_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "956b3c5d46367f70fa8fcecef06c208d|powerplant_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "956b3c5d46367f70fa8fcecef06c208d|powerplant_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "95a3d5f69a793eebfbbdc011c50b9fba|laser_tower_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "95a3d5f69a793eebfbbdc011c50b9fba|laser_tower_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "95a3d5f69a793eebfbbdc011c50b9fba|laser_tower_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "95a3d5f69a793eebfbbdc011c50b9fba|laser_tower_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "963644881a96d3280617a7f4aff56833|watchtower_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "963644881a96d3280617a7f4aff56833|watchtower_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "963644881a96d3280617a7f4aff56833|watchtower_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "963644881a96d3280617a7f4aff56833|watchtower_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97183d6410a704454502cf670cfb8811|eliminator_wreck|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97183d6410a704454502cf670cfb8811|eliminator_wreck|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97183d6410a704454502cf670cfb8811|eliminator_wreck|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97f146d667db8e24f18fa77819cd4579|eliminator_hull_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97f146d667db8e24f18fa77819cd4579|eliminator_hull_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97f146d667db8e24f18fa77819cd4579|eliminator_hull_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "97f146d667db8e24f18fa77819cd4579|eliminator_hull_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "983d91f29ac880e2b07bbe6c21fe70b6|eliminator_hull_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "983d91f29ac880e2b07bbe6c21fe70b6|eliminator_hull_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "983d91f29ac880e2b07bbe6c21fe70b6|eliminator_hull_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "983d91f29ac880e2b07bbe6c21fe70b6|eliminator_hull_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98c8fd35f8e299268aa15f97066eca5a|hangar_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98c8fd35f8e299268aa15f97066eca5a|hangar_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98c8fd35f8e299268aa15f97066eca5a|hangar_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98c8fd35f8e299268aa15f97066eca5a|hangar_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98ff12e816c6155ed8329b37fe28d10d|watchtower_head_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98ff12e816c6155ed8329b37fe28d10d|watchtower_head_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98ff12e816c6155ed8329b37fe28d10d|watchtower_head_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "98ff12e816c6155ed8329b37fe28d10d|watchtower_head_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "99f99e96844651c4a944e1df628e0aef|mcv_crane_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "99f99e96844651c4a944e1df628e0aef|mcv_crane_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "99f99e96844651c4a944e1df628e0aef|mcv_crane_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "99f99e96844651c4a944e1df628e0aef|mcv_crane_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9c38d3f0a47b2ecf6c8c2a23f8a86c3c|watchtower_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9c38d3f0a47b2ecf6c8c2a23f8a86c3c|watchtower_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9c38d3f0a47b2ecf6c8c2a23f8a86c3c|watchtower_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9c38d3f0a47b2ecf6c8c2a23f8a86c3c|watchtower_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9f9786154c12a6066693ff2db8109c38|soldier_torso_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9f9786154c12a6066693ff2db8109c38|soldier_torso_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9f9786154c12a6066693ff2db8109c38|soldier_torso_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "9f9786154c12a6066693ff2db8109c38|soldier_torso_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a21e16eb250f4e0e306f8e768469c10f|watchtower_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a21e16eb250f4e0e306f8e768469c10f|watchtower_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a21e16eb250f4e0e306f8e768469c10f|watchtower_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a21e16eb250f4e0e306f8e768469c10f|watchtower_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a31eb1a348e2fbe9ad37e8ac6760eeee|soldier_leg_r_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a31eb1a348e2fbe9ad37e8ac6760eeee|soldier_leg_r_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a31eb1a348e2fbe9ad37e8ac6760eeee|soldier_leg_r_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a31eb1a348e2fbe9ad37e8ac6760eeee|soldier_leg_r_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a4e10f1dc24f1194266997c2a2e57db7|tank_turret_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a4e10f1dc24f1194266997c2a2e57db7|tank_turret_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a4e10f1dc24f1194266997c2a2e57db7|tank_turret_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a4e10f1dc24f1194266997c2a2e57db7|tank_turret_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a64c88e8d954ec1dacb3a6e87256a378|rocketeer_leg_l_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a64c88e8d954ec1dacb3a6e87256a378|rocketeer_leg_l_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a64c88e8d954ec1dacb3a6e87256a378|rocketeer_leg_l_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a64c88e8d954ec1dacb3a6e87256a378|rocketeer_leg_l_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a721bdc48f925efb5e0f2c50de3b024e|infiltrator_torso_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a721bdc48f925efb5e0f2c50de3b024e|infiltrator_torso_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a721bdc48f925efb5e0f2c50de3b024e|infiltrator_torso_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a721bdc48f925efb5e0f2c50de3b024e|infiltrator_torso_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a79bbe515ff8af3f478c97471a57d466|infiltrator_leg_r|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a79bbe515ff8af3f478c97471a57d466|infiltrator_leg_r|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a79bbe515ff8af3f478c97471a57d466|infiltrator_leg_r|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a95e626a95c955e28a569fcc696465a6|wall_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a95e626a95c955e28a569fcc696465a6|wall_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a95e626a95c955e28a569fcc696465a6|wall_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a95e626a95c955e28a569fcc696465a6|wall_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a9dbd668661000fa5d54e27cf990ac47|engineer_leg_r_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a9dbd668661000fa5d54e27cf990ac47|engineer_leg_r_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a9dbd668661000fa5d54e27cf990ac47|engineer_leg_r_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "a9dbd668661000fa5d54e27cf990ac47|engineer_leg_r_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ab3f9984a4c84a0678f89323e6454c16|terminator_turret_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ab3f9984a4c84a0678f89323e6454c16|terminator_turret_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ab3f9984a4c84a0678f89323e6454c16|terminator_turret_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ab3f9984a4c84a0678f89323e6454c16|terminator_turret_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b1a360d6e506f7b956c616b745ba9572|hangar_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b1a360d6e506f7b956c616b745ba9572|hangar_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b1a360d6e506f7b956c616b745ba9572|hangar_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b1a360d6e506f7b956c616b745ba9572|hangar_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b20db7508426fa02f2d4a921633050e3|base_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b20db7508426fa02f2d4a921633050e3|base_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b20db7508426fa02f2d4a921633050e3|base_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b20db7508426fa02f2d4a921633050e3|base_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b23ccd1f5999859f1f739570d7e2fb54|mcv_hull_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b23ccd1f5999859f1f739570d7e2fb54|mcv_hull_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b23ccd1f5999859f1f739570d7e2fb54|mcv_hull_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b23ccd1f5999859f1f739570d7e2fb54|mcv_hull_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b33f8a17ef47d71a5514ff2dea20d230|terminator_jet_r_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b33f8a17ef47d71a5514ff2dea20d230|terminator_jet_r_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b33f8a17ef47d71a5514ff2dea20d230|terminator_jet_r_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b33f8a17ef47d71a5514ff2dea20d230|terminator_jet_r_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b34d4f2330aaf439aa7aeeb69d86db5f|factory_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b34d4f2330aaf439aa7aeeb69d86db5f|factory_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b34d4f2330aaf439aa7aeeb69d86db5f|factory_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b34d4f2330aaf439aa7aeeb69d86db5f|factory_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b582b46d9e7e8ddecf0c96a82b56a907|eliminator_turret_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b582b46d9e7e8ddecf0c96a82b56a907|eliminator_turret_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b582b46d9e7e8ddecf0c96a82b56a907|eliminator_turret_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b582b46d9e7e8ddecf0c96a82b56a907|eliminator_turret_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b5befe7e64470bf5297de911934f482c|crystal_c|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b5befe7e64470bf5297de911934f482c|crystal_c|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b64f42bc92a607955849be940043ed9e|lab_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b64f42bc92a607955849be940043ed9e|lab_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b64f42bc92a607955849be940043ed9e|lab_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b64f42bc92a607955849be940043ed9e|lab_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b7c212502178c085a1d631b07ceeba86|laser_tower_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b7c212502178c085a1d631b07ceeba86|laser_tower_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b7c212502178c085a1d631b07ceeba86|laser_tower_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b7c212502178c085a1d631b07ceeba86|laser_tower_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b80b3b406097fce55cce783b158f95d9|soldier_leg_l_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b80b3b406097fce55cce783b158f95d9|soldier_leg_l_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b80b3b406097fce55cce783b158f95d9|soldier_leg_l_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b80b3b406097fce55cce783b158f95d9|soldier_leg_l_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8e531d4e205121fe50662eb008cd241|terminator_turret_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8e531d4e205121fe50662eb008cd241|terminator_turret_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8e531d4e205121fe50662eb008cd241|terminator_turret_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8e531d4e205121fe50662eb008cd241|terminator_turret_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8eb144610fc836c3fd14e1844d17cf8|hypercopter_rotor_r_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8eb144610fc836c3fd14e1844d17cf8|hypercopter_rotor_r_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "b8eb144610fc836c3fd14e1844d17cf8|hypercopter_rotor_r_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc0ecc69eb3e53146856eb650e284947|tank_turret_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc0ecc69eb3e53146856eb650e284947|tank_turret_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc0ecc69eb3e53146856eb650e284947|tank_turret_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc0ecc69eb3e53146856eb650e284947|tank_turret_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc17fb468f92c34e5ff46f34c8d23743|rocket_tower_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc17fb468f92c34e5ff46f34c8d23743|rocket_tower_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc17fb468f92c34e5ff46f34c8d23743|rocket_tower_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bc17fb468f92c34e5ff46f34c8d23743|rocket_tower_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bd69c6bb3c80933c9fd6948fdda7fcb5|eliminator_hull_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bd69c6bb3c80933c9fd6948fdda7fcb5|eliminator_hull_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bd69c6bb3c80933c9fd6948fdda7fcb5|eliminator_hull_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bd69c6bb3c80933c9fd6948fdda7fcb5|eliminator_hull_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bde946c4ad14f07dd9272b68950e9e48|hypercopter_rotor_r_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bde946c4ad14f07dd9272b68950e9e48|hypercopter_rotor_r_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bde946c4ad14f07dd9272b68950e9e48|hypercopter_rotor_r_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "be0c7c2ba4a7ee9af1a9694726806ffb|laser_tower_head_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "be0c7c2ba4a7ee9af1a9694726806ffb|laser_tower_head_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "be0c7c2ba4a7ee9af1a9694726806ffb|laser_tower_head_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "be0c7c2ba4a7ee9af1a9694726806ffb|laser_tower_head_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bf020d1ac89d55a91fc2942414b21ee4|engineer_torso_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bf020d1ac89d55a91fc2942414b21ee4|engineer_torso_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bf020d1ac89d55a91fc2942414b21ee4|engineer_torso_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "bf020d1ac89d55a91fc2942414b21ee4|engineer_torso_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c1e6457eb102867e9d2e281b595e7932|engineer_torso_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c1e6457eb102867e9d2e281b595e7932|engineer_torso_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c1e6457eb102867e9d2e281b595e7932|engineer_torso_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c1e6457eb102867e9d2e281b595e7932|engineer_torso_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c2c524af11296b6ffa509a58bfb295d2|laser_tower_head_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c2c524af11296b6ffa509a58bfb295d2|laser_tower_head_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c2c524af11296b6ffa509a58bfb295d2|laser_tower_head_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c2c524af11296b6ffa509a58bfb295d2|laser_tower_head_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c5d43e20b8e3268e2ba70398c49e94e1|engineer_leg_l_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c5d43e20b8e3268e2ba70398c49e94e1|engineer_leg_l_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c5d43e20b8e3268e2ba70398c49e94e1|engineer_leg_l_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c5d43e20b8e3268e2ba70398c49e94e1|engineer_leg_l_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c63bed41e62f6b317179fb8792b8b47a|hypercopter_body_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c63bed41e62f6b317179fb8792b8b47a|hypercopter_body_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c63bed41e62f6b317179fb8792b8b47a|hypercopter_body_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c63bed41e62f6b317179fb8792b8b47a|hypercopter_body_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c8dea2b450d0c65fa240f28aae955503|rocket_tower_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c8dea2b450d0c65fa240f28aae955503|rocket_tower_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c8dea2b450d0c65fa240f28aae955503|rocket_tower_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "c8dea2b450d0c65fa240f28aae955503|rocket_tower_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cb2afd58bca00ae4c2f377c658ccfb94|soldier_torso_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cb2afd58bca00ae4c2f377c658ccfb94|soldier_torso_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cb2afd58bca00ae4c2f377c658ccfb94|soldier_torso_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cb2afd58bca00ae4c2f377c658ccfb94|soldier_torso_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cbd8a3be5aec7143c96ac0e92b1602e2|hypercopter_body_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cbd8a3be5aec7143c96ac0e92b1602e2|hypercopter_body_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cbd8a3be5aec7143c96ac0e92b1602e2|hypercopter_body_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cbd8a3be5aec7143c96ac0e92b1602e2|hypercopter_body_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cc6a65d958569d0c164b3bd84558546e|terminator_jet_l_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cc6a65d958569d0c164b3bd84558546e|terminator_jet_l_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cc6a65d958569d0c164b3bd84558546e|terminator_jet_l_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cc6a65d958569d0c164b3bd84558546e|terminator_jet_l_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cd5f7fa68ee7212614e012773568f8bc|laser_tower_head_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cd5f7fa68ee7212614e012773568f8bc|laser_tower_head_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cd5f7fa68ee7212614e012773568f8bc|laser_tower_head_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cd5f7fa68ee7212614e012773568f8bc|laser_tower_head_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cf3ef4c5879034da6df9fbb74a0595ec|soldier_leg_r_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cf3ef4c5879034da6df9fbb74a0595ec|soldier_leg_r_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cf3ef4c5879034da6df9fbb74a0595ec|soldier_leg_r_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "cf3ef4c5879034da6df9fbb74a0595ec|soldier_leg_r_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d03d62548adb67ce51d8f5f007c3dcd5|watchtower_head_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d03d62548adb67ce51d8f5f007c3dcd5|watchtower_head_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d03d62548adb67ce51d8f5f007c3dcd5|watchtower_head_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d03d62548adb67ce51d8f5f007c3dcd5|watchtower_head_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d1a12aa17d9fbba52b8bed716db7aa75|rocketeer_leg_r_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d1a12aa17d9fbba52b8bed716db7aa75|rocketeer_leg_r_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d1a12aa17d9fbba52b8bed716db7aa75|rocketeer_leg_r_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d1a12aa17d9fbba52b8bed716db7aa75|rocketeer_leg_r_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d256baa8e293c7f4abe91729c752a5b1|terminator_hull_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d256baa8e293c7f4abe91729c752a5b1|terminator_hull_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d256baa8e293c7f4abe91729c752a5b1|terminator_hull_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d256baa8e293c7f4abe91729c752a5b1|terminator_hull_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d2fe66c6260d034a585009afa5142800|harvester_hull_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d2fe66c6260d034a585009afa5142800|harvester_hull_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d2fe66c6260d034a585009afa5142800|harvester_hull_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d2fe66c6260d034a585009afa5142800|harvester_hull_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d37fd570979be2236230a871e62f15ce|engineer_torso_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d37fd570979be2236230a871e62f15ce|engineer_torso_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d37fd570979be2236230a871e62f15ce|engineer_torso_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d37fd570979be2236230a871e62f15ce|engineer_torso_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d52bbaabe4e6e9521f99d72073b64524|crystal_b|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d52bbaabe4e6e9521f99d72073b64524|crystal_b|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d6ebef365e585990d0a39f041adacbca|rocketeer_torso_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d6ebef365e585990d0a39f041adacbca|rocketeer_torso_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d6ebef365e585990d0a39f041adacbca|rocketeer_torso_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d6ebef365e585990d0a39f041adacbca|rocketeer_torso_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d792897dd39d60740dc8dec452dc0064|watchtower_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d792897dd39d60740dc8dec452dc0064|watchtower_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d792897dd39d60740dc8dec452dc0064|watchtower_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "d792897dd39d60740dc8dec452dc0064|watchtower_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "df71ab47f1b418dae826d3f7b54291ba|refinery_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "df71ab47f1b418dae826d3f7b54291ba|refinery_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "df71ab47f1b418dae826d3f7b54291ba|refinery_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "df71ab47f1b418dae826d3f7b54291ba|refinery_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e5117084a9e0ce660c4c85d34bf5dd44|rocketeer_leg_r_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e5117084a9e0ce660c4c85d34bf5dd44|rocketeer_leg_r_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e5117084a9e0ce660c4c85d34bf5dd44|rocketeer_leg_r_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e5117084a9e0ce660c4c85d34bf5dd44|rocketeer_leg_r_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e77b470fd1e6a17e89bf3d5d24bae93d|rocketeer_leg_l_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e77b470fd1e6a17e89bf3d5d24bae93d|rocketeer_leg_l_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e77b470fd1e6a17e89bf3d5d24bae93d|rocketeer_leg_l_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e77b470fd1e6a17e89bf3d5d24bae93d|rocketeer_leg_l_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e81b3ebb5fd73948a5e53444bfb54010|infiltrator_leg_l|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e81b3ebb5fd73948a5e53444bfb54010|infiltrator_leg_l|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "e81b3ebb5fd73948a5e53444bfb54010|infiltrator_leg_l|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb35b37e90059d6cfcea6349c6a27402|soldier_leg_r_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb35b37e90059d6cfcea6349c6a27402|soldier_leg_r_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb35b37e90059d6cfcea6349c6a27402|soldier_leg_r_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb35b37e90059d6cfcea6349c6a27402|soldier_leg_r_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb445276e9c97b30f200cdbc1e5c53d5|infiltrator_torso_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb445276e9c97b30f200cdbc1e5c53d5|infiltrator_torso_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb445276e9c97b30f200cdbc1e5c53d5|infiltrator_torso_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb445276e9c97b30f200cdbc1e5c53d5|infiltrator_torso_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb7522b86d873afd218121ab84f6f068|engineer_leg_l_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb7522b86d873afd218121ab84f6f068|engineer_leg_l_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb7522b86d873afd218121ab84f6f068|engineer_leg_l_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "eb7522b86d873afd218121ab84f6f068|engineer_leg_l_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ecf4f39a0cba504c8c1dd69f3e284d93|engineer_leg_r_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ecf4f39a0cba504c8c1dd69f3e284d93|engineer_leg_r_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ecf4f39a0cba504c8c1dd69f3e284d93|engineer_leg_r_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ecf4f39a0cba504c8c1dd69f3e284d93|engineer_leg_r_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef0ba4376579cec12764797a70b71252|radar_dish_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef0ba4376579cec12764797a70b71252|radar_dish_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef0ba4376579cec12764797a70b71252|radar_dish_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef0ba4376579cec12764797a70b71252|radar_dish_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef2f15f78ff17e99917fcafa88baa509|eliminator_turret_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef2f15f78ff17e99917fcafa88baa509|eliminator_turret_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef2f15f78ff17e99917fcafa88baa509|eliminator_turret_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ef2f15f78ff17e99917fcafa88baa509|eliminator_turret_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f008818c7a49b63853e775031108e6cb|silo_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f008818c7a49b63853e775031108e6cb|silo_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f008818c7a49b63853e775031108e6cb|silo_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f008818c7a49b63853e775031108e6cb|silo_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f01a0a66f646875643ab759737d82d9f|tank_wreck|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f01a0a66f646875643ab759737d82d9f|tank_wreck|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f01a0a66f646875643ab759737d82d9f|tank_wreck|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f09b10a0f9db01bae4500deb23e5c203|hangar_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f09b10a0f9db01bae4500deb23e5c203|hangar_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f09b10a0f9db01bae4500deb23e5c203|hangar_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f09b10a0f9db01bae4500deb23e5c203|hangar_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f0d8935918192edb47a4c47fe30c302c|rocket_tower_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f0d8935918192edb47a4c47fe30c302c|rocket_tower_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f0d8935918192edb47a4c47fe30c302c|rocket_tower_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f0d8935918192edb47a4c47fe30c302c|rocket_tower_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f1ab852e824778e016f8935bdb8a2e6b|silo_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f1ab852e824778e016f8935bdb8a2e6b|silo_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f1ab852e824778e016f8935bdb8a2e6b|silo_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f1ab852e824778e016f8935bdb8a2e6b|silo_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f2ef6dcd4a1209c909ffe9eb4d138765|tank_hull_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f2ef6dcd4a1209c909ffe9eb4d138765|tank_hull_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f2ef6dcd4a1209c909ffe9eb4d138765|tank_hull_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f2ef6dcd4a1209c909ffe9eb4d138765|tank_hull_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f34c53b4f213e0818391368cb0c0493c|mcv_hull_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f34c53b4f213e0818391368cb0c0493c|mcv_hull_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f34c53b4f213e0818391368cb0c0493c|mcv_hull_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f34c53b4f213e0818391368cb0c0493c|mcv_hull_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f5f572ab4639b621d236ce8053333aa8|mcv_hull_t3|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f5f572ab4639b621d236ce8053333aa8|mcv_hull_t3|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f5f572ab4639b621d236ce8053333aa8|mcv_hull_t3|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f5f572ab4639b621d236ce8053333aa8|mcv_hull_t3|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f657e8393063f3450052cf467820e6a7|terminator_hull_t1|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f657e8393063f3450052cf467820e6a7|terminator_hull_t1|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f657e8393063f3450052cf467820e6a7|terminator_hull_t1|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f657e8393063f3450052cf467820e6a7|terminator_hull_t1|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f74243fd01d04d5267754e794cd146d1|soldier_leg_l_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f74243fd01d04d5267754e794cd146d1|soldier_leg_l_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f74243fd01d04d5267754e794cd146d1|soldier_leg_l_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f74243fd01d04d5267754e794cd146d1|soldier_leg_l_t0|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f7eef71e9f3cf0f82b981b7ba6e49016|harvester_drill|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f7eef71e9f3cf0f82b981b7ba6e49016|harvester_drill|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "f7eef71e9f3cf0f82b981b7ba6e49016|harvester_drill|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fa462b730ec1f6fd4bd24f4dc74957ca|hypercopter_wreck|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fa462b730ec1f6fd4bd24f4dc74957ca|hypercopter_wreck|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fa462b730ec1f6fd4bd24f4dc74957ca|hypercopter_wreck|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fb6721ea531c7b2954257892e13fd8b5|terminator_jet_l_t2|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fb6721ea531c7b2954257892e13fd8b5|terminator_jet_l_t2|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fb6721ea531c7b2954257892e13fd8b5|terminator_jet_l_t2|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "fb6721ea531c7b2954257892e13fd8b5|terminator_jet_l_t2|3": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ff46385b33d70fabe77212c2832f2b33|rocket_tower_head_t0|0": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ff46385b33d70fabe77212c2832f2b33|rocket_tower_head_t0|1": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ff46385b33d70fabe77212c2832f2b33|rocket_tower_head_t0|2": "6a47693befd1fb8393e7f6ce05f6523c",
+      "ff46385b33d70fabe77212c2832f2b33|rocket_tower_head_t0|3": "6a47693befd1fb8393e7f6ce05f6523c"
+    },
+    "modelMaterialOverrides": {},
+    "motes": true,
+    "motionBlur": 0.0,
+    "moveSpeed": 2.700000047683716,
+    "muted": false,
+    "normalStrength": 0.6639999747276306,
+    "paintedFlowers": "",
+    "paintedGrass": "",
+    "paintedTrees2": "",
+    "rainAmount": 0.0,
+    "rays": 0.0,
+    "rivers": {
+      "paths": [
+        {
+          "bias": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            -1.409999966621399,
+            0.0,
+            0.0
+          ],
+          "enabled": true,
+          "kind": 1,
+          "name": "Brook",
+          "points": [
+            [
+              -740.4879150390625,
+              -113.16471862792969
+            ],
+            [
+              -1822.42822265625,
+              -169.332763671875
+            ],
+            [
+              -326.6647033691406,
+              123.37625122070313
+            ],
+            [
+              -95.29936981201172,
+              -7.886932373046875
+            ],
+            [
+              -79.32789611816406,
+              37.014991760253906
+            ],
+            [
+              -45.323150634765625,
+              25.513961791992188
+            ],
+            [
+              -15.132111549377441,
+              -15.774398803710938
+            ],
+            [
+              -13.388082504272461,
+              -43.78662109375
+            ],
+            [
+              -9.819326400756836,
+              -52.250885009765625
+            ],
+            [
+              -14.775367736816406,
+              -63.36345672607422
+            ],
+            [
+              -21.654035568237305,
+              -72.7896499633789
+            ],
+            [
+              -40.94390106201172,
+              -112.28289794921875
+            ],
+            [
+              -40.09477615356445,
+              -119.00851440429688
+            ],
+            [
+              -37.842994689941406,
+              -132.18637084960938
+            ]
+          ],
+          "preset": 3,
+          "style": {
+            "autoFlow": true,
+            "bankBlend": 0.8500000238418579,
+            "bankLayer": 3,
+            "bankPaint": 30.0,
+            "bankRise": 2.2899999618530273,
+            "bankWidth": 25.6299991607666,
+            "bedFlat": 0.7599999904632568,
+            "bendEase": 1.100000023841858,
+            "bendScour": 0.550000011920929,
+            "clarity": 0.05000000074505806,
+            "current": 0.0,
+            "deep": [
+              0.289035826921463,
+              0.2911260426044464,
+              0.29723989963531494
+            ],
+            "depth": 1.7400000095367432,
+            "depthVary": 0.1899999976158142,
+            "fallMin": 1.5,
+            "fallSlope": 0.30000001192092896,
+            "flip": false,
+            "flowSpeed": 0.6399999856948853,
+            "foamWidth": 0.49000000953674316,
+            "maxCut": 8.0,
+            "meander": 41.900001525878906,
+            "meanderLength": 133.0,
+            "minSlope": 0.001500000013038516,
+            "plunge": 1.2000000476837158,
+            "poolLength": 14.0,
+            "rapidSlope": 0.019999999552965164,
+            "reedColor": [
+              0.36000001430511475,
+              0.4399999976158142,
+              0.2199999988079071
+            ],
+            "reedDepth": 0.6000000238418579,
+            "reedHeight": 2.809999942779541,
+            "reeds": 0.0,
+            "reflect": 0.2800000011920929,
+            "ripple": 0.08699999749660492,
+            "rippleScale": 1.6200000047683716,
+            "seed": 7,
+            "shallow": [
+              0.5244161486625671,
+              0.5244161486625671,
+              0.5244161486625671
+            ],
+            "smooth": 40,
+            "sparkle": 0.07999999821186066,
+            "stoneColor": [
+              0.4399999976158142,
+              0.41999998688697815,
+              0.38999998569488525
+            ],
+            "stoneSize": 0.550000011920929,
+            "stoneSpread": 3.0,
+            "stones": 0.0,
+            "widen": 1.5,
+            "width": 4.699999809265137,
+            "widthVary": 0.7099999785423279
+          }
+        },
+        {
+          "bias": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.559999942779541
+          ],
+          "enabled": true,
+          "kind": 1,
+          "name": "River",
+          "points": [
+            [
+              104.52360534667969,
+              -67.91061401367188
+            ],
+            [
+              100.03851318359375,
+              -32.43254089355469
+            ],
+            [
+              81.06156921386719,
+              -2.2443771362304688
+            ],
+            [
+              75.06144714355469,
+              50.23478698730469
+            ],
+            [
+              54.909095764160156,
+              185.3851318359375
+            ],
+            [
+              -82.5910415649414,
+              522.08056640625
+            ]
+          ],
+          "preset": 3,
+          "style": {
+            "autoFlow": true,
+            "bankBlend": 0.8500000238418579,
+            "bankLayer": 3,
+            "bankPaint": 4.5,
+            "bankRise": 0.28999999165534973,
+            "bankWidth": 10.0,
+            "bedFlat": 0.5,
+            "bendEase": 1.100000023841858,
+            "bendScour": 0.550000011920929,
+            "clarity": 0.44999998807907104,
+            "current": 1.399999976158142,
+            "deep": [
+              0.03999999910593033,
+              0.05999999865889549,
+              0.05999999865889549
+            ],
+            "depth": 2.200000047683716,
+            "depthVary": 0.4000000059604645,
+            "fallMin": 1.5,
+            "fallSlope": 0.30000001192092896,
+            "flip": false,
+            "flowSpeed": 0.23999999463558197,
+            "foamWidth": 1.7300000190734863,
+            "maxCut": 8.0,
+            "meander": 26.0,
+            "meanderLength": 170.0,
+            "minSlope": 0.001500000013038516,
+            "plunge": 1.2000000476837158,
+            "poolLength": 14.0,
+            "rapidSlope": 0.019999999552965164,
+            "reedColor": [
+              0.36000001430511475,
+              0.4399999976158142,
+              0.2199999988079071
+            ],
+            "reedDepth": 0.6000000238418579,
+            "reedHeight": 1.3799999952316284,
+            "reeds": 94.0,
+            "reflect": 0.8999999761581421,
+            "ripple": 0.0689999982714653,
+            "rippleScale": 0.3799999952316284,
+            "seed": 7,
+            "shallow": [
+              0.30000001192092896,
+              0.33000001311302185,
+              0.25999999046325684
+            ],
+            "smooth": 14,
+            "sparkle": 0.6000000238418579,
+            "stoneColor": [
+              0.4399999976158142,
+              0.41999998688697815,
+              0.38999998569488525
+            ],
+            "stoneSize": 0.550000011920929,
+            "stoneSpread": 3.0,
+            "stones": 25.0,
+            "widen": 1.5,
+            "width": 14.0,
+            "widthVary": 0.25
+          }
+        }
+      ]
+    },
+    "road": {
+      "banks": "0 0 0 0 0 0 ",
+      "bed": 0.0,
+      "biomes": [],
+      "bridgeStyle": {
+        "abutment": 6.0,
+        "deckThick": 0.6000000238418579,
+        "overhang": 0.4000000059604645,
+        "pierSpacing": 14.0,
+        "pierWidth": 1.2000000476837158,
+        "railHeight": 1.100000023841858,
+        "railWidth": 0.30000001192092896
+      },
+      "bridges": [],
+      "cityBudget": 400,
+      "cityEnabled": true,
+      "cityMinPixels": 2.5,
+      "cityRange": 1200.0,
+      "closed": false,
+      "decals": [],
+      "edgeAngle": 35.0,
+      "edgeWidth": 0.0,
+      "enabled": true,
+      "fadeWidth": 0.0,
+      "glow": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "glowMap": "",
+      "glowStrength": 0.0,
+      "glowTile": 40.0,
+      "grade": 0.550000011920929,
+      "junctionGlow": "",
+      "junctionStyle": {
+        "blend": 18.0,
+        "clearance": 2.5,
+        "enabled": true,
+        "margin": 1.0,
+        "minAngleDeg": 22.0
+      },
+      "junctionTex": "",
+      "lifts": "0 0 0 0 0 0 ",
+      "loops": [],
+      "name": "Tulpengasse",
+      "normal": "asphalt_04_diff_4k.jpg",
+      "points": "-128.8135 -140.7962 -134.8203 -111.4037 -150.7626 -33.39578 -152.7008 42.8206 -159.5686 131.0242 -161.8975 160.9337 ",
+      "rainRings": 1.0,
+      "shoulder": 2.5,
+      "sideObjects": [],
+      "surface": "asphalt_04_diff_4k.jpg",
+      "texTile": 8.0,
+      "town": 1,
+      "tunnelStyle": {
+        "abutment": 10.0,
+        "clearHeight": 5.5,
+        "portal": 1.0,
+        "sideClear": 1.0,
+        "skirt": 2.0
+      },
+      "tunnels": [],
+      "wetMap": "",
+      "wetReflect": 0.44999998807907104,
+      "wetShore": 0.18000000715255737,
+      "wetStretch": 1.0,
+      "wetTile": 26.0,
+      "wetVar": 0.0,
+      "wetness": 0.0,
+      "width": 6.0
+    },
+    "roads": [
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Tulpengasse",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "-128.8135 -140.7962 -134.8203 -111.4037 -150.7626 -33.39578 -152.7008 42.8206 -159.5686 131.0242 -161.8975 160.9337 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Marktweg",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "-32.81455 -142.3963 -35.24091 -112.4946 -41.63861 -33.65142 -53.95995 49.11508 -61.04912 124.199 -63.86908 154.0661 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Hauptstraße",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "63.20848 -147.3073 60.60145 -117.4208 53.43731 -35.29273 45.1998 43.0335 40.93624 126.7063 39.40956 156.6674 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Lindenstraße",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "158.8674 -153.6338 158.0367 -123.6453 155.7788 -42.13993 142.4356 33.60842 138.089 117.9523 136.545 147.9126 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Veilchenweg",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "-164.8185 -111.0751 -134.8203 -111.4037 -35.24091 -112.4946 60.60145 -117.4208 158.0367 -123.6453 187.9756 -125.5579 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Wiesenstraße",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "-180.7626 -33.3255 -150.7626 -33.39578 -41.63861 -33.65142 53.43731 -35.29273 155.7788 -42.13993 185.7119 -44.14262 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Werkweg",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "-182.64 40.91205 -152.7008 42.8206 -53.95995 49.11508 45.1998 43.0335 142.4356 33.60842 172.2956 30.71408 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      },
+      {
+        "banks": "0 0 0 0 0 0 ",
+        "bed": 0.0,
+        "biomes": [],
+        "bridgeStyle": {
+          "abutment": 6.0,
+          "deckThick": 0.6000000238418579,
+          "overhang": 0.4000000059604645,
+          "pierSpacing": 14.0,
+          "pierWidth": 1.2000000476837158,
+          "railHeight": 1.100000023841858,
+          "railWidth": 0.30000001192092896
+        },
+        "bridges": [],
+        "cityBudget": 400,
+        "cityEnabled": true,
+        "cityMinPixels": 2.5,
+        "cityRange": 1200.0,
+        "closed": false,
+        "decals": [],
+        "edgeAngle": 35.0,
+        "edgeWidth": 0.0,
+        "enabled": true,
+        "fadeWidth": 0.0,
+        "glow": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "glowMap": "",
+        "glowStrength": 0.0,
+        "glowTile": 40.0,
+        "grade": 0.550000011920929,
+        "junctionGlow": "",
+        "junctionStyle": {
+          "blend": 18.0,
+          "clearance": 2.5,
+          "enabled": true,
+          "margin": 1.0,
+          "minAngleDeg": 22.0
+        },
+        "junctionTex": "",
+        "lifts": "0 0 0 0 0 0 ",
+        "loops": [],
+        "name": "Querweg",
+        "normal": "asphalt_04_diff_4k.jpg",
+        "points": "-189.4969 133.0976 -159.5686 131.0242 -61.04912 124.199 40.93624 126.7063 138.089 117.9523 167.9679 115.2601 ",
+        "rainRings": 1.0,
+        "shoulder": 2.5,
+        "sideObjects": [],
+        "surface": "asphalt_04_diff_4k.jpg",
+        "texTile": 8.0,
+        "town": 1,
+        "tunnelStyle": {
+          "abutment": 10.0,
+          "clearHeight": 5.5,
+          "portal": 1.0,
+          "sideClear": 1.0,
+          "skirt": 2.0
+        },
+        "tunnels": [],
+        "wetMap": "",
+        "wetReflect": 0.44999998807907104,
+        "wetShore": 0.18000000715255737,
+        "wetStretch": 1.0,
+        "wetTile": 26.0,
+        "wetVar": 0.0,
+        "wetness": 0.0,
+        "width": 6.0
+      }
+    ],
+    "rockSlope": 0.6200000047683716,
+    "saturation": 0.7799999713897705,
+    "showCrosshair": false,
+    "showGrid": false,
+    "skidDark": 0.550000011920929,
+    "skidMarks": false,
+    "skidSlip": 0.44999998807907104,
+    "skidWidth": 0.1599999964237213,
+    "skyAltocumulusAmount": 0.5,
+    "skyAltocumulusDir": 1.100000023841858,
+    "skyAltocumulusHeight": 3400.0,
+    "skyAltocumulusOn": false,
+    "skyAltocumulusScale": 1.0,
+    "skyAltocumulusWind": 7.0,
+    "skyCirrocumulusAmount": 0.44999998807907104,
+    "skyCirrocumulusDir": 0.30000001192092896,
+    "skyCirrocumulusHeight": 5200.0,
+    "skyCirrocumulusOn": false,
+    "skyCirrocumulusScale": 1.0,
+    "skyCirrocumulusWind": 9.0,
+    "skyCirrusAmount": 0.18000000715255737,
+    "skyCirrusDir": 0.0,
+    "skyCirrusHeight": 8000.0,
+    "skyCirrusOn": true,
+    "skyCirrusScale": 1.0,
+    "skyCirrusWind": 2.5,
+    "skyContrailsAmount": 0.3499999940395355,
+    "skyContrailsDir": 0.5,
+    "skyContrailsHeight": 10500.0,
+    "skyContrailsOn": true,
+    "skyContrailsScale": 0.5,
+    "skyContrailsWind": 1.0,
+    "skyStratocumulusAmount": 0.550000011920929,
+    "skyStratocumulusDir": 0.6000000238418579,
+    "skyStratocumulusHeight": 1200.0,
+    "skyStratocumulusOn": false,
+    "skyStratocumulusScale": 1.0,
+    "skyStratocumulusWind": 5.0,
+    "skyStratusAmount": 0.6000000238418579,
+    "skyStratusDir": 0.0,
+    "skyStratusHeight": 600.0,
+    "skyStratusOn": false,
+    "skyStratusScale": 1.600000023841858,
+    "skyStratusWind": 4.0,
+    "slopeSharp": 0.14000000059604645,
+    "snapAngle": 15.0,
+    "snapScale": 0.10000000149011612,
+    "snowLevel": 1100.0,
+    "soundscape": false,
+    "splines": {
+      "paths": []
+    },
+    "ssao": 0.8399999737739563,
+    "ssaoBias": 0.47999998927116394,
+    "ssaoRadius": 2.931999921798706,
+    "ssr": true,
+    "startMode": 0,
+    "sunDeclination": 18.0,
+    "sunLatitude": 47.0,
+    "terrBiome": 0.0017999999690800905,
+    "terrContinent": 1.0,
+    "terrFreq": 0.014000000432133675,
+    "terrHeight": 10.0,
+    "terrIslandCenterX": 0.0,
+    "terrIslandCenterZ": 0.0,
+    "terrIslandRadius": 0.0,
+    "terrIslandShape": 0.0,
+    "terrOctaves": 5,
+    "terrPeak": 0.800000011920929,
+    "terrRelief": 1.0,
+    "terrRidge": 6.0,
+    "terrSeed": 0.0,
+    "terrTerrace": 0.0,
+    "terrValley": 0.0,
+    "terrWarp": 10.0,
+    "terrainEditCell": 1.0,
+    "terrainEdits": "",
+    "terrainEntity": true,
+    "terrainGloss": 0.0,
+    "terrainHeightBlend": 0.6000000238418579,
+    "terrainLayers": [
+      {
+        "hEnd": -6.0,
+        "hStart": -10.5,
+        "name": "coast_sand_01_diff_4k",
+        "norm": "00000000000000000000000000000000",
+        "sEnd": 90.0,
+        "sStart": 0.0,
+        "scale": 0.07999999821186066,
+        "tex": "dc6c8f253f4d60c0d25c38b40ff04616"
+      },
+      {
+        "hEnd": 1000.0,
+        "hStart": -1000.0,
+        "name": "forest_leaves_02_diffuse_4k",
+        "norm": "8f05d731abc007fd0483f4a2510770e0",
+        "sEnd": 0.0,
+        "sStart": 0.0,
+        "scale": 0.2879999876022339,
+        "tex": "9d5faa85ce4d214e47db8609b85677d5"
+      },
+      {
+        "hEnd": -21.600000381469727,
+        "hStart": -1000.0,
+        "name": "brown_mud_leaves_01_diff_4k",
+        "norm": "6fa87123727703a7e378b7a5262de75d",
+        "sEnd": 90.0,
+        "sStart": 0.0,
+        "scale": 0.34299999475479126,
+        "tex": "90b148f6d3a5237bbb1f20c0d0e91a8b"
+      },
+      {
+        "hEnd": 1000.0,
+        "hStart": -1000.0,
+        "name": "dry_river_pebbles_diff_4k",
+        "norm": "4ea2299d0251cad7f33a05ef3e34e9b1",
+        "sEnd": 90.0,
+        "sStart": 26.0,
+        "scale": 0.1889999955892563,
+        "tex": "921e11f1260e99526954ec307244a6a0"
+      },
+      {
+        "hEnd": 1000.0,
+        "hStart": -200.0,
+        "name": "gray_rocks_diff_4k",
+        "norm": "f4a1202ce2cd193f5c0b668bc0b2fc5b",
+        "sEnd": 90.0,
+        "sStart": 9.0,
+        "scale": 0.20600000023841858,
+        "tex": "572227c9c89109cec6181d6af4718868"
+      },
+      {
+        "hEnd": 1000.0,
+        "hStart": -48.400001525878906,
+        "name": "sparse_grass_diff_4k",
+        "norm": "16d5de595291343213408c489a44e199",
+        "sEnd": 54.0,
+        "sStart": 0.0,
+        "scale": 0.35499998927116394,
+        "tex": "6e094ca4b5e154fd34689c3ddb91bedd"
+      }
+    ],
+    "terrainPaint": "",
+    "terrainPaintCell": 1.0,
+    "texScale": 0.07999999821186066,
+    "timeFlows": false,
+    "timeOfDay": 9.300000190734863,
+    "tonemapCurve": 0,
+    "towns": {
+      "nextId": 2,
+      "range": 1600.0,
+      "towns": [
+        {
+          "adverts": 0.5,
+          "binEvery": 70.0,
+          "blockBase": [
+            0.30000001192092896,
+            0.28999999165534973,
+            0.2800000011920929
+          ],
+          "blockColor": [
+            0.6200000047683716,
+            0.5699999928474426,
+            0.49000000953674316
+          ],
+          "blockFloorsMax": 6,
+          "blockFloorsMin": 3,
+          "blockPalette": 6,
+          "blockRing": 0.0,
+          "budget": 1500,
+          "busShare": 0.10000000149011612,
+          "busStopEvery": 350.0,
+          "centrePark": true,
+          "civic": {
+            "church": {
+              "count": 1
+            },
+            "cinema": {
+              "count": 0
+            },
+            "departmentStore": {
+              "count": 0
+            },
+            "fireStation": {
+              "count": 1
+            },
+            "hospital": {
+              "count": 0
+            },
+            "hotel": {
+              "count": 0
+            },
+            "industry": {
+              "count": 0
+            },
+            "kindergarten": {
+              "count": 1
+            },
+            "landfill": {
+              "count": 0
+            },
+            "library": {
+              "count": 0
+            },
+            "museum": {
+              "count": 0
+            },
+            "parkingGarage": {
+              "count": 0
+            },
+            "petrolStation": {
+              "count": 1
+            },
+            "police": {
+              "count": 0
+            },
+            "pool": {
+              "count": 0
+            },
+            "powerPlant": {
+              "count": 0
+            },
+            "school": {
+              "count": 1
+            },
+            "station": {
+              "count": 0
+            },
+            "supermarket": {
+              "count": 0
+            },
+            "theatre": {
+              "count": 0
+            },
+            "townHall": {
+              "count": 1
+            }
+          },
+          "collider": true,
+          "colourVariety": 0.3499999940395355,
+          "enabled": true,
+          "facadeColor": [
+            0.41999998688697815,
+            0.4000000059604645,
+            0.3799999952316284
+          ],
+          "fill": 0.8500000238418579,
+          "glassTint": [
+            0.10000000149011612,
+            0.12999999523162842,
+            0.17000000178813934
+          ],
+          "grid": {
+            "avenueEvery": 0,
+            "avenueWidth": 7.5,
+            "blockX": 100.0,
+            "blockZ": 80.0,
+            "bridges": true,
+            "center": [
+              0.0,
+              0.0
+            ],
+            "maxBridge": 180.0,
+            "names": 0,
+            "organic": 0.3499999940395355,
+            "rotation": 0.0,
+            "seed": 11,
+            "sizeX": 300.0,
+            "sizeZ": 240.0,
+            "streetWidth": 6.0,
+            "stub": 30.0
+          },
+          "houseLot": 24.0,
+          "houseNumbers": true,
+          "houseSetback": 6.0,
+          "id": 1,
+          "industryAngle": 0.0,
+          "industryShare": 0.0,
+          "laid": {
+            "avenueEvery": 0,
+            "avenueWidth": 7.5,
+            "blockX": 100.0,
+            "blockZ": 80.0,
+            "bridges": true,
+            "center": [
+              0.0,
+              0.0
+            ],
+            "maxBridge": 180.0,
+            "names": 0,
+            "organic": 0.3499999940395355,
+            "rotation": 0.0,
+            "seed": 11,
+            "sizeX": 300.0,
+            "sizeZ": 240.0,
+            "streetWidth": 6.0,
+            "stub": 30.0
+          },
+          "lampBothSides": false,
+          "lampEvery": 32.0,
+          "lampInset": 0.6000000238418579,
+          "lampPrefabs": [],
+          "manholes": true,
+          "maxSlope": 0.2199999988079071,
+          "name": "Ruinen von Weissenfeld",
+          "parkChance": 0.10000000149011612,
+          "pavements": true,
+          "people": 0.0,
+          "personPlaceholderWeight": 1.0,
+          "personPrefabs": [],
+          "placeholderWeight": 1.0,
+          "powerLineLength": 1500.0,
+          "powerLines": true,
+          "roofColor": [
+            0.2199999988079071,
+            0.11999999731779099,
+            0.10000000149011612
+          ],
+          "rowRing": 0.25,
+          "seed": 11,
+          "shopSigns": true,
+          "sidewalk": 3.0,
+          "signStyle": 0,
+          "signs": true,
+          "towerBase": [
+            0.20000000298023224,
+            0.20000000298023224,
+            0.20999999344348907
+          ],
+          "towerFloorsMax": 45,
+          "towerFloorsMin": 12,
+          "towerPalette": 5,
+          "towerRing": 0.0,
+          "traffic": 0.0,
+          "trafficLights": true,
+          "trafficSigns": true,
+          "truckShare": 0.15000000596046448,
+          "vehiclePrefabs": [],
+          "weathering": 1.0,
+          "windowLit": 0.05999999865889549,
+          "zoneNoise": 0.11999999731779099
+        }
+      ]
+    },
+    "trailGlow": 2.0,
+    "trailLife": 1.600000023841858,
+    "trailOpacity": 0.5,
+    "trailWidth": 0.30000001192092896,
+    "treeBrightness": 0.6200000047683716,
+    "treeContrast": 0.800000011920929,
+    "treeEnabled": true,
+    "treeHue": -4.0,
+    "treePainted": true,
+    "treeProcedural": true,
+    "treeShadowDist": 120.0,
+    "trees": [
+      {
+        "bbAspect": 0.9900000095367432,
+        "bbEnabled": true,
+        "bbSize": 1.0499999523162842,
+        "bbStart": 60.0,
+        "billboard": "billboard_tree_bled.png",
+        "density": 1.399999976158142,
+        "enabled": true,
+        "lods": [
+          {
+            "dist": 45.0,
+            "model": "tree1.glb"
+          }
+        ],
+        "materials": [],
+        "name": "Fichte",
+        "size": 11.0
+      },
+      {
+        "bbAspect": 0.9900000095367432,
+        "bbEnabled": true,
+        "bbSize": 1.0499999523162842,
+        "bbStart": 60.0,
+        "billboard": "billboard_tree_bled.png",
+        "density": 1.0,
+        "enabled": true,
+        "lods": [
+          {
+            "dist": 45.0,
+            "model": "tree2.glb"
+          }
+        ],
+        "materials": [],
+        "name": "Kiefer",
+        "size": 12.0
+      },
+      {
+        "bbAspect": 0.9900000095367432,
+        "bbEnabled": true,
+        "bbSize": 1.0499999523162842,
+        "bbStart": 60.0,
+        "billboard": "billboard_tree_bled.png",
+        "density": 0.699999988079071,
+        "enabled": true,
+        "lods": [
+          {
+            "dist": 45.0,
+            "model": "tree3.glb"
+          }
+        ],
+        "materials": [],
+        "name": "Laub",
+        "size": 9.0
+      },
+      {
+        "bbAspect": 0.9900000095367432,
+        "bbEnabled": true,
+        "bbSize": 1.0499999523162842,
+        "bbStart": 60.0,
+        "billboard": "billboard_tree_bled.png",
+        "density": 0.5,
+        "enabled": true,
+        "lods": [
+          {
+            "dist": 45.0,
+            "model": "tree4.glb"
+          }
+        ],
+        "materials": [],
+        "name": "Busch",
+        "size": 3.0
+      }
+    ],
+    "value": 0.9769999980926514,
+    "viewRadius": 7,
+    "vignette": 0.44999998807907104,
+    "volFog": false,
+    "volFogAmbient": 1.0,
+    "volFogAnisotropy": 0.550000011920929,
+    "volFogCenterX": 0.0,
+    "volFogCenterY": 20.053720474243164,
+    "volFogCenterZ": 0.0,
+    "volFogColorB": 0.949999988079071,
+    "volFogColorG": 0.8600000143051147,
+    "volFogColorR": 0.800000011920929,
+    "volFogCoverage": 0.30000001192092896,
+    "volFogDensity": 0.07999999821186066,
+    "volFogDetail": 0.44999998807907104,
+    "volFogEdge": 0.25,
+    "volFogFollow": true,
+    "volFogHeightFalloff": 0.800000011920929,
+    "volFogNoiseScale": 0.009999999776482582,
+    "volFogNoiseVertical": 3.0,
+    "volFogRes": 2,
+    "volFogSelfShadow": true,
+    "volFogShafts": true,
+    "volFogSizeX": 600.0,
+    "volFogSizeY": 40.0,
+    "volFogSizeZ": 600.0,
+    "volFogSteps": 32,
+    "volFogSun": 1.0,
+    "volFogWarp": 0.3499999940395355,
+    "volFogWindX": 2.0,
+    "volFogWindY": 0.0,
+    "volFogWindZ": 0.6000000238418579,
+    "volume": 0.800000011920929,
+    "warmth": 0.11999999731779099,
+    "waterClarity": 0.6499999761581421,
+    "waterColorB": 0.0,
+    "waterColorG": 0.0,
+    "waterColorR": 0.0,
+    "waterIor": 1.3300000429153442,
+    "waterLevel": -7.97599983215332,
+    "waterReflectivity": 0.3799999952316284,
+    "waveChoppy": 0.08100000023841858,
+    "waveHeight": 0.0,
+    "waveScale": 0.05999999865889549,
+    "waveStrength": 0.0,
+    "weather": 0.11999999731779099,
+    "weatherPreset": "",
+    "weatherPresetMist": true,
+    "weatherPresetTime": true,
+    "wildlife": false,
+    "windAngle": 26.56999969482422,
+    "windGust": 0.699999988079071,
+    "windStrength": 0.5,
+    "wxBreeze": 1.0,
+    "wxRain": 0.0,
+    "wxStorm": 0.0,
+    "wxThunder": 1.0,
+    "wxWind": 0.0
+  },
+  "version": 3
+}

@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.33000001311302185,
+    0.5600000023841858,
+    0.4699999988079071
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "f2b10aaa7b6eccc39514663ec5318835",
+  "ior": 1.5,
+  "name": "City Civic Copper",
+  "opacity": 1.0,
+  "reflectivity": 0.10000000149011612,
+  "roughness": 0.550000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.7200000286102295,
+    0.7200000286102295,
+    0.7400000095367432
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "6a47693befd1fb8393e7f6ce05f6523c",
+  "ior": 1.5,
+  "name": "Default",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.20000000298023224,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "albedo": [
+    0.8999999761581421,
+    0.9100000262260437,
+    0.9100000262260437
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "4411353fefe4b614b8de82de079a1b67",
+  "ior": 1.5,
+  "name": "City Civic Hospital",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.75,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "windowCell": [
+    2.200000047683716,
+    3.5
+  ],
+  "windowColor": [
+    1.0,
+    0.8799999952316284,
+    0.699999988079071
+  ],
+  "windowGlow": 2.200000047683716,
+  "windowGrid": true,
+  "windowLit": 0.05999999865889549,
+  "windowSeed": 83.0
+}

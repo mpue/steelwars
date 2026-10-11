@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.11999999731779099,
+    0.014399999752640724,
+    0.053999997675418854
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.11999999731779099,
+    0.44999998807907104
+  ],
+  "emissionStrength": 2.75,
+  "glass": false,
+  "id": "c285365d866de4a996f3112a96e8bd99",
+  "ior": 1.5,
+  "name": "Building F Sign A",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.44999998807907104,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

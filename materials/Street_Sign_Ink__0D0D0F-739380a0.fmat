@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.05000000074505806,
+    0.05000000074505806,
+    0.05999999865889549
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "739380a043f8e5fcf7ccdf72854ba1d3",
+  "ior": 1.5,
+  "name": "Street Sign Ink #0D0D0F",
+  "opacity": 1.0,
+  "reflectivity": 0.03999999910593033,
+  "roughness": 0.3799999952316284,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

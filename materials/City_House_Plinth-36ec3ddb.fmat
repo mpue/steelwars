@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.25999999046325684,
+    0.2800000011920929,
+    0.28999999165534973
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "36ec3ddb3653bfde6b842ee3ef47d9f1",
+  "ior": 1.5,
+  "name": "City House Plinth",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.800000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

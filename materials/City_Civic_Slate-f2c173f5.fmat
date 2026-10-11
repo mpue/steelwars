@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.20000000298023224,
+    0.20999999344348907,
+    0.23999999463558197
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "f2c173f58219e987930e0f6a8b88eff1",
+  "ior": 1.5,
+  "name": "City Civic Slate",
+  "opacity": 1.0,
+  "reflectivity": 0.05000000074505806,
+  "roughness": 0.6000000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

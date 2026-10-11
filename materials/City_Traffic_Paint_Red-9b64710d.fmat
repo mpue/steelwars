@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.550000011920929,
+    0.05999999865889549,
+    0.05000000074505806
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 0.0,
+  "glass": false,
+  "id": "9b64710dae33e3cb1f5d77cc00c1fbf4",
+  "ior": 1.5,
+  "name": "City Traffic Paint Red",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.30000001192092896,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

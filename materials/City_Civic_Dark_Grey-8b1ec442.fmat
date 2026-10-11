@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.14000000059604645,
+    0.14000000059604645,
+    0.15000000596046448
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "8b1ec4422008609a02dfbb391f7f2adb",
+  "ior": 1.5,
+  "name": "City Civic Dark Grey",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.800000011920929,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

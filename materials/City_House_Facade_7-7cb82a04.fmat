@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.7900000214576721,
+    0.7900000214576721,
+    0.7699999809265137
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "7cb82a04d06822a40d697a5d8891b4d9",
+  "ior": 1.5,
+  "name": "City House Facade 7",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8500000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

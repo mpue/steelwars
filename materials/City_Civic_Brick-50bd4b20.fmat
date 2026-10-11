@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.5,
+    0.23000000417232513,
+    0.17000000178813934
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "emissionStrength": 1.0,
+  "glass": false,
+  "id": "50bd4b20decce206cf54979881142fa8",
+  "ior": 1.5,
+  "name": "City Civic Brick",
+  "opacity": 1.0,
+  "reflectivity": 0.0,
+  "roughness": 0.8500000238418579,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

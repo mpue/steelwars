@@ -1,0 +1,28 @@
+{
+  "albedo": [
+    0.699999988079071,
+    0.4000000059604645,
+    0.05000000074505806
+  ],
+  "alphaCutoff": 0.5,
+  "alphaMode": 0,
+  "emission": [
+    1.0,
+    0.5,
+    0.03999999910593033
+  ],
+  "emissionStrength": 7.0,
+  "glass": false,
+  "id": "40b2819841f56b4602395fc9a7031140",
+  "ior": 1.5,
+  "name": "City Traffic Lamp Indicator",
+  "opacity": 1.0,
+  "reflectivity": 0.30000001192092896,
+  "roughness": 0.15000000596046448,
+  "thickness": 0.019999999552965164,
+  "tint": [
+    1.0,
+    1.0,
+    1.0
+  ]
+}

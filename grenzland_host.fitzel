@@ -1,0 +1,4295 @@
+{
+ "entities": [
+  {
+   "active": true,
+   "center": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "components": [
+    {
+     "color": [
+      1.0,
+      0.72,
+      0.48
+     ],
+     "intensity": 0.85,
+     "type": "sun"
+    }
+   ],
+   "half": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "id": 0,
+   "name": "Sun",
+   "parent": -1,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "type": 5
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "components": [
+    {
+     "backdropAngle": 188.0,
+     "backdropCenterX": -600.0,
+     "backdropCenterZ": 120.0,
+     "backdropHeight": 2800.0,
+     "backdropLake": 40.0,
+     "backdropOutlet": 16000.0,
+     "backdropRadius": 2300.0,
+     "backdropScale": 3400.0,
+     "backdropStretch": 0.550000011920929,
+     "backdropWidth": 3200.0,
+     "biomeFreq": 0.0017999999690800905,
+     "chunkSize": 64.0,
+     "continentAmp": 1.0,
+     "frequency": 0.014000000432133675,
+     "gain": 0.5,
+     "heightScale": 10.0,
+     "islandCenterX": 0.0,
+     "islandCenterZ": 0.0,
+     "islandRadius": 0.0,
+     "islandShape": 0.0,
+     "lacunarity": 2.0,
+     "octaves": 5,
+     "peakSharpness": 0.800000011920929,
+     "reliefGain": 1.0,
+     "resolution": 96,
+     "ridgeScale": 6.0,
+     "seed": 0.0,
+     "terrace": 0.0,
+     "type": "terrain",
+     "valleyDepth": 0.0,
+     "warpFrequency": 0.009999999776482582,
+     "warpStrength": 10.0
+    }
+   ],
+   "half": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "id": 1,
+   "name": "Terrain",
+   "parent": -1,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    0,
+    0.0
+   ],
+   "components": [
+    {
+     "file": "steelwars.lua",
+     "params": [
+      {
+       "name": "autoStart",
+       "type": "string",
+       "value": "mphost"
+      },
+      {
+       "name": "showFps",
+       "type": "bool",
+       "value": true
+      },
+      {
+       "name": "musicOn",
+       "type": "bool",
+       "value": false
+      }
+     ],
+     "type": "script"
+    }
+   ],
+   "half": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "id": 2,
+   "name": "Steelwars",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    0,
+    0.0
+   ],
+   "components": [],
+   "half": [
+    2,
+    2,
+    2
+   ],
+   "id": 3,
+   "name": "SW Map",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    -378.88,
+    0,
+    -378.88
+   ],
+   "components": [],
+   "half": [
+    3,
+    3,
+    3
+   ],
+   "id": 4,
+   "name": "SW Start",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    378.88,
+    0,
+    378.88
+   ],
+   "components": [],
+   "half": [
+    3,
+    3,
+    3
+   ],
+   "id": 5,
+   "name": "SW Start",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    -378.88,
+    0,
+    378.88
+   ],
+   "components": [],
+   "half": [
+    3,
+    3,
+    3
+   ],
+   "id": 6,
+   "name": "SW Start",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    378.88,
+    0,
+    -378.88
+   ],
+   "components": [],
+   "half": [
+    3,
+    3,
+    3
+   ],
+   "id": 7,
+   "name": "SW Start",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    -300.2509654447218,
+    0,
+    -364.13296894609374
+   ],
+   "components": [],
+   "half": [
+    1,
+    1,
+    1
+   ],
+   "id": 8,
+   "name": "SW Field",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    300.2509654447218,
+    0,
+    364.13296894609374
+   ],
+   "components": [],
+   "half": [
+    1,
+    1,
+    1
+   ],
+   "id": 9,
+   "name": "SW Field",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    -364.13296894609374,
+    0,
+    300.2509654447218
+   ],
+   "components": [],
+   "half": [
+    1,
+    1,
+    1
+   ],
+   "id": 10,
+   "name": "SW Field",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    364.13296894609374,
+    0,
+    -300.2509654447218
+   ],
+   "components": [],
+   "half": [
+    1,
+    1,
+    1
+   ],
+   "id": 11,
+   "name": "SW Field",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    -210.0,
+    0,
+    10.0
+   ],
+   "components": [],
+   "half": [
+    1.5,
+    1.5,
+    1.5
+   ],
+   "id": 12,
+   "name": "SW Field",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    210.0,
+    0,
+    -10.0
+   ],
+   "components": [],
+   "half": [
+    1.5,
+    1.5,
+    1.5
+   ],
+   "id": 13,
+   "name": "SW Field",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 4.0,
+     "burst": 70,
+     "colorEnd": [
+      0.9,
+      0.2,
+      0.03
+     ],
+     "colorStart": [
+      1.0,
+      0.75,
+      0.35
+     ],
+     "coneAngle": 25.0,
+     "drag": 2.5,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      2.0,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.4,
+     "lifetime": 0.9,
+     "loop": false,
+     "maxCount": 900,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 5.5,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 9,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 5,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 14,
+   "name": "FX Explosion",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 24,
+     "colorEnd": [
+      0.4,
+      0.08,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.55,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 1.5,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      3.0,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.3,
+     "loop": false,
+     "maxCount": 500,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 7.0,
+     "sizeStart": 2.5,
+     "sizeVar": 0.25,
+     "speed": 3,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 2,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 15,
+   "name": "FX Fireball",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.8,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 22,
+     "colorEnd": [
+      0.09,
+      0.088,
+      0.085
+     ],
+     "colorStart": [
+      0.035,
+      0.032,
+      0.03
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.9,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      1.6,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.4,
+     "lifetime": 4.0,
+     "loop": false,
+     "maxCount": 800,
+     "playing": true,
+     "radius": 0.5,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 7.5,
+     "sizeStart": 1.8,
+     "sizeVar": 0.25,
+     "speed": 2.2,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1.2,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      1.5,
+      0,
+      0.6
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 16,
+   "name": "FX Smoke Puff",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 5.0,
+     "burst": 45,
+     "colorEnd": [
+      1.0,
+      0.4,
+      0.1
+     ],
+     "colorStart": [
+      1.0,
+      0.85,
+      0.5
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.6,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      -14,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.5,
+     "lifetime": 0.7,
+     "loop": false,
+     "maxCount": 1500,
+     "playing": true,
+     "radius": 0.3,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.04,
+     "sizeStart": 0.12,
+     "sizeVar": 0.25,
+     "speed": 16,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 8,
+     "spin": 20.0,
+     "sprite": "",
+     "stretch": 0.06,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 17,
+   "name": "FX Sparks",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.8,
+     "alphaStart": 1.0,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 30,
+     "colorEnd": [
+      0.05,
+      0.05,
+      0.05
+     ],
+     "colorStart": [
+      0.06,
+      0.06,
+      0.06
+     ],
+     "coneAngle": 60,
+     "drag": 0.3,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      -18,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.8,
+     "loop": false,
+     "maxCount": 600,
+     "playing": true,
+     "radius": 0.5,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 2,
+     "sizeEnd": 0.35,
+     "sizeStart": 0.45,
+     "sizeVar": 0.25,
+     "speed": 12,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 6,
+     "spin": 360,
+     "sprite": "",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 18,
+   "name": "FX Debris",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.6,
+     "alphaStart": 1.0,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 40,
+     "colorEnd": [
+      0.01,
+      0.01,
+      0.012
+     ],
+     "colorStart": [
+      0.02,
+      0.02,
+      0.025
+     ],
+     "coneAngle": 55,
+     "drag": 0.2,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      -16,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.2,
+     "loop": false,
+     "maxCount": 600,
+     "playing": true,
+     "radius": 0.5,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 2,
+     "sizeEnd": 0.12,
+     "sizeStart": 0.25,
+     "sizeVar": 0.25,
+     "speed": 7,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 4,
+     "spin": 20.0,
+     "sprite": "",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 19,
+   "name": "FX Oil",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 6.0,
+     "burst": 8,
+     "colorEnd": [
+      1.0,
+      0.45,
+      0.1
+     ],
+     "colorStart": [
+      1.0,
+      0.8,
+      0.45
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      0,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.2,
+     "lifetime": 0.09,
+     "loop": false,
+     "maxCount": 500,
+     "playing": true,
+     "radius": 0.1,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.2,
+     "sizeStart": 0.9,
+     "sizeVar": 0.25,
+     "speed": 2,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1.0,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 20,
+   "name": "FX Muzzle",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.45,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 30,
+     "colorEnd": [
+      0.16,
+      0.14,
+      0.12
+     ],
+     "colorStart": [
+      0.12,
+      0.1,
+      0.08
+     ],
+     "coneAngle": 25.0,
+     "drag": 1.6,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      0.4,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 2.6,
+     "loop": false,
+     "maxCount": 800,
+     "playing": true,
+     "radius": 2.0,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 6.0,
+     "sizeStart": 1.5,
+     "sizeVar": 0.25,
+     "speed": 4,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 2,
+     "spin": 20.0,
+     "sprite": "shmup_puff.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 21,
+   "name": "FX Dust",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 6.0,
+     "burst": 6,
+     "colorEnd": [
+      0.1,
+      1.0,
+      0.5
+     ],
+     "colorStart": [
+      0.4,
+      1.0,
+      0.7
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      -6,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 0.8,
+     "loop": false,
+     "maxCount": 400,
+     "playing": true,
+     "radius": 0.6,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.05,
+     "sizeStart": 0.18,
+     "sizeVar": 0.25,
+     "speed": 5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 3,
+     "spin": 20.0,
+     "sprite": "",
+     "stretch": 0.04,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 22,
+   "name": "FX Energicum",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 7.0,
+     "burst": 20,
+     "colorEnd": [
+      0.2,
+      0.6,
+      1.0
+     ],
+     "colorStart": [
+      0.6,
+      0.95,
+      1.0
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      -4,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 0.35,
+     "loop": false,
+     "maxCount": 500,
+     "playing": true,
+     "radius": 0.5,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.1,
+     "sizeStart": 0.5,
+     "sizeVar": 0.25,
+     "speed": 8,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 4,
+     "spin": 20.0,
+     "sprite": "",
+     "stretch": 0.03,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 23,
+   "name": "FX Laser Hit",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 5.0,
+     "burst": 30,
+     "colorEnd": [
+      0.15,
+      0.3,
+      1.0
+     ],
+     "colorStart": [
+      0.5,
+      0.85,
+      1.0
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      1,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 0.6,
+     "loop": false,
+     "maxCount": 500,
+     "playing": true,
+     "radius": 0.5,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 4.0,
+     "sizeStart": 1.8,
+     "sizeVar": 0.25,
+     "speed": 6,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 3,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 24,
+   "name": "FX Plasma Hit",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": true,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 6.0,
+     "burst": 10,
+     "colorEnd": [
+      1.0,
+      0.7,
+      0.3
+     ],
+     "colorStart": [
+      0.7,
+      0.9,
+      1.0
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 0.1,
+     "gravity": [
+      0,
+      -12,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 0.5,
+     "loop": false,
+     "maxCount": 400,
+     "playing": true,
+     "radius": 0.5,
+     "rate": 0.0,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.03,
+     "sizeStart": 0.1,
+     "sizeVar": 0.25,
+     "speed": 6,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 3,
+     "spin": 20.0,
+     "sprite": "",
+     "stretch": 0.04,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 25,
+   "name": "FX Weld",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 26,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 27,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 28,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 29,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 30,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 31,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 32,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 33,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 34,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 35,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 36,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 1.0,
+     "blend": 1,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 3.0,
+     "burst": 0,
+     "colorEnd": [
+      0.8,
+      0.15,
+      0.02
+     ],
+     "colorStart": [
+      1.0,
+      0.6,
+      0.2
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.4,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      5,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 1.1,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.2,
+     "rate": 45,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 0.4,
+     "sizeStart": 1.6,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_fire.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      0.0,
+      0.0,
+      0.0
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 37,
+   "name": "FX Fire",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 38,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 39,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 40,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 41,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 42,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 43,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 44,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 45,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 46,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 47,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 48,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  },
+  {
+   "active": false,
+   "center": [
+    0.0,
+    -200,
+    0.0
+   ],
+   "components": [
+    {
+     "alphaEnd": 0.0,
+     "alphaStart": 0.7,
+     "blend": 0,
+     "boxSize": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "brightness": 1.0,
+     "burst": 0,
+     "colorEnd": [
+      0.08,
+      0.08,
+      0.08
+     ],
+     "colorStart": [
+      0.03,
+      0.028,
+      0.026
+     ],
+     "coneAngle": 25.0,
+     "drag": 0.5,
+     "duration": 3.0,
+     "gravity": [
+      0,
+      2.2,
+      0
+     ],
+     "inherit": 0.0,
+     "lifeVar": 0.3,
+     "lifetime": 7.0,
+     "loop": true,
+     "maxCount": 200,
+     "playing": true,
+     "radius": 1.0,
+     "rate": 14,
+     "rotation": 180.0,
+     "shape": 1,
+     "sizeEnd": 10.0,
+     "sizeStart": 2.0,
+     "sizeVar": 0.25,
+     "speed": 2.5,
+     "speedGlowMax": 1.0,
+     "speedGlowMin": 1.0,
+     "speedVar": 1,
+     "spin": 20.0,
+     "sprite": "shmup_smoke.png",
+     "stretch": 0.0,
+     "type": "particles",
+     "wind": [
+      2.0,
+      0,
+      0.8
+     ],
+     "worldSpace": true
+    }
+   ],
+   "half": [
+    0.1,
+    0.1,
+    0.1
+   ],
+   "id": 49,
+   "name": "FX Smoke",
+   "parent": -1,
+   "rotation": [
+    0,
+    0,
+    0
+   ],
+   "type": 7
+  }
+ ],
+ "settings": {
+  "adaptSpeed": 1.5,
+  "autoExposure": false,
+  "autoMaxEv": 2.5,
+  "autoMinEv": -1.5,
+  "autoWeather": false,
+  "birdsEnabled": false,
+  "bloom": 0.28,
+  "bloomKnee": 1.5,
+  "bloomThreshold": 4.0,
+  "camPathLoop": true,
+  "camPathOnStart": false,
+  "camPathSpeed": 0.6399999856948853,
+  "camPreview": true,
+  "cascadeSplit": 0.847000002861023,
+  "cloudBottom": 900.0,
+  "cloudDensity": 1.0,
+  "cloudScale": 0.0008999999845400453,
+  "cloudShadows": true,
+  "cloudTop": 2600.0,
+  "cloudWind": 4.0,
+  "contactShadows": true,
+  "contrails": false,
+  "contrast": 0.52,
+  "coverage": 0.5,
+  "cursorGrid": 1.0,
+  "cursorX": -138.69845581054688,
+  "cursorY": 7.584833145141602,
+  "cursorZ": -73.74562072753906,
+  "dayLength": 600.0,
+  "detailStrength": 1.5,
+  "dofBlur": 0.0,
+  "dofFar": 140.0,
+  "dofNear": 25.0,
+  "ecoCover": 0.55,
+  "ecoForest": true,
+  "ecoSlopeLove": 0.6000000238418579,
+  "ecoSolitary": 0.03,
+  "ecoStandSize": 260.0,
+  "editorCamera": {
+   "pitch": -48.0,
+   "x": -260.0,
+   "y": 220.0,
+   "yaw": 45.0,
+   "z": -260.0
+  },
+  "envProbeFaces": 3,
+  "envProbeRes": 256,
+  "exposure": 1.35,
+  "farPlane": 900.0,
+  "farPlaneAuto": true,
+  "farSnowLevel": 2050.0,
+  "farTerrain": true,
+  "farTreeLine": 1650.0,
+  "filmGrain": 0.05,
+  "fireflyEnabled": false,
+  "flowerDensity": 1.0,
+  "flowerEnabled": false,
+  "foamWidth": 1.2380000352859497,
+  "fogDensity": 0.0009,
+  "fogFalloff": 0.018,
+  "forestFloorLayer": 1,
+  "forestRadius": 1600.0,
+  "gradeSplit": 0.4740000069141388,
+  "gradeVibrance": 0.47099998593330383,
+  "grassChaos": 2.0,
+  "grassDensity": 1.1,
+  "grassDryGrowth": 1.0,
+  "grassEnabled": true,
+  "grassHeight": 0.4259999990463257,
+  "grassRadius": 120.0,
+  "grassTintB": 0.25,
+  "grassTintG": 0.62,
+  "grassTintR": 0.55,
+  "gridFade": 220.0,
+  "hdri": "textures/cowboy_town_hall_4k.exr",
+  "herdCount": 0,
+  "herdGrazeClip": 0,
+  "herdHeight": 2.0,
+  "herdModel": "content/models/horse.fbx",
+  "herdRadius": 30.0,
+  "herdWalkClip": 2,
+  "herdWalkSpeed": 1.399999976158142,
+  "herdX": 70.0,
+  "herdYaw": 0.0,
+  "herdZ": 125.0,
+  "hue": 1.0,
+  "ibl": false,
+  "iblIntensity": 1.0,
+  "iblSkybox": false,
+  "impostorShadowDist": 0.0,
+  "impostorStart": 130.0,
+  "lightning": false,
+  "meadowTint": 0.6,
+  "mixAmbient": 1.0,
+  "mixAmbientMute": false,
+  "mixSfx": 1.0,
+  "mixSfxMute": false,
+  "motes": true,
+  "motionBlur": 0.0,
+  "moveSpeed": 2.700000047683716,
+  "muted": false,
+  "normalStrength": 0.6639999747276306,
+  "rainAmount": 0.0,
+  "rays": 0.0,
+  "rivers": {
+   "paths": [
+    {
+     "bias": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -1.409999966621399,
+      0.0,
+      0.0
+     ],
+     "enabled": true,
+     "kind": 1,
+     "name": "Brook",
+     "points": [
+      [
+       -740.4879150390625,
+       -113.16471862792969
+      ],
+      [
+       -1822.42822265625,
+       -169.332763671875
+      ],
+      [
+       -326.6647033691406,
+       123.37625122070312
+      ],
+      [
+       -95.29936981201172,
+       -7.886932373046875
+      ],
+      [
+       -79.32789611816406,
+       37.014991760253906
+      ],
+      [
+       -45.323150634765625,
+       25.513961791992188
+      ],
+      [
+       -15.132111549377441,
+       -15.774398803710938
+      ],
+      [
+       -13.388082504272461,
+       -43.78662109375
+      ],
+      [
+       -9.819326400756836,
+       -52.250885009765625
+      ],
+      [
+       -14.775367736816406,
+       -63.36345672607422
+      ],
+      [
+       -21.654035568237305,
+       -72.7896499633789
+      ],
+      [
+       -40.94390106201172,
+       -112.28289794921875
+      ],
+      [
+       -40.09477615356445,
+       -119.00851440429688
+      ],
+      [
+       -37.842994689941406,
+       -132.18637084960938
+      ]
+     ],
+     "preset": 3,
+     "style": {
+      "autoFlow": true,
+      "bankBlend": 0.8500000238418579,
+      "bankLayer": 3,
+      "bankPaint": 30.0,
+      "bankRise": 2.2899999618530273,
+      "bankWidth": 25.6299991607666,
+      "bedFlat": 0.7599999904632568,
+      "bendEase": 1.100000023841858,
+      "bendScour": 0.550000011920929,
+      "clarity": 0.05000000074505806,
+      "current": 0.0,
+      "deep": [
+       0.289035826921463,
+       0.2911260426044464,
+       0.29723989963531494
+      ],
+      "depth": 1.7400000095367432,
+      "depthVary": 0.1899999976158142,
+      "fallMin": 1.5,
+      "fallSlope": 0.30000001192092896,
+      "flip": false,
+      "flowSpeed": 0.6399999856948853,
+      "foamWidth": 0.49000000953674316,
+      "maxCut": 8.0,
+      "meander": 41.900001525878906,
+      "meanderLength": 133.0,
+      "minSlope": 0.001500000013038516,
+      "plunge": 1.2000000476837158,
+      "poolLength": 14.0,
+      "rapidSlope": 0.019999999552965164,
+      "reedColor": [
+       0.36000001430511475,
+       0.4399999976158142,
+       0.2199999988079071
+      ],
+      "reedDepth": 0.6000000238418579,
+      "reedHeight": 2.809999942779541,
+      "reeds": 0.0,
+      "reflect": 0.2800000011920929,
+      "ripple": 0.08699999749660492,
+      "rippleScale": 1.6200000047683716,
+      "seed": 7,
+      "shallow": [
+       0.5244161486625671,
+       0.5244161486625671,
+       0.5244161486625671
+      ],
+      "smooth": 40,
+      "sparkle": 0.07999999821186066,
+      "stoneColor": [
+       0.4399999976158142,
+       0.41999998688697815,
+       0.38999998569488525
+      ],
+      "stoneSize": 0.550000011920929,
+      "stoneSpread": 3.0,
+      "stones": 0.0,
+      "widen": 1.5,
+      "width": 4.699999809265137,
+      "widthVary": 0.7099999785423279
+     }
+    },
+    {
+     "bias": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.559999942779541
+     ],
+     "enabled": true,
+     "kind": 1,
+     "name": "River",
+     "points": [
+      [
+       104.52360534667969,
+       -67.91061401367188
+      ],
+      [
+       100.03851318359375,
+       -32.43254089355469
+      ],
+      [
+       81.06156921386719,
+       -2.2443771362304688
+      ],
+      [
+       75.06144714355469,
+       50.23478698730469
+      ],
+      [
+       54.909095764160156,
+       185.3851318359375
+      ],
+      [
+       -82.5910415649414,
+       522.08056640625
+      ]
+     ],
+     "preset": 3,
+     "style": {
+      "autoFlow": true,
+      "bankBlend": 0.8500000238418579,
+      "bankLayer": 3,
+      "bankPaint": 4.5,
+      "bankRise": 0.28999999165534973,
+      "bankWidth": 10.0,
+      "bedFlat": 0.5,
+      "bendEase": 1.100000023841858,
+      "bendScour": 0.550000011920929,
+      "clarity": 0.44999998807907104,
+      "current": 1.399999976158142,
+      "deep": [
+       0.03999999910593033,
+       0.05999999865889549,
+       0.05999999865889549
+      ],
+      "depth": 2.200000047683716,
+      "depthVary": 0.4000000059604645,
+      "fallMin": 1.5,
+      "fallSlope": 0.30000001192092896,
+      "flip": false,
+      "flowSpeed": 0.23999999463558197,
+      "foamWidth": 1.7300000190734863,
+      "maxCut": 8.0,
+      "meander": 26.0,
+      "meanderLength": 170.0,
+      "minSlope": 0.001500000013038516,
+      "plunge": 1.2000000476837158,
+      "poolLength": 14.0,
+      "rapidSlope": 0.019999999552965164,
+      "reedColor": [
+       0.36000001430511475,
+       0.4399999976158142,
+       0.2199999988079071
+      ],
+      "reedDepth": 0.6000000238418579,
+      "reedHeight": 1.3799999952316284,
+      "reeds": 94.0,
+      "reflect": 0.8999999761581421,
+      "ripple": 0.0689999982714653,
+      "rippleScale": 0.3799999952316284,
+      "seed": 7,
+      "shallow": [
+       0.30000001192092896,
+       0.33000001311302185,
+       0.25999999046325684
+      ],
+      "smooth": 14,
+      "sparkle": 0.6000000238418579,
+      "stoneColor": [
+       0.4399999976158142,
+       0.41999998688697815,
+       0.38999998569488525
+      ],
+      "stoneSize": 0.550000011920929,
+      "stoneSpread": 3.0,
+      "stones": 25.0,
+      "widen": 1.5,
+      "width": 14.0,
+      "widthVary": 0.25
+     }
+    }
+   ]
+  },
+  "road": {
+   "banks": "0 0 0 0 0 0 0 0 0 0 0 0 ",
+   "bed": 0.0,
+   "biomes": [],
+   "bridgeStyle": {
+    "abutment": 6.0,
+    "deckThick": 0.6000000238418579,
+    "overhang": 0.4000000059604645,
+    "pierSpacing": 14.0,
+    "pierWidth": 1.2000000476837158,
+    "railHeight": 1.100000023841858,
+    "railWidth": 0.30000001192092896
+   },
+   "bridges": [],
+   "cityBudget": 400,
+   "cityEnabled": true,
+   "cityMinPixels": 7.0,
+   "cityRange": 1200.0,
+   "closed": false,
+   "decals": [],
+   "edgeAngle": 35.0,
+   "edgeWidth": 0.0,
+   "enabled": true,
+   "fadeWidth": 0.20000000298023224,
+   "glow": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "glowMap": "",
+   "glowStrength": 0.0,
+   "glowTile": 40.0,
+   "grade": 0.949999988079071,
+   "junctionGlow": "",
+   "junctionStyle": {
+    "blend": 18.0,
+    "clearance": 2.5,
+    "enabled": true,
+    "margin": 1.0,
+    "minAngleDeg": 22.0
+   },
+   "junctionTex": "roads_basic_crossing.png",
+   "lifts": "0 0 0 0 0 0 -4.912 0 0 0 0 0 ",
+   "loops": [],
+   "name": "Road 1",
+   "normal": "",
+   "points": "27.47933 -34.01449 23.53352 -37.96661 18.10969 -37.92056 12.1492 -38.93213 0.7497654 -36.3274 -1.858223 -31.15088 13.59937 1.169901 -25.41715 13.75866 -63.43773 44.0166 -109.0378 71.34821 -181.4056 99.51343 -266.0033 127.5906 ",
+   "rainRings": 1.0,
+   "shoulder": 5.699999809265137,
+   "sideObjects": [],
+   "surface": "roads_basic.png",
+   "texTile": 8.0,
+   "tunnelStyle": {
+    "abutment": 10.0,
+    "clearHeight": 5.5,
+    "portal": 1.0,
+    "sideClear": 1.0,
+    "skirt": 2.0
+   },
+   "tunnels": [],
+   "wetMap": "",
+   "wetReflect": 0.44999998807907104,
+   "wetShore": 0.18000000715255737,
+   "wetStretch": 1.0,
+   "wetTile": 26.0,
+   "wetVar": 0.0,
+   "wetness": 0.0,
+   "width": 1.0
+  },
+  "rockSlope": 0.6200000047683716,
+  "saturation": 0.78,
+  "showCrosshair": false,
+  "showGrid": false,
+  "skidDark": 0.550000011920929,
+  "skidMarks": false,
+  "skidSlip": 0.44999998807907104,
+  "skidWidth": 0.1599999964237213,
+  "skyAltocumulusAmount": 0.5,
+  "skyAltocumulusDir": 1.100000023841858,
+  "skyAltocumulusHeight": 3400.0,
+  "skyAltocumulusOn": false,
+  "skyAltocumulusScale": 1.0,
+  "skyAltocumulusWind": 7.0,
+  "skyCirrocumulusAmount": 0.44999998807907104,
+  "skyCirrocumulusDir": 0.30000001192092896,
+  "skyCirrocumulusHeight": 5200.0,
+  "skyCirrocumulusOn": false,
+  "skyCirrocumulusScale": 1.0,
+  "skyCirrocumulusWind": 9.0,
+  "skyCirrusAmount": 0.18000000715255737,
+  "skyCirrusDir": 0.0,
+  "skyCirrusHeight": 8000.0,
+  "skyCirrusOn": true,
+  "skyCirrusScale": 1.0,
+  "skyCirrusWind": 2.5,
+  "skyContrailsAmount": 0.3499999940395355,
+  "skyContrailsDir": 0.5,
+  "skyContrailsHeight": 10500.0,
+  "skyContrailsOn": true,
+  "skyContrailsScale": 0.5,
+  "skyContrailsWind": 1.0,
+  "skyStratocumulusAmount": 0.550000011920929,
+  "skyStratocumulusDir": 0.6000000238418579,
+  "skyStratocumulusHeight": 1200.0,
+  "skyStratocumulusOn": false,
+  "skyStratocumulusScale": 1.0,
+  "skyStratocumulusWind": 5.0,
+  "skyStratusAmount": 0.6000000238418579,
+  "skyStratusDir": 0.0,
+  "skyStratusHeight": 600.0,
+  "skyStratusOn": false,
+  "skyStratusScale": 1.600000023841858,
+  "skyStratusWind": 4.0,
+  "slopeSharp": 0.14000000059604645,
+  "snapAngle": 15.0,
+  "snapScale": 0.10000000149011612,
+  "snowLevel": 1100.0,
+  "soundscape": false,
+  "ssao": 0.8399999737739563,
+  "ssaoBias": 0.47999998927116394,
+  "ssaoRadius": 2.931999921798706,
+  "ssr": true,
+  "startMode": 0,
+  "sunDeclination": 18.0,
+  "sunLatitude": 47.0,
+  "terrBiome": 0.0017999999690800905,
+  "terrContinent": 1.0,
+  "terrFreq": 0.014000000432133675,
+  "terrHeight": 10.0,
+  "terrIslandCenterX": 0.0,
+  "terrIslandCenterZ": 0.0,
+  "terrIslandRadius": 0.0,
+  "terrIslandShape": 0.0,
+  "terrOctaves": 5,
+  "terrPeak": 0.800000011920929,
+  "terrRelief": 1.0,
+  "terrRidge": 6.0,
+  "terrSeed": 0.0,
+  "terrTerrace": 0.0,
+  "terrValley": 0.0,
+  "terrWarp": 10.0,
+  "terrainEditCell": 1.0,
+  "terrainEntity": true,
+  "terrainGloss": 0.0,
+  "terrainHeightBlend": 0.6000000238418579,
+  "terrainLayers": [
+   {
+    "hEnd": -6.0,
+    "hStart": -10.5,
+    "name": "coast_sand_01_diff_4k",
+    "norm": "00000000000000000000000000000000",
+    "sEnd": 90.0,
+    "sStart": 0.0,
+    "scale": 0.07999999821186066,
+    "tex": "dc6c8f253f4d60c0d25c38b40ff04616"
+   },
+   {
+    "hEnd": 1000.0,
+    "hStart": -1000.0,
+    "name": "forest_leaves_02_diffuse_4k",
+    "norm": "8f05d731abc007fd0483f4a2510770e0",
+    "sEnd": 0.0,
+    "sStart": 0.0,
+    "scale": 0.2879999876022339,
+    "tex": "9d5faa85ce4d214e47db8609b85677d5"
+   },
+   {
+    "hEnd": -21.600000381469727,
+    "hStart": -1000.0,
+    "name": "brown_mud_leaves_01_diff_4k",
+    "norm": "6fa87123727703a7e378b7a5262de75d",
+    "sEnd": 90.0,
+    "sStart": 0.0,
+    "scale": 0.34299999475479126,
+    "tex": "90b148f6d3a5237bbb1f20c0d0e91a8b"
+   },
+   {
+    "hEnd": 1000.0,
+    "hStart": -1000.0,
+    "name": "dry_river_pebbles_diff_4k",
+    "norm": "4ea2299d0251cad7f33a05ef3e34e9b1",
+    "sEnd": 90.0,
+    "sStart": 26.0,
+    "scale": 0.1889999955892563,
+    "tex": "921e11f1260e99526954ec307244a6a0"
+   },
+   {
+    "hEnd": 1000.0,
+    "hStart": -200.0,
+    "name": "gray_rocks_diff_4k",
+    "norm": "f4a1202ce2cd193f5c0b668bc0b2fc5b",
+    "sEnd": 90.0,
+    "sStart": 9.0,
+    "scale": 0.20600000023841858,
+    "tex": "572227c9c89109cec6181d6af4718868"
+   },
+   {
+    "hEnd": 1000.0,
+    "hStart": -48.400001525878906,
+    "name": "sparse_grass_diff_4k",
+    "norm": "16d5de595291343213408c489a44e199",
+    "sEnd": 54.0,
+    "sStart": 0.0,
+    "scale": 0.35499998927116394,
+    "tex": "6e094ca4b5e154fd34689c3ddb91bedd"
+   }
+  ],
+  "terrainPaintCell": 1.0,
+  "texScale": 0.07999999821186066,
+  "timeFlows": false,
+  "timeOfDay": 17.7,
+  "tonemapCurve": 0,
+  "trailGlow": 2.0,
+  "trailLife": 1.600000023841858,
+  "trailOpacity": 0.5,
+  "trailWidth": 0.30000001192092896,
+  "treeBrightness": 0.62,
+  "treeContrast": 0.8,
+  "treeEnabled": true,
+  "treeHue": -4.0,
+  "treePainted": true,
+  "treeProcedural": true,
+  "treeShadowDist": 120.0,
+  "trees": [
+   {
+    "bbAspect": 0.99,
+    "bbEnabled": true,
+    "bbSize": 1.05,
+    "bbStart": 60.0,
+    "billboard": "billboard_tree_bled.png",
+    "density": 1.4,
+    "enabled": true,
+    "lods": [
+     {
+      "dist": 45.0,
+      "model": "tree1.glb"
+     }
+    ],
+    "materials": [],
+    "name": "Fichte",
+    "size": 11.0
+   },
+   {
+    "bbAspect": 0.99,
+    "bbEnabled": true,
+    "bbSize": 1.05,
+    "bbStart": 60.0,
+    "billboard": "billboard_tree_bled.png",
+    "density": 1.0,
+    "enabled": true,
+    "lods": [
+     {
+      "dist": 45.0,
+      "model": "tree2.glb"
+     }
+    ],
+    "materials": [],
+    "name": "Kiefer",
+    "size": 12.0
+   },
+   {
+    "bbAspect": 0.99,
+    "bbEnabled": true,
+    "bbSize": 1.05,
+    "bbStart": 60.0,
+    "billboard": "billboard_tree_bled.png",
+    "density": 0.7,
+    "enabled": true,
+    "lods": [
+     {
+      "dist": 45.0,
+      "model": "tree3.glb"
+     }
+    ],
+    "materials": [],
+    "name": "Laub",
+    "size": 9.0
+   },
+   {
+    "bbAspect": 0.99,
+    "bbEnabled": true,
+    "bbSize": 1.05,
+    "bbStart": 60.0,
+    "billboard": "billboard_tree_bled.png",
+    "density": 0.5,
+    "enabled": true,
+    "lods": [
+     {
+      "dist": 45.0,
+      "model": "tree4.glb"
+     }
+    ],
+    "materials": [],
+    "name": "Busch",
+    "size": 3.0
+   }
+  ],
+  "value": 0.9769999980926514,
+  "viewRadius": 5,
+  "vignette": 0.45,
+  "volFog": false,
+  "volFogAmbient": 1.0,
+  "volFogAnisotropy": 0.550000011920929,
+  "volFogCenterX": 0.0,
+  "volFogCenterY": 20.053720474243164,
+  "volFogCenterZ": 0.0,
+  "volFogColorB": 0.949999988079071,
+  "volFogColorG": 0.8600000143051147,
+  "volFogColorR": 0.800000011920929,
+  "volFogCoverage": 0.30000001192092896,
+  "volFogDensity": 0.07999999821186066,
+  "volFogDetail": 0.44999998807907104,
+  "volFogEdge": 0.25,
+  "volFogFollow": true,
+  "volFogHeightFalloff": 0.800000011920929,
+  "volFogNoiseScale": 0.009999999776482582,
+  "volFogNoiseVertical": 3.0,
+  "volFogRes": 2,
+  "volFogSelfShadow": true,
+  "volFogShafts": true,
+  "volFogSizeX": 600.0,
+  "volFogSizeY": 40.0,
+  "volFogSizeZ": 600.0,
+  "volFogSteps": 32,
+  "volFogSun": 1.0,
+  "volFogWarp": 0.3499999940395355,
+  "volFogWindX": 2.0,
+  "volFogWindY": 0.0,
+  "volFogWindZ": 0.6000000238418579,
+  "volume": 0.800000011920929,
+  "warmth": 0.12,
+  "waterClarity": 0.6499999761581421,
+  "waterColorB": 0.0,
+  "waterColorG": 0.0,
+  "waterColorR": 0.0,
+  "waterIor": 1.3300000429153442,
+  "waterLevel": -7.97599983215332,
+  "waterReflectivity": 0.3799999952316284,
+  "waveChoppy": 0.08100000023841858,
+  "waveHeight": 0.0,
+  "waveScale": 0.05999999865889549,
+  "waveStrength": 0.0,
+  "weather": 0.12,
+  "weatherPreset": "",
+  "weatherPresetMist": true,
+  "weatherPresetTime": true,
+  "wildlife": false,
+  "windAngle": 26.56999969482422,
+  "windGust": 0.699999988079071,
+  "windStrength": 0.5,
+  "wxBreeze": 1.0,
+  "wxRain": 0.0,
+  "wxStorm": 0.0,
+  "wxThunder": 1.0,
+  "wxWind": 0.0,
+  "paintedGrass": "",
+  "paintedFlowers": "",
+  "paintedTrees2": "",
+  "terrainEdits": "",
+  "terrainPaint": "",
+  "roads": [
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Tulpengasse",
+    "points": "-128.813461 -140.796173 -134.820343 -111.403702 -150.762650 -33.395782 -152.700760 42.820602 -159.568604 131.024216 -161.897461 160.933685 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Marktweg",
+    "points": "-32.814552 -142.396301 -35.240913 -112.494591 -41.638611 -33.651424 -53.959953 49.115078 -61.049118 124.198967 -63.869076 154.066132 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Hauptstra\u00dfe",
+    "points": "63.208485 -147.307312 60.601448 -117.420807 53.437313 -35.292732 45.199799 43.033501 40.936237 126.706306 39.409565 156.667435 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Lindenstra\u00dfe",
+    "points": "158.867401 -153.633789 158.036667 -123.645294 155.778809 -42.139935 142.435562 33.608421 138.088989 117.952347 136.545013 147.912598 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Veilchenweg",
+    "points": "-164.818542 -111.075073 -134.820343 -111.403702 -35.240913 -112.494591 60.601448 -117.420807 158.036667 -123.645294 187.975647 -125.557899 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Wiesenstra\u00dfe",
+    "points": "-180.762573 -33.325504 -150.762650 -33.395782 -41.638611 -33.651424 53.437313 -35.292732 155.778809 -42.139935 185.711884 -44.142620 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Werkweg",
+    "points": "-182.639984 40.912052 -152.700760 42.820602 -53.959953 49.115078 45.199799 43.033501 142.435562 33.608421 172.295624 30.714081 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   },
+   {
+    "banks": "0 0 0 0 0 0 ",
+    "bridges": [],
+    "lifts": "0 0 0 0 0 0 ",
+    "name": "Querweg",
+    "points": "-189.496872 133.097595 -159.568604 131.024216 -61.049118 124.198967 40.936237 126.706306 138.088989 117.952347 167.967941 115.260101 ",
+    "shoulder": 2.5,
+    "town": 1,
+    "width": 6.0
+   }
+  ],
+  "anim": {
+   "clips": []
+  },
+  "animGraphs": [
+   {
+    "entry": 0,
+    "name": "Graph 1",
+    "params": [],
+    "states": [],
+    "transitions": []
+   }
+  ],
+  "modelMaterialOverrides": {},
+  "towns": {
+   "nextId": 2,
+   "towns": [
+    {
+     "blockBase": [
+      0.30000001192092896,
+      0.28999999165534973,
+      0.2800000011920929
+     ],
+     "blockColor": [
+      0.6200000047683716,
+      0.5699999928474426,
+      0.49000000953674316
+     ],
+     "blockFloorsMax": 6,
+     "blockFloorsMin": 3,
+     "blockPalette": 6,
+     "blockRing": 0.0,
+     "budget": 1500,
+     "busShare": 0.10000000149011612,
+     "busStopEvery": 350.0,
+     "centrePark": true,
+     "civic": {
+      "church": {
+       "count": 1
+      },
+      "fireStation": {
+       "count": 1
+      },
+      "hospital": {
+       "count": 0
+      },
+      "industry": {
+       "count": 0
+      },
+      "kindergarten": {
+       "count": 1
+      },
+      "landfill": {
+       "count": 0
+      },
+      "library": {
+       "count": 0
+      },
+      "museum": {
+       "count": 0
+      },
+      "petrolStation": {
+       "count": 1
+      },
+      "police": {
+       "count": 0
+      },
+      "pool": {
+       "count": 0
+      },
+      "powerPlant": {
+       "count": 0
+      },
+      "school": {
+       "count": 1
+      },
+      "station": {
+       "count": 0
+      },
+      "theatre": {
+       "count": 0
+      },
+      "townHall": {
+       "count": 1
+      }
+     },
+     "collider": true,
+     "colourVariety": 0.35,
+     "enabled": true,
+     "facadeColor": [
+      0.42,
+      0.4,
+      0.38
+     ],
+     "fill": 0.8500000238418579,
+     "glassTint": [
+      0.10000000149011612,
+      0.12999999523162842,
+      0.17000000178813934
+     ],
+     "grid": {
+      "avenueEvery": 0,
+      "avenueWidth": 7.5,
+      "blockX": 100.0,
+      "blockZ": 80.0,
+      "bridges": true,
+      "center": [
+       0.0,
+       0.0
+      ],
+      "maxBridge": 180.0,
+      "names": 0,
+      "organic": 0.3499999940395355,
+      "rotation": 0.0,
+      "seed": 11,
+      "sizeX": 300.0,
+      "sizeZ": 240.0,
+      "streetWidth": 6.0,
+      "stub": 30.0
+     },
+     "houseLot": 24.0,
+     "houseSetback": 6.0,
+     "id": 1,
+     "industryAngle": 0.0,
+     "industryShare": 0.0,
+     "laid": {
+      "avenueEvery": 0,
+      "avenueWidth": 7.5,
+      "blockX": 100.0,
+      "blockZ": 80.0,
+      "bridges": true,
+      "center": [
+       0.0,
+       0.0
+      ],
+      "maxBridge": 180.0,
+      "names": 0,
+      "organic": 0.3499999940395355,
+      "rotation": 0.0,
+      "seed": 11,
+      "sizeX": 300.0,
+      "sizeZ": 240.0,
+      "streetWidth": 6.0,
+      "stub": 30.0
+     },
+     "lampBothSides": false,
+     "lampEvery": 32.0,
+     "lampInset": 0.6000000238418579,
+     "lampPrefabs": [],
+     "maxSlope": 0.2199999988079071,
+     "name": "Ruinen von Weissenfeld",
+     "parkChance": 0.10000000149011612,
+     "pavements": true,
+     "people": 0.0,
+     "personPlaceholderWeight": 1.0,
+     "personPrefabs": [],
+     "placeholderWeight": 1.0,
+     "powerLineLength": 1500.0,
+     "powerLines": true,
+     "roofColor": [
+      0.22,
+      0.12,
+      0.1
+     ],
+     "rowRing": 0.25,
+     "seed": 11,
+     "sidewalk": 3.0,
+     "signStyle": 0,
+     "signs": true,
+     "towerBase": [
+      0.20000000298023224,
+      0.20000000298023224,
+      0.20999999344348907
+     ],
+     "towerFloorsMax": 45,
+     "towerFloorsMin": 12,
+     "towerPalette": 5,
+     "towerRing": 0.0,
+     "traffic": 0.0,
+     "trafficLights": true,
+     "truckShare": 0.15000000596046448,
+     "vehiclePrefabs": [],
+     "weathering": 1.0,
+     "windowLit": 0.06,
+     "zoneNoise": 0.11999999731779099
+    }
+   ],
+   "range": 1600.0
+  }
+ },
+ "version": 3,
+ "app": "0.5.0.347 (7485606, dirty)"
+}
