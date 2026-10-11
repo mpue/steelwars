@@ -6,3 +6,6 @@
 
 # Generated at load time (H.makeMinimap)
 textures/sw_minimap_*.tga
+
+# The server package (server/build.sh)
+server/dist/
