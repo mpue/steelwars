@@ -218,7 +218,7 @@ function I.commands()
         cmds[#cmds + 1] = { key = "Z", label = "Angriff-Zug", act = function() I.mode = "amove" end, on = I.mode == "amove" }
         if #units == 1 and I.drive then
             cmds[#cmds + 1] = { key = "C", label = "Steuern",
-                tip = "Selbst ans Steuer: W/S fahren, A/D lenken, Maus zielen, Linksklick feuern. C oder Esc steigt aus.",
+                tip = "Selbst ans Steuer: W/S fahren, A/D lenken, Maus zielen, Linksklick feuern. C oder Esc steigt aus, Tab wechselt zwischen Sitz und Kommando.",
                 act = function() I.drive(units[1]) end }
         end
         local deploy, fly, copter = {}, {}, nil
@@ -371,6 +371,12 @@ function I.update(dt, mx, my, over)
         end
     end
     if game.keyPressed(game.KEY_SPACE) and I.lastAlert then C.lookAt(I.lastAlert[1], I.lastAlert[2]) end
+    -- back into the seat left last, else into the one unit selected
+    if game.keyPressed(game.KEY_TAB) and I.drive then
+        local units = I.myUnits(I.selected())
+        if I.driveBack and I.driveBack() then A.play("click"); return
+        elseif #units == 1 then I.drive(units[1]); A.play("click"); return end
+    end
     local cmds = I.commands()
     for _, c in ipairs(cmds) do
         local k = (c.key == "DEL") and game.KEY_DELETE or game["KEY_" .. c.key]

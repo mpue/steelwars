@@ -295,6 +295,8 @@ function Mn.draw(dt, ctx)
             { "T / G / Z / B", "Stopp / Halten / Angriff-Zug (dann Klick) / zur Werkstatt" },
             { "X", "Ausbauen (Baufahrzeug) · Fliegen (Terminator) · Entladen" },
             { "C", "Selbst steuern: W S A D, Maus zielt, Klick feuert" },
+            { "Tab", "Zwischen Fahrersitz und Kommando wechseln" },
+            { "V", "Beim Fahren: Verwalter führt die Basis an/aus" },
             { "H / Leertaste", "Zur Basis / zur letzten Meldung" },
             { "V / N / M / Entf", "Sammelpunkt / Verstärken / Erweitern / Verkaufen" },
             { "P", "Pause (Gefecht gegen KI)" },

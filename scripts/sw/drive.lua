@@ -4,7 +4,9 @@
 -- it, W/S drive, A/D steer, the mouse aims and the left button fires; Q/E turn
 -- the camera around the unit, the wheel brings it nearer or further, X does
 -- what X always does (build up, fly, unload here). C or Esc gives the unit
--- back to its crew, who stop where it stands.
+-- back to its crew, who stop where it stands. Tab does the same, and Tab in
+-- the commander's view puts you back in that seat. Meanwhile the steward minds
+-- the base (sw/steward.lua); V sends it away or calls it back.
 --
 -- What the hands do reaches the simulation as orders like any click ("dc id
 -- throttle steer aimX aimZ fire", see simcmd.lua), so a driven unit is the
@@ -17,11 +19,13 @@ local V = require("sw.view")
 local C = require("sw.camera")
 local I = require("sw.ui")
 local A = require("sw.audio")
+local St = require("sw.steward")
 
 local R = {}
 local sin, cos, min, max, abs, floor, pi = math.sin, math.cos, math.min, math.max, math.abs, math.floor, math.pi
 
 R.id = nil            -- the unit being driven
+R.last = nil          -- the one driven last: Tab goes back to it
 R.time = 0
 local sent, sentKeys, sentT = nil, nil, -1
 local camYaw = 0      -- the camera's turn around the unit (Q/E), on top of its heading
@@ -48,6 +52,7 @@ end
 function R.enter(o)
     if not R.canDrive(o) then return end
     R.id = o.id
+    R.last = o.id
     sent, sentKeys = nil, nil
     camYaw, camZoom = 0, 1
     yaw = o.h
@@ -70,8 +75,16 @@ function R.leave(quiet)
     C.tdist = 90
 end
 
+-- Back into the seat left last; false when that unit is gone or out of reach.
+function R.back()
+    local o = R.last and S.get(R.last)
+    if not R.canDrive(o) then R.last = nil; return false end
+    R.enter(o)
+    return true
+end
+
 -- A new game: nobody is driving.
-function R.reset() R.id = nil; V.eye = nil end
+function R.reset() R.id = nil; R.last = nil; V.eye = nil end
 
 local function unit()
     local o = R.id and S.get(R.id)
@@ -154,7 +167,7 @@ function R.update(dt, mx, my, over)
     R.time = R.time + dt
     local o = unit()
     if not o then R.leave(true); return end
-    if game.keyPressed(game.KEY_C) or game.keyPressed(game.KEY_ESCAPE) then
+    if game.keyPressed(game.KEY_C) or game.keyPressed(game.KEY_ESCAPE) or game.keyPressed(game.KEY_TAB) then
         R.leave()
         A.play("click")
         return
@@ -165,6 +178,10 @@ function R.update(dt, mx, my, over)
     if kd(game.KEY_S) or kd(game.KEY_DOWN) then thr = thr - 1 end
     if kd(game.KEY_D) or kd(game.KEY_RIGHT) then steer = steer + 1 end
     if kd(game.KEY_A) or kd(game.KEY_LEFT) then steer = steer - 1 end
+    if game.keyPressed(game.KEY_V) then
+        St.on = not St.on
+        A.play("click")
+    end
     if game.keyPressed(game.KEY_X) then
         if o.def.deploys then I.send("dp " .. o.id)
         elseif o.def.canFly then I.send("fl " .. o.id)
@@ -252,12 +269,17 @@ function R.draw()
         end
     end
     -- the panel
-    local pw, ph = 620, 112
+    local pw, ph = 800, 112
     local px, py = (W - pw) * 0.5, Hh - ph - 18
     game.hudRect(px, py, pw, ph, 0.02, 0.03, 0.04, 0.82, 6)
     game.hudFrame(px, py, pw, ph, AMBER[1], AMBER[2], AMBER[3], 0.6, 1.5, 6)
     game.hudText(px + 18, py + 10, (d.name or o.type), 24, WHITE[1], WHITE[2], WHITE[3], 1, 0, true)
     game.hudText(px + pw - 18, py + 14, "DIREKTSTEUERUNG", 14, AMBER[1], AMBER[2], AMBER[3], 1, 1, true)
+    if St.on then
+        game.hudText(px + pw - 18, py + 32, "BASIS: VERWALTER", 13, GREEN[1], GREEN[2], GREEN[3], 0.9, 1, true)
+    else
+        game.hudText(px + pw - 18, py + 32, "BASIS: OHNE AUFSICHT", 13, RED[1], RED[2], RED[3], 0.9, 1, true)
+    end
     local f = o.hp / o.maxhp
     local hc = (f > 0.6 and GREEN) or (f > 0.3 and AMBER) or RED
     game.hudRect(px + 18, py + 44, 300, 12, 0.1, 0.1, 0.1, 1, 3)
@@ -279,7 +301,7 @@ function R.draw()
     if d.deploys then keys = keys .. "  ·  X ausbauen"
     elseif d.canFly then keys = keys .. (o.flyWant and "  ·  X landen" or "  ·  X fliegen")
     elseif d.transport then keys = keys .. "  ·  X entladen" end
-    keys = keys .. "  ·  Q/E Blick  ·  C/Esc aussteigen"
+    keys = keys .. "  ·  Q/E Blick  ·  V Verwalter  ·  Tab Kommando  ·  C aussteigen"
     game.hudText(px + 18, py + 84, keys, 14, WHITE[1], WHITE[2], WHITE[3], 0.85, 0)
 end
 

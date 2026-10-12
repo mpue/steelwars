@@ -115,6 +115,9 @@ end
 --   stance     "sammeln" | "verteidigen" | "angreifen" | "ueberfall" | "alles_rein"
 --   minUnits   n                   attack once this many stand ready
 --   spend      "wirtschaft" | "ausgewogen" | "heer"
+--   steward    true               the player's own base while they drive a unit
+--                                  (sw/steward.lua): no construction vehicle, no
+--                                  attacks -- only idle units near home defend it
 local MIX = {
     ausgewogen = { f = { tank = 5, eliminator = 2.5, terminator = 1, hypercopter = 1 },
                    b = { soldier = 5, rocketeer = 4, infiltrator = 1 }, inf = 8 },
@@ -150,6 +153,8 @@ local function think(S, p, b, ctx)
     -- 1. no base? deploy the construction vehicle
     local base = first(S, p, "base")
     if not base then
+        -- where the player's base goes is the player's to say
+        if P.steward then return end
         local mcv = first(S, p, "mcv")
         if mcv and #mcv.orders == 0 then
             if b.deployTries and b.deployTries > 0 then
@@ -314,7 +319,9 @@ local function think(S, p, b, ctx)
     -- 6. the army
     local idle, value = {}, 0
     for _, o in ipairs(S.objs) do
-        if o.alive and o.owner == p and o.cat == "unit" and not o.inside and S.weaponOf(o) and not o.def.harvest then
+        -- a unit steered by hand (o.ctl) is not the brain's
+        if o.alive and o.owner == p and o.cat == "unit" and not o.inside and S.weaponOf(o) and not o.def.harvest
+            and not o.ctl and not (P.steward and U.dist2(o.x, o.z, base.x, base.z) > 160 * 160) then
             value = value + o.def.cost
             local ord = o.orders[1]
             if not ord or ord.k == "guard" or (ord.k == "move" and ord.rally) then idle[#idle + 1] = o end
@@ -330,6 +337,8 @@ local function think(S, p, b, ctx)
         order(string.format("am %s %d %d 0", S.encodeIds(idle), floor(threat.x * 10), floor(threat.z * 10)))
         return
     end
+    -- the player's army is the player's: where it stands, it stays
+    if P.steward then return end
     local stance = P.stance
     local attacking = stance == nil or stance == "angreifen" or stance == "alles_rein" or stance == "ueberfall"
     -- ones that stand idle out in the field press on to the next target

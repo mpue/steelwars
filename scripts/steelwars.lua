@@ -15,6 +15,7 @@
 --   sw/view     units on screen          sw/fx       effects    sw/audio  sound
 --   sw/camera   the commander's eye      sw/ui       selecting and ordering
 --   sw/drive    one unit steered by hand
+--   sw/steward  minds the base while you drive
 --   sw/hud      the command screen       sw/menu     title, lobby, results
 --   sw/session  the lockstep clock (local or over the relay)
 --   sw/agent    commanders that think with a language model (Ollama)
@@ -33,7 +34,7 @@ ollamaPort    = 11434
 followAction = false  -- the camera goes where the shooting is (spectating)
 lookField = 0         -- testing: start looking at Energicum field n
 
-local D, U, M, S, AI, V, F, A, C, I, H, Mn, N, G, Dr
+local D, U, M, S, AI, V, F, A, C, I, H, Mn, N, G, Dr, St
 
 local state = "boot"      -- boot, loading, menu, game, result
 local loader = nil
@@ -121,6 +122,7 @@ local function uiTestStep(dt)
     end
 end
 local lastDump = nil
+local treeSoundAt = nil   -- when a falling tree was last heard (H.time)
 local lastFollow = nil
 
 local function requireAll()
@@ -139,7 +141,9 @@ local function requireAll()
     N = require("sw.session")
     G = require("sw.agent")
     Dr = require("sw.drive")
+    St = require("sw.steward")
     I.drive = Dr.enter
+    I.driveBack = Dr.back
 end
 
 -- --- The scene's markers -----------------------------------------------------------
@@ -315,6 +319,7 @@ local function beginGame(players, seed, mySlot, mode)
     I.send = N.send
     I.clearSel()
     Dr.reset()
+    St.reset()
     local me = players[mySlot + 1]
     C.jump(me.startX, me.startZ)
     C.tyaw = U.heading(markers.cx - me.startX, markers.cz - me.startZ)
@@ -401,8 +406,12 @@ local function handleEvents()
                     game.clearTrees(tx, tz, 0.6)
                 end
             end
-            -- no sound of its own yet: a dull, low impact for the crack
-            if F.visible(ev.x, ev.z) then F.sound("impact", ev.x, V.groundY(ev.x, ev.z), ev.z, 0.5, 0.55) end
+            -- creak, crack and crash -- ten seconds long, so a vehicle ploughing
+            -- through a wood starts a new one only now and then
+            if F.visible(ev.x, ev.z) and H.time - (treeSoundAt or -1e9) > 1.5 then
+                treeSoundAt = H.time
+                F.sound("tree_fall", ev.x, V.groundY(ev.x, ev.z), ev.z, 1, 0.92 + math.random() * 0.16)
+            end
         elseif t == "burn" then
             -- trees a hit set alight (x, z, scale triples)
             for k = 1, #ev.trees - 2, 3 do F.burnTree(ev.trees[k], ev.trees[k + 1], ev.trees[k + 2], ev.secs) end
@@ -759,6 +768,7 @@ frame = function(e, dt, t)
         local a = N.update(dt)
         handleEvents()
         G.update(S, N.sendAs)
+        St.update(S, V.me, Dr.active(), N.send)
         F.camX, F.camZ, F.camDist = C.x, C.z, C.dist
         V.update(a, t, dt)
         F.update(dt)

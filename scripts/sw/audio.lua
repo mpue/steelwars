@@ -21,6 +21,7 @@ A.cues = {
     explode_med  = { files = { "sw_expl_m1.wav", "sw_expl_m2.wav" }, vol = 1.0, near = 80, far = 900 },
     explode_big  = { files = { "sw_expl_b1.wav", "sw_expl_b2.wav" }, vol = 1.0, near = 100, far = 1200 },
     die_bot      = { files = { "sw_botdie1.wav", "sw_botdie2.wav", "sw_botdie3.wav" }, vol = 0.7, near = 40, far = 400 },
+    tree_fall    = { files = { "tree-falling.wav" }, vol = 0.8, near = 40, far = 450 },
     build_place  = { files = { "sw_place.wav" }, vol = 0.8 },
     build_rise   = { files = { "sw_construct.wav" }, vol = 0.6, near = 60, far = 500 },
     deploy       = { files = { "sw_deploy.wav" }, vol = 0.9, near = 60, far = 600 },
